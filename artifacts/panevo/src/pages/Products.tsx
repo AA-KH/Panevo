@@ -83,13 +83,13 @@ export default function Products() {
       />
 
       {/* PAGE HERO */}
-      <section className="bg-primary text-primary-foreground py-24 text-center">
+      <section className="bg-background text-foreground py-24 text-center">
         <div className="container px-4">
           <Reveal>
             <h1 className="text-5xl md:text-7xl mb-6">Three Flavours. One Rule. Zero Marination.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.</p>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.</p>
           </Reveal>
         </div>
       </section>

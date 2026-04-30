@@ -153,11 +153,13 @@ export default function Subscribe() {
           </Reveal>
 
           <Reveal delay={200}>
-            <div className="flex flex-wrap justify-center gap-6 text-sm font-bold text-foreground mb-10 uppercase tracking-wider">
-              <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> No lock-in</span>
-              <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> Pause any time</span>
-              <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> Fresh every delivery</span>
-            </div>
+            <ul className="flex flex-wrap justify-center gap-3 mb-10 list-none">
+              {["No lock-in", "Pause any time", "Fresh every delivery"].map((label) => (
+                <li key={label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-secondary text-secondary text-sm font-semibold tracking-wide">
+                  <Check className="w-4 h-4" /> {label}
+                </li>
+              ))}
+            </ul>
           </Reveal>
 
           <Reveal delay={280}>

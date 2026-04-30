@@ -79,7 +79,7 @@ export default function Recipes() {
       <section className="bg-primary text-primary-foreground py-24 text-center">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-5xl md:text-7xl mb-6">Don't Overthink Dinner.</h1>
+            <h1 className="text-5xl md:text-7xl mb-6">The Recipes That Prove Paneer Doesn't Need 30 Minutes.</h1>
           </Reveal>
           <Reveal delay={120}>
             <p className="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">High protein. Under 10 minutes. Because the flavour is already in the paneer.</p>

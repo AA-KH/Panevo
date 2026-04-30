@@ -54,13 +54,16 @@ export default function OurStory() {
       />
 
       {/* HERO */}
-      <section className="bg-primary text-primary-foreground py-24 text-center">
+      <section className="bg-secondary text-secondary-foreground py-24 text-center">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-5xl md:text-7xl mb-6">How We Decided to Fix Paneer.</h1>
+            <Shatkona className="w-16 h-16 mx-auto mb-6 text-secondary-foreground" />
           </Reveal>
-          <Reveal delay={120}>
-            <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">A brand doesn't start with a product. It starts with a problem nobody else is bothered to solve.</p>
+          <Reveal delay={80}>
+            <h1 className="text-5xl md:text-7xl mb-6">Tradition Transformed.</h1>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">The Shatkona is the ancient Indian symbol of union — fire and water, energy and nourishment, raw and ready. It's also the story of PANEVO.</p>
           </Reveal>
         </div>
       </section>

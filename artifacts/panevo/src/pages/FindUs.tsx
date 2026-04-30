@@ -127,7 +127,7 @@ export default function FindUs() {
       <section className="bg-primary text-primary-foreground py-24 text-center">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-5xl md:text-7xl mb-6">PANEVO is Closer Than You Think.</h1>
+            <h1 className="text-5xl md:text-7xl mb-6">In Your Kitchen in 10 Minutes. Or at Your Corner Store.</h1>
           </Reveal>
           <Reveal delay={120}>
             <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart — or find us at your nearest store across Chandigarh Tri-City and Gurgaon.</p>
