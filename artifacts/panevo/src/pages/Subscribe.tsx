@@ -2,6 +2,7 @@ import { SEO } from "@/components/SEO";
 import { useState, useEffect } from "react";
 import { track } from "@/lib/analytics";
 import { Check, ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { faqs } from "@/data/faqs";
 import { useLocation } from "wouter";
@@ -144,18 +145,26 @@ export default function Subscribe() {
       {/* HERO */}
       <section className="bg-background pt-24 pb-16 text-center border-b border-border">
         <div className="container px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">Your Weekly Paneer Box.<br/><span className="text-primary">Cancel Any Time.</span></h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">Stop thinking about paneer. Start eating it.</p>
-          
-          <div className="flex flex-wrap justify-center gap-6 text-sm font-bold text-foreground mb-10 uppercase tracking-wider">
-            <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> No lock-in</span>
-            <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> Pause any time</span>
-            <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> Fresh every delivery</span>
-          </div>
+          <Reveal>
+            <h1 className="text-5xl md:text-7xl mb-6 text-foreground">Your Weekly Paneer Box.<br/><span className="text-primary">Cancel Any Time.</span></h1>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">Stop thinking about paneer. Start eating it.</p>
+          </Reveal>
 
-          <button onClick={() => document.getElementById("plans")?.scrollIntoView({ behavior: "smooth" })} className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br hover:bg-primary/90 transition-colors inline-flex items-center gap-2">
-            See Plans <ArrowRight className="w-5 h-5" />
-          </button>
+          <Reveal delay={200}>
+            <div className="flex flex-wrap justify-center gap-6 text-sm font-bold text-foreground mb-10 uppercase tracking-wider">
+              <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> No lock-in</span>
+              <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> Pause any time</span>
+              <span className="flex items-center gap-1"><Check className="w-4 h-4 text-primary" /> Fresh every delivery</span>
+            </div>
+          </Reveal>
+
+          <Reveal delay={280}>
+            <button onClick={() => document.getElementById("plans")?.scrollIntoView({ behavior: "smooth" })} className="cta-primary bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br inline-flex items-center gap-2">
+              See Plans <ArrowRight className="w-5 h-5 cta-arrow" />
+            </button>
+          </Reveal>
         </div>
       </section>
 
@@ -168,18 +177,20 @@ export default function Subscribe() {
               { id: "fortnightly", title: "Fortnightly", desc: "Delivered every 14 days. Two-pack option available. Best for smaller households.", color: "border-border", btnClass: "bg-foreground text-background" },
               { id: "monthly", title: "Monthly", desc: "One delivery per month. Best for families who batch-cook.", color: "border-border", btnClass: "bg-foreground text-background" }
             ].map(plan => (
-              <div key={plan.id} className={`bg-card border-2 ${plan.color} p-8 rounded-xl shadow-sm relative flex flex-col`}>
-                {plan.badge && (
-                  <div className="absolute top-0 right-0 translate-x-2 -translate-y-2 bg-accent text-accent-foreground px-3 py-1 text-xs font-bold uppercase tracking-wider rounded notch-br shadow-sm">
-                    {plan.badge}
-                  </div>
-                )}
-                <h3 className="text-3xl font-bold mb-4 text-foreground uppercase">{plan.title}</h3>
-                <p className="text-muted-foreground mb-8 flex-1">{plan.desc}</p>
-                <button onClick={() => handlePlanSelect(plan.id)} className={`w-full py-3 rounded-md font-bold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary ${plan.btnClass}`}>
-                  Subscribe {plan.title}
-                </button>
-              </div>
+              <Reveal key={plan.id} delay={0}>
+                <div className={`card-lift bg-card border-2 ${plan.color} p-8 relative flex flex-col h-full`} style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                  {plan.badge && (
+                    <div className="absolute top-0 right-0 translate-x-2 -translate-y-2 bg-accent text-accent-foreground px-3 py-1 text-xs font-bold uppercase tracking-wider notch-br" style={{ borderRadius: 100 }}>
+                      {plan.badge}
+                    </div>
+                  )}
+                  <h3 className="text-3xl mb-4 text-foreground">{plan.title}</h3>
+                  <p className="text-muted-foreground mb-8 flex-1">{plan.desc}</p>
+                  <button onClick={() => handlePlanSelect(plan.id)} className={`cta-primary w-full py-3 font-bold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary notch-br ${plan.btnClass}`} style={{ borderRadius: 4 }}>
+                    Subscribe {plan.title}
+                  </button>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -189,15 +200,15 @@ export default function Subscribe() {
       <section id="wizard" className="py-24 bg-background">
         <div className="container px-4 max-w-3xl">
           <div className="mb-8 flex justify-between items-center border-b border-border pb-4" aria-live="polite">
-            <h2 className="text-2xl font-bold text-foreground">Build Your Box</h2>
-            <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest bg-muted px-3 py-1 rounded">Step {step} of 3</span>
+            <h2 className="text-2xl text-foreground">Build Your Box</h2>
+            <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest bg-muted px-3 py-1" style={{ borderRadius: 100 }}>Step {step} of 3</span>
           </div>
 
-          <div className="bg-card border border-border rounded-xl p-6 md:p-10 shadow-sm">
+          <div className="bg-card border border-border p-6 md:p-10" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
             
             {/* STEP 1 */}
             {step === 1 && (
-              <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+              <div className="space-y-8 wizard-step-enter">
                 <div>
                   <h3 className="text-xl font-bold mb-4 text-foreground">Selected Plan</h3>
                   <div className="bg-muted p-4 rounded-lg flex justify-between items-center">
@@ -228,7 +239,7 @@ export default function Subscribe() {
 
             {/* STEP 2 */}
             {step === 2 && (
-              <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+              <div className="space-y-8 wizard-step-enter">
                 <div>
                   <div className="flex justify-between items-baseline mb-4">
                     <h3 className="text-xl font-bold text-foreground">Select Flavours</h3>
@@ -254,7 +265,7 @@ export default function Subscribe() {
 
             {/* STEP 3 */}
             {step === 3 && (
-              <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+              <div className="space-y-8 wizard-step-enter">
                 <div className="flex justify-between items-baseline border-b border-border pb-4">
                   <div>
                     <h3 className="text-xl font-bold text-foreground">Delivery Details</h3>

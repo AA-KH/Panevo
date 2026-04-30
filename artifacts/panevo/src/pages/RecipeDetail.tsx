@@ -3,6 +3,7 @@ import { Link, useRoute } from "wouter";
 import { recipes } from "@/data/recipes";
 import { ArrowLeft, Clock, Flame, Info } from "lucide-react";
 import NotFound from "./not-found";
+import { Reveal } from "@/components/motion/Reveal";
 
 export default function RecipeDetail() {
   const [, params] = useRoute("/recipes/:slug");
@@ -46,68 +47,75 @@ export default function RecipeDetail() {
       />
 
       <div className="container px-4 py-8">
-        <Link href="/recipes" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-medium mb-8 transition-colors">
+        <Link href="/recipes" className="nav-link inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-medium mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Recipes
         </Link>
 
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Column - Image & CTA */}
-          <div className="w-full lg:w-5/12 space-y-8">
-            <div className="aspect-[4/5] bg-muted rounded-2xl relative overflow-hidden border border-border">
-              {/* Image placeholder */}
+          <Reveal className="w-full lg:w-5/12 space-y-8">
+            <div className="aspect-[4/5] bg-muted relative overflow-hidden border border-border" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
               <div className="absolute inset-0 bg-secondary/5 flex flex-col items-center justify-center p-6 text-center">
-                 <span className="text-muted-foreground font-bold uppercase tracking-widest mb-2">Recipe Photo</span>
-                 <span className="text-sm font-medium text-foreground">{recipe.title}</span>
+                <span className="text-muted-foreground font-bold uppercase tracking-widest mb-2">Recipe Photo</span>
+                <span className="text-sm font-medium text-foreground">{recipe.title}</span>
               </div>
             </div>
 
-            <div className="bg-card border border-border p-6 rounded-xl text-center shadow-sm">
-              <h4 className="font-bold text-foreground mb-2">Need this flavour?</h4>
+            <div className="bg-card border border-border p-6 text-center" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+              <h4 className="text-lg text-foreground mb-2 uppercase">Need this flavour?</h4>
               <p className="text-sm text-muted-foreground mb-4">This recipe uses PANEVO {recipe.flavour}.</p>
-              <Link href="/products" className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold text-sm inline-block notch-br hover:bg-primary/90 transition-colors w-full">
+              <Link href="/products" className="cta-primary bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold text-sm inline-block notch-br hover:bg-primary/90 transition-colors w-full">
                 Order {recipe.flavour}
               </Link>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right Column - Content */}
           <div className="w-full lg:w-7/12">
-            <div className="mb-6 flex flex-wrap gap-2">
-              <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{recipe.flavour}</span>
-              {recipe.tags.map(tag => (
-                <span key={tag} className="bg-accent/20 text-accent-foreground px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{tag}</span>
-              ))}
-            </div>
+            <Reveal>
+              <div className="mb-6 flex flex-wrap gap-2">
+                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{recipe.flavour}</span>
+                {recipe.tags.map(tag => (
+                  <span key={tag} className="bg-accent/20 text-accent-foreground px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{tag}</span>
+                ))}
+              </div>
+            </Reveal>
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-foreground">{recipe.title}</h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">{recipe.description}</p>
+            <Reveal delay={80}>
+              <h1 className="text-4xl md:text-6xl mb-4 text-foreground">{recipe.title}</h1>
+            </Reveal>
+            <Reveal delay={160}>
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">{recipe.description}</p>
+            </Reveal>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-              <div className="bg-card border border-border p-4 rounded-lg text-center">
-                <Clock className="w-5 h-5 mx-auto mb-2 text-muted-foreground" />
-                <p className="text-xs text-muted-foreground uppercase font-bold">Total Time</p>
-                <p className="font-bold text-foreground">{recipe.time}</p>
+            <Reveal delay={240}>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+                <div className="card-lift bg-card border border-border p-4 text-center" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                  <Clock className="w-5 h-5 mx-auto mb-2 text-muted-foreground" />
+                  <p className="text-xs text-muted-foreground uppercase font-bold">Total Time</p>
+                  <p className="font-bold text-foreground tabnums">{recipe.time}</p>
+                </div>
+                <div className="card-lift bg-card border border-border p-4 text-center" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                  <Flame className="w-5 h-5 mx-auto mb-2 text-primary" />
+                  <p className="text-xs text-muted-foreground uppercase font-bold">Calories</p>
+                  <p className="tabnums font-bold text-foreground">{recipe.macros.calories}</p>
+                </div>
+                <div className="card-lift bg-card border border-border p-4 text-center" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                  <div className="w-5 h-5 mx-auto mb-2 text-primary font-bold">P</div>
+                  <p className="text-xs text-muted-foreground uppercase font-bold">Protein</p>
+                  <p className="tabnums font-bold text-foreground">{recipe.macros.protein}g</p>
+                </div>
+                <div className="card-lift bg-card border border-border p-4 text-center" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                  <div className="w-5 h-5 mx-auto mb-2 text-muted-foreground font-bold">C</div>
+                  <p className="text-xs text-muted-foreground uppercase font-bold">Carbs</p>
+                  <p className="tabnums font-bold text-foreground">{recipe.macros.carbs}g</p>
+                </div>
               </div>
-              <div className="bg-card border border-border p-4 rounded-lg text-center">
-                <Flame className="w-5 h-5 mx-auto mb-2 text-primary" />
-                <p className="text-xs text-muted-foreground uppercase font-bold">Calories</p>
-                <p className="font-mono font-bold text-foreground">{recipe.macros.calories}</p>
-              </div>
-              <div className="bg-card border border-border p-4 rounded-lg text-center">
-                <div className="w-5 h-5 mx-auto mb-2 text-primary font-bold">P</div>
-                <p className="text-xs text-muted-foreground uppercase font-bold">Protein</p>
-                <p className="font-mono font-bold text-foreground">{recipe.macros.protein}g</p>
-              </div>
-              <div className="bg-card border border-border p-4 rounded-lg text-center">
-                <div className="w-5 h-5 mx-auto mb-2 text-muted-foreground font-bold">C</div>
-                <p className="text-xs text-muted-foreground uppercase font-bold">Carbs</p>
-                <p className="font-mono font-bold text-foreground">{recipe.macros.carbs}g</p>
-              </div>
-            </div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-2xl font-bold mb-6 text-foreground border-b border-border pb-2">Ingredients</h3>
+              <Reveal>
+                <h3 className="text-2xl mb-6 text-foreground border-b border-border pb-2 uppercase">Ingredients</h3>
                 <ul className="space-y-3">
                   {recipe.ingredients.map((ing, i) => (
                     <li key={i} className="flex items-start gap-3 text-foreground">
@@ -116,14 +124,14 @@ export default function RecipeDetail() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </Reveal>
 
-              <div>
-                <h3 className="text-2xl font-bold mb-6 text-foreground border-b border-border pb-2">Method</h3>
+              <Reveal delay={120}>
+                <h3 className="text-2xl mb-6 text-foreground border-b border-border pb-2 uppercase">Method</h3>
                 <ol className="space-y-6">
                   {recipe.method.map((step, i) => (
                     <li key={i} className="flex gap-4">
-                      <span className="font-bold text-muted-foreground font-mono bg-muted w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+                      <span className="font-bold text-muted-foreground tabnums bg-muted w-8 h-8 rounded-full flex items-center justify-center shrink-0">
                         {i + 1}
                       </span>
                       <span className="text-foreground leading-relaxed pt-1">{step}</span>
@@ -132,15 +140,15 @@ export default function RecipeDetail() {
                 </ol>
 
                 {recipe.chefTip && (
-                  <div className="mt-8 bg-muted p-6 rounded-xl border border-border">
+                  <div className="mt-8 bg-muted p-6 border border-border" style={{ borderRadius: 12 }}>
                     <div className="flex items-center gap-2 mb-2">
                       <Info className="w-5 h-5 text-primary" />
-                      <h4 className="font-bold text-foreground">Chef's Tip</h4>
+                      <h4 className="font-bold text-foreground uppercase" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.02em" }}>Chef's Tip</h4>
                     </div>
                     <p className="text-muted-foreground text-sm italic">{recipe.chefTip}</p>
                   </div>
                 )}
-              </div>
+              </Reveal>
             </div>
 
           </div>

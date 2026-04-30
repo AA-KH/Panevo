@@ -12,7 +12,10 @@ export function StickyBottomBar() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-primary h-14 md:hidden flex border-t border-primary-foreground/10">
+    <div
+      className="fixed bottom-0 left-0 right-0 bg-primary md:hidden flex border-t border-primary-foreground/10"
+      style={{ height: 56, zIndex: 100, boxShadow: "var(--shadow-nav)" }}
+    >
       {Object.entries(QCOM_LINKS).map(([platform, url]) => (
         <a
           key={platform}
@@ -20,7 +23,7 @@ export function StickyBottomBar() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => handleQComClick(platform)}
-          className="flex-1 flex flex-col items-center justify-center border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10 outline-none focus-visible:bg-primary-foreground/10"
+          className="qcom-shimmer flex-1 flex flex-col items-center justify-center border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10 outline-none focus-visible:bg-primary-foreground/10"
           aria-label={`Order on ${platform}`}
         >
           <span className="text-primary-foreground text-xs font-bold capitalize">{platform}</span>

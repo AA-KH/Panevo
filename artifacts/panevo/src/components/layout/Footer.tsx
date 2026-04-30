@@ -9,26 +9,26 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-secondary text-secondary-foreground py-12">
+    <footer className="bg-secondary text-secondary-foreground" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-1">
              <Link href="/" className="flex items-center gap-2 mb-4 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
-              <span className="font-bold text-3xl tracking-tight uppercase" style={{ fontFamily: 'var(--app-font-sans)' }}>{BRAND.name}</span>
+              <span className="text-3xl tracking-tight uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>{BRAND.name}</span>
             </Link>
             <p className="text-sm opacity-80 mb-4">Made in India ✦ Delivered in 10 minutes</p>
-            <div className="flex gap-4">
-              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('instagram')} className="opacity-80 hover:opacity-100 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+            <div className="flex gap-4 text-sm">
+              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('instagram')} className="opacity-80 hover:opacity-100 hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded transition-opacity">
                 Instagram
               </a>
-              <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('whatsapp')} className="opacity-80 hover:opacity-100 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+              <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('whatsapp')} className="opacity-80 hover:opacity-100 hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded transition-opacity">
                 WhatsApp
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="font-bold mb-4">Explore</h4>
+            <h4 className="mb-4 text-lg uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>Explore</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><Link href="/" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Home</Link></li>
               <li><Link href="/products" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Products</Link></li>
@@ -42,7 +42,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold mb-4">Legal</h4>
+            <h4 className="mb-4 text-lg uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>Legal</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><Link href="/privacy" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Terms of Use</Link></li>
@@ -51,7 +51,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold mb-4">Company</h4>
+            <h4 className="mb-4 text-lg uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>Company</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li>{BRAND.placeholders.fssai}</li>
               <li>{BRAND.parentCompany}</li>

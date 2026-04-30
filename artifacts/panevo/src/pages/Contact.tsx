@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import { BRAND } from "@/config/brand";
 import { track } from "@/lib/analytics";
 import { toast } from "sonner";
+import { Reveal } from "@/components/motion/Reveal";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -92,8 +93,12 @@ export default function Contact() {
       {/* HERO */}
       <section className="bg-primary text-primary-foreground py-24 text-center">
         <div className="container px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">Let's Talk.</h1>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto">Whether you're a customer, a retailer, or just curious about what we do.</p>
+          <Reveal>
+            <h1 className="text-5xl md:text-7xl mb-6">Let's Talk.</h1>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="text-xl opacity-90 max-w-2xl mx-auto">Whether you're a customer, a retailer, or just curious about what we do.</p>
+          </Reveal>
         </div>
       </section>
 
@@ -102,9 +107,9 @@ export default function Contact() {
           <div className="flex flex-col lg:flex-row gap-16">
             
             {/* Contact Info */}
-            <div className="w-full lg:w-1/3 space-y-12">
+            <Reveal className="w-full lg:w-1/3 space-y-12">
               <div>
-                <h3 className="text-2xl font-bold mb-6 text-foreground">Direct Contacts</h3>
+                <h3 className="text-2xl mb-6 text-foreground uppercase">Direct Contacts</h3>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <Mail className="w-6 h-6 text-primary mt-1" />
@@ -131,7 +136,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <h3 className="text-xl font-bold mb-4 text-foreground">Registered Office</h3>
+                <h3 className="text-xl mb-4 text-foreground uppercase">Registered Office</h3>
                 <div className="flex items-start gap-4">
                   <MapPin className="w-6 h-6 text-primary mt-1" />
                   <div className="text-muted-foreground">
@@ -141,15 +146,16 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Contact Form */}
-            <div className="w-full lg:w-2/3 bg-card border border-border p-8 rounded-xl shadow-sm">
+            <Reveal delay={120} className="w-full lg:w-2/3">
+              <div className="bg-card border border-border p-8" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
               <div className="flex justify-between items-center mb-8 border-b border-border pb-4">
-                <h3 className="text-2xl font-bold text-foreground">Send a Message</h3>
-                <div className="flex gap-2 bg-muted p-1 rounded-lg">
-                  <button onClick={() => setIsTradeMode(false)} className={`px-4 py-2 rounded-md text-sm font-bold transition-colors ${!isTradeMode ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'}`}>General</button>
-                  <button onClick={() => setIsTradeMode(true)} className={`px-4 py-2 rounded-md text-sm font-bold transition-colors ${isTradeMode ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'}`}>Trade</button>
+                <h3 className="text-2xl text-foreground uppercase">Send a Message</h3>
+                <div className="flex gap-2 bg-muted p-1" style={{ borderRadius: 8 }}>
+                  <button onClick={() => setIsTradeMode(false)} className={`px-4 py-2 text-sm font-bold transition-colors ${!isTradeMode ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'}`} style={{ borderRadius: 6 }}>General</button>
+                  <button onClick={() => setIsTradeMode(true)} className={`px-4 py-2 text-sm font-bold transition-colors ${isTradeMode ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'}`} style={{ borderRadius: 6 }}>Trade</button>
                 </div>
               </div>
 
@@ -158,21 +164,21 @@ export default function Contact() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-bold text-foreground">Full Name</label>
-                      <input id="name" type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                      <input id="name" type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }} />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-bold text-foreground">Email Address</label>
-                      <input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                      <input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="phone" className="text-sm font-bold text-foreground">Phone Number (Optional)</label>
-                      <input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                      <input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }} />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="subject" className="text-sm font-bold text-foreground">Subject</label>
-                      <select id="subject" value={formData.subject} onChange={(e) => setFormData({...formData, subject: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary">
+                      <select id="subject" value={formData.subject} onChange={(e) => setFormData({...formData, subject: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }}>
                         <option value="general">General Enquiry</option>
                         <option value="feedback">Product Feedback</option>
                         <option value="press">Press / Media</option>
@@ -181,32 +187,32 @@ export default function Contact() {
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="message" className="text-sm font-bold text-foreground">Message</label>
-                    <textarea id="message" required rows={5} value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary resize-none"></textarea>
+                    <textarea id="message" required rows={5} value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary resize-none" style={{ borderRadius: 8 }}></textarea>
                   </div>
-                  <button disabled={isSubmitting} type="submit" className="bg-primary text-primary-foreground px-8 py-4 rounded-md font-bold w-full hover:bg-primary/90 transition-colors notch-br disabled:opacity-50">
+                  <button disabled={isSubmitting} type="submit" className="cta-primary bg-primary text-primary-foreground px-8 py-4 font-bold w-full hover:bg-primary/90 transition-colors notch-br disabled:opacity-50" style={{ borderRadius: 4 }}>
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               ) : (
-                <form onSubmit={handleTradeSubmit} className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
+                <form onSubmit={handleTradeSubmit} className="space-y-6 wizard-step-enter">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="tradeName" className="text-sm font-bold text-foreground">Contact Name</label>
-                      <input id="tradeName" type="text" required value={tradeData.name} onChange={(e) => setTradeData({...tradeData, name: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                      <input id="tradeName" type="text" required value={tradeData.name} onChange={(e) => setTradeData({...tradeData, name: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }} />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="businessName" className="text-sm font-bold text-foreground">Business Name</label>
-                      <input id="businessName" type="text" required value={tradeData.businessName} onChange={(e) => setTradeData({...tradeData, businessName: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                      <input id="businessName" type="text" required value={tradeData.businessName} onChange={(e) => setTradeData({...tradeData, businessName: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="city" className="text-sm font-bold text-foreground">City</label>
-                      <input id="city" type="text" required value={tradeData.city} onChange={(e) => setTradeData({...tradeData, city: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                      <input id="city" type="text" required value={tradeData.city} onChange={(e) => setTradeData({...tradeData, city: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }} />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="type" className="text-sm font-bold text-foreground">Business Type</label>
-                      <select id="type" value={tradeData.type} onChange={(e) => setTradeData({...tradeData, type: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary">
+                      <select id="type" value={tradeData.type} onChange={(e) => setTradeData({...tradeData, type: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }}>
                         <option value="Retailer">Retailer (Grocery / Supermarket)</option>
                         <option value="Distributor">Distributor / Wholesaler</option>
                         <option value="HORECA">HORECA (Restaurant / Cafe)</option>
@@ -215,18 +221,19 @@ export default function Contact() {
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="monthlyVolume" className="text-sm font-bold text-foreground">Expected Monthly Volume (Optional)</label>
-                    <input id="monthlyVolume" type="text" placeholder="e.g. 50kg, 200 packs" value={tradeData.monthlyVolume} onChange={(e) => setTradeData({...tradeData, monthlyVolume: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    <input id="monthlyVolume" type="text" placeholder="e.g. 50kg, 200 packs" value={tradeData.monthlyVolume} onChange={(e) => setTradeData({...tradeData, monthlyVolume: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary" style={{ borderRadius: 8 }} />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="tradeMessage" className="text-sm font-bold text-foreground">Additional Details</label>
-                    <textarea id="tradeMessage" required rows={4} value={tradeData.message} onChange={(e) => setTradeData({...tradeData, message: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary resize-none"></textarea>
+                    <textarea id="tradeMessage" required rows={4} value={tradeData.message} onChange={(e) => setTradeData({...tradeData, message: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary resize-none" style={{ borderRadius: 8 }}></textarea>
                   </div>
-                  <button disabled={isTradeSubmitting} type="submit" className="bg-primary text-primary-foreground px-8 py-4 rounded-md font-bold w-full hover:bg-primary/90 transition-colors notch-br disabled:opacity-50">
+                  <button disabled={isTradeSubmitting} type="submit" className="cta-primary bg-primary text-primary-foreground px-8 py-4 font-bold w-full hover:bg-primary/90 transition-colors notch-br disabled:opacity-50" style={{ borderRadius: 4 }}>
                     {isTradeSubmitting ? "Submitting..." : "Submit Trade Enquiry"}
                   </button>
                 </form>
               )}
-            </div>
+              </div>
+            </Reveal>
 
           </div>
         </div>

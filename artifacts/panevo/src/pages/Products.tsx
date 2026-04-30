@@ -8,6 +8,7 @@ import { track } from "@/lib/analytics";
 import { toast } from "sonner";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { faqs } from "@/data/faqs";
+import { Reveal } from "@/components/motion/Reveal";
 
 export default function Products() {
   const [email, setEmail] = useState("");
@@ -84,8 +85,12 @@ export default function Products() {
       {/* PAGE HERO */}
       <section className="bg-primary text-primary-foreground py-24 text-center">
         <div className="container px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">Three Flavours. One Rule. Zero Marination.</h1>
-          <p className="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.</p>
+          <Reveal>
+            <h1 className="text-5xl md:text-7xl mb-6">Three Flavours. One Rule. Zero Marination.</h1>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.</p>
+          </Reveal>
         </div>
       </section>
 
@@ -98,68 +103,82 @@ export default function Products() {
         >
           <div className="container px-4">
             <div className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
-              <div className="w-full md:w-1/2 aspect-square bg-card border border-border rounded-xl flex items-center justify-center relative overflow-hidden">
-                {/* Image placeholder */}
-                <div className="absolute inset-0 bg-secondary/5 flex flex-col items-center justify-center">
-                   <span className="font-bold text-xl uppercase text-muted-foreground">{product.name} Pack Shot</span>
+              <Reveal className="w-full md:w-1/2">
+                <div className="aspect-square bg-card border border-border flex items-center justify-center relative overflow-hidden" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                  <div className="absolute inset-0 bg-secondary/5 flex flex-col items-center justify-center">
+                    <span className="font-bold text-xl uppercase text-muted-foreground">{product.name} Pack Shot</span>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
               <div className="w-full md:w-1/2">
-                <h2 className="text-4xl md:text-5xl font-bold mb-2 uppercase text-foreground">{product.name}</h2>
-                <p className="text-xl text-primary font-bold mb-6 italic">"{product.tagline}"</p>
+                <Reveal>
+                  <h2 className="text-4xl md:text-5xl mb-2 text-foreground">{product.name}</h2>
+                </Reveal>
+                <Reveal delay={80}>
+                  <p className="text-xl text-primary mb-6 italic" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.01em" }}>"{product.tagline}"</p>
+                </Reveal>
 
-                <div className="flex gap-4 mb-6 font-bold text-foreground">
-                  <span className="bg-card px-3 py-1 rounded border border-border">200g — ₹125</span>
-                  <span className="bg-card px-3 py-1 rounded border border-border">500g — ₹275</span>
-                </div>
-
-                <p className="text-lg leading-relaxed text-muted-foreground mb-8">{product.description}</p>
-
-                <div className="mb-8">
-                  <h4 className="font-bold mb-2 text-foreground uppercase tracking-wider text-sm">Best Used For</h4>
-                  <div className="flex gap-2 flex-wrap">
-                    {product.bestUsedFor.map(tag => (
-                      <span key={tag} className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">{tag}</span>
-                    ))}
+                <Reveal delay={160}>
+                  <div className="flex gap-4 mb-6 font-bold text-foreground">
+                    <span className="bg-card px-3 py-1 border border-border tabnums" style={{ borderRadius: 4 }}>200g — ₹125</span>
+                    <span className="bg-card px-3 py-1 border border-border tabnums" style={{ borderRadius: 4 }}>500g — ₹275</span>
                   </div>
-                </div>
+                </Reveal>
 
-                <div className="bg-card p-4 rounded-lg border border-border mb-8 flex justify-between items-center">
-                  <div>
-                    <p className="font-bold text-foreground">Protein</p>
-                    <p className="text-primary font-bold text-xl tabular-nums">[LAB CONFIRM]g / 100g</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xs text-muted-foreground">Storage: 1–4°C</p>
-                    <p className="text-xs text-muted-foreground">Use within 5 days of opening</p>
-                  </div>
-                </div>
+                <Reveal delay={240}>
+                  <p className="text-lg leading-relaxed text-muted-foreground mb-8">{product.description}</p>
+                </Reveal>
 
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="relative group">
-                    <button className="w-full sm:w-auto bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br flex items-center justify-center gap-2">
-                      Order Now <ArrowRight className="w-5 h-5" />
-                    </button>
-                     {/* Hover Dropdown for platforms */}
-                    <div className="absolute hidden group-hover:flex flex-col top-full left-0 mt-2 w-48 bg-card rounded-md shadow-lg border border-border py-1 z-50">
-                      {Object.entries(QCOM_LINKS).map(([platform, url]) => (
-                        <a
-                          key={platform}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => handleQComClick(platform)}
-                          className="px-4 py-2 text-sm text-foreground hover:bg-muted capitalize font-medium"
-                        >
-                          Order on {platform}
-                        </a>
+                <Reveal delay={320}>
+                  <div className="mb-8">
+                    <h4 className="font-bold mb-2 text-foreground uppercase tracking-wider text-sm">Best Used For</h4>
+                    <div className="flex gap-2 flex-wrap">
+                      {product.bestUsedFor.map(tag => (
+                        <span key={tag} className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">{tag}</span>
                       ))}
                     </div>
                   </div>
-                  <Link href="/find-us" className="w-full sm:w-auto bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/5 transition-colors flex items-center justify-center text-center">
-                    Find in Store
-                  </Link>
-                </div>
+                </Reveal>
+
+                <Reveal delay={400}>
+                  <div className="bg-card p-4 border border-border mb-8 flex justify-between items-center" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                    <div>
+                      <p className="font-bold text-foreground">Protein</p>
+                      <p className="text-primary font-bold text-xl tabnums">[LAB CONFIRM]g / 100g</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs text-muted-foreground">Storage: 1–4°C</p>
+                      <p className="text-xs text-muted-foreground">Use within 5 days of opening</p>
+                    </div>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={400}>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="relative group">
+                      <button className="cta-primary w-full sm:w-auto bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br flex items-center justify-center gap-2">
+                        Order Now <ArrowRight className="w-5 h-5 cta-arrow" />
+                      </button>
+                      <div className="absolute hidden group-hover:flex flex-col top-full left-0 mt-2 w-48 bg-card border border-border py-1 z-50" style={{ borderRadius: 8, boxShadow: "var(--shadow-hover)" }}>
+                        {Object.entries(QCOM_LINKS).map(([platform, url]) => (
+                          <a
+                            key={platform}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => handleQComClick(platform)}
+                            className="qcom-shimmer px-4 py-2 text-sm text-foreground hover:bg-muted capitalize font-medium"
+                          >
+                            Order on {platform}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                    <Link href="/find-us" className="w-full sm:w-auto bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/5 transition-colors flex items-center justify-center text-center">
+                      Find in Store
+                    </Link>
+                  </div>
+                </Reveal>
               </div>
             </div>
           </div>
