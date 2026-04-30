@@ -24,4 +24,8 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - `pnpm --filter @workspace/api-server run dev` — run API server locally
 
+## Artifacts
+
+- **panevo** (`/`) — PANEVO website Phase 1. Brand site for India's first pre-flavoured fresh paneer (Shatkona Ventures Pvt Ltd). 8 pages: Home, Products, Our Story, Nutrition, Subscribe, Find Us, Contact, Recipes (+ dynamic recipe detail). Three personas (Q-Com buyers, subscription households, health/gym). All integrations (Razorpay, Google Maps, GA4/Hotjar, MSG91 webhook) are stubbed in Phase 1 — wire real endpoints in Phase 2. See `attached_assets/PANEVO_Phase1_Master_Build_Prompt_*.md` for the full spec.
+
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
