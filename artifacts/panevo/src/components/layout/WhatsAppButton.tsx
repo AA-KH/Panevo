@@ -18,9 +18,9 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      className="fixed right-4 md:right-8 bg-[#25D366] text-white rounded-full hover:scale-110 transition-transform active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366] flex items-center justify-center"
+      className="fixed right-4 md:right-8 bg-[#25D366] text-white rounded-full transition-transform active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366] flex items-center justify-center md:hover:scale-110"
       style={{
-        bottom: "calc(56px + 1rem)",
+        bottom: "calc(64px + env(safe-area-inset-bottom, 0px) + 1rem)",
         width: 56,
         height: 56,
         zIndex: 99,

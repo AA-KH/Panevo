@@ -78,8 +78,8 @@ export default function Products() {
   return (
     <div className="w-full">
       <SEO
-        title="Our Flavours"
-        description="Three bold flavours. One rule: zero marination. Pick your PANEVO."
+        title="PANEVO Flavoured Paneer — Black Pepper, Red Chilli, Oregano | ₹125 for 200g"
+        description="Three bold pre-flavoured paneer variants — Black Pepper, Red Chilli Flakes and Oregano — at ₹125 for 200g. Zero marination, ready to cook in minutes."
         structuredData={structuredData}
       />
 

@@ -169,59 +169,64 @@
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
 
-/* Card lift hover */
+/* Card lift hover — gated on devices with true hover */
 .card-lift {
   box-shadow: var(--shadow-rest);
   transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
-  will-change: transform;
 }
-.card-lift:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
-}
-
 .recipe-lift {
   box-shadow: var(--shadow-rest);
   transition: transform 250ms ease, box-shadow 250ms ease;
-  will-change: transform;
 }
-.recipe-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+@media (hover: hover) {
+  .card-lift { will-change: transform; }
+  .card-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+  .recipe-lift { will-change: transform; }
+  .recipe-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
 }
 
 /* Primary CTA — text/icon shift on hover */
 .cta-primary {
   transition: background-color 180ms ease;
 }
-.cta-primary:hover {
-  background-color: color-mix(in srgb, hsl(var(--primary)) 92%, white);
-}
 .cta-primary .cta-arrow {
   transition: transform 180ms ease;
   display: inline-flex;
 }
-.cta-primary:hover .cta-arrow { transform: translateX(4px); }
+@media (hover: hover) {
+  .cta-primary:hover {
+    background-color: color-mix(in srgb, hsl(var(--primary)) 92%, white);
+  }
+  .cta-primary:hover .cta-arrow { transform: translateX(4px); }
+}
 
-/* Q-Com shimmer */
+/* Q-Com shimmer — gated on hover-capable devices */
 .qcom-shimmer {
   position: relative;
   overflow: hidden;
 }
-.qcom-shimmer::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
-  pointer-events: none;
-  transition: left 0s;
-}
-.qcom-shimmer:hover::after {
-  left: 100%;
-  transition: left 600ms ease;
+@media (hover: hover) {
+  .qcom-shimmer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    pointer-events: none;
+    transition: left 0s;
+  }
+  .qcom-shimmer:hover::after {
+    left: 100%;
+    transition: left 600ms ease;
+  }
 }
 
 /* Nav-link underline */
@@ -307,4 +312,39 @@
 /* Tabular numerics helper */
 .tabnums {
   font-variant-numeric: tabular-nums;
+}
+
+/* Main padding accommodates mobile sticky bottom bar (≥64px + safe area) */
+.main-with-sticky-bar {
+  padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+}
+@media (min-width: 768px) {
+  .main-with-sticky-bar {
+    padding-bottom: 0;
+  }
+}
+
+/* Anchor scroll offset for sticky nav */
+:where(section[id], h1[id], h2[id], h3[id]) {
+  scroll-margin-top: 80px;
+}
+
+/* Global focus-visible — 2px Terracotta with 2px offset */
+:where(a, button, [role="button"], input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Fluid type scale fallback (Tailwind text-* utilities on heading
+   elements always win on specificity, so this only affects headings
+   without an explicit size class) */
+h1:not([class*="text-"]) {
+  font-size: clamp(2rem, 5.5vw, 4.5rem);
+}
+h2:not([class*="text-"]) {
+  font-size: clamp(1.625rem, 4vw, 3rem);
+}
+h3:not([class*="text-"]) {
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
 }

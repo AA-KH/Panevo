@@ -12,9 +12,16 @@ export function StickyBottomBar() {
   };
 
   return (
-    <div
-      className="fixed bottom-0 left-0 right-0 bg-primary md:hidden flex border-t border-primary-foreground/10"
-      style={{ height: 56, zIndex: 100, boxShadow: "var(--shadow-nav)" }}
+    <nav
+      role="navigation"
+      aria-label="Quick order"
+      className="sticky-bottom-bar fixed bottom-0 left-0 right-0 bg-primary md:hidden flex border-t border-primary-foreground/10"
+      style={{
+        minHeight: 64,
+        paddingBottom: "env(safe-area-inset-bottom, 0px)",
+        zIndex: 100,
+        boxShadow: "var(--shadow-nav)",
+      }}
     >
       {Object.entries(QCOM_LINKS).map(([platform, url]) => (
         <a
@@ -23,13 +30,13 @@ export function StickyBottomBar() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => handleQComClick(platform)}
-          className="qcom-shimmer flex-1 flex flex-col items-center justify-center border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10 outline-none focus-visible:bg-primary-foreground/10"
+          className="qcom-shimmer flex-1 flex flex-col items-center justify-center border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10 outline-none focus-visible:bg-primary-foreground/10 min-h-[64px]"
           aria-label={`Order on ${platform}`}
         >
           <span className="text-primary-foreground text-[11px] uppercase tracking-wider font-bold leading-tight">Order on</span>
           <span className="text-primary-foreground text-sm font-bold capitalize leading-tight" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.04em" }}>{platform}</span>
         </a>
       ))}
-    </div>
+    </nav>
   );
 }

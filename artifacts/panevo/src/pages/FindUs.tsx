@@ -118,8 +118,8 @@ export default function FindUs() {
   return (
     <div className="w-full">
       <SEO
-        title="Find Us"
-        description="Delivered in 10 minutes on Blinkit, Zepto, and Instamart. Or find PANEVO at your nearest store."
+        title="Where to Buy PANEVO — Blinkit, Zepto, Instamart, Chandigarh Stores"
+        description="Find PANEVO on Blinkit, Zepto and Swiggy Instamart in Chandigarh Tri-City and Gurgaon, plus our growing list of physical retail stores."
         structuredData={structuredData}
       />
 

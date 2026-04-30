@@ -1,21 +1,53 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Link } from "wouter";
+import { Shatkona } from "@/components/sections/Shatkona";
+import { SEO } from "@/components/SEO";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
+    <>
+      <SEO
+        title="Page Not Found — PANEVO"
+        description="The page you’re looking for has moved or doesn’t exist. Head back to PANEVO — India’s first pre-flavoured fresh paneer."
+        robots="noindex, follow"
+      />
+      <section className="min-h-[70vh] flex items-center justify-center bg-background py-20 px-4">
+        <div className="max-w-xl mx-auto text-center">
+          <div className="flex justify-center mb-6">
+            <Shatkona className="w-12 h-12 opacity-70" />
           </div>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
+          <p
+            className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4"
+            style={{ fontFamily: "var(--app-font-display)" }}
+          >
+            404 · Page Not Found
           </p>
-        </CardContent>
-      </Card>
-    </div>
+          <h1
+            className="text-4xl sm:text-5xl md:text-6xl uppercase mb-6 leading-tight"
+            style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.02em" }}
+          >
+            This page has wandered off
+          </h1>
+          <p className="text-base md:text-lg text-foreground/80 mb-8">
+            The link you followed may be broken or the page may have moved. Let’s
+            get you back to fresh, flavoured, ready paneer.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/"
+              className="cta-primary inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold notch-br outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              Back to Home
+              <span className="cta-arrow">→</span>
+            </Link>
+            <Link
+              href="/products"
+              className="inline-flex items-center justify-center gap-2 border-2 border-secondary text-secondary px-6 py-3 rounded-md font-semibold outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              Explore Flavours
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

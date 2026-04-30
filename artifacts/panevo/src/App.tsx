@@ -30,8 +30,14 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
+      <a
+        href="#main-content"
+        className="skip-to-content sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+      >
+        Skip to main content
+      </a>
       <Navbar />
-      <main className="flex-1 w-full pb-14 md:pb-0">
+      <main id="main-content" className="flex-1 w-full main-with-sticky-bar">
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/products" component={Products} />

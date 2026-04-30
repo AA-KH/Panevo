@@ -65,6 +65,7 @@ export function Navbar() {
 
   return (
     <nav
+      aria-label="Main"
       className={`sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 transition-transform duration-200 ${navTransform} ${navShadow}`}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">

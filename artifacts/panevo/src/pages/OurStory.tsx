@@ -48,8 +48,8 @@ export default function OurStory() {
   return (
     <div className="w-full">
       <SEO
-        title="Our Story"
-        description="How we decided to fix paneer. A brand doesn't start with a product, it starts with a problem."
+        title="About PANEVO — India's First Pre-Flavoured Paneer Brand"
+        description="The story behind PANEVO — India's first pre-flavoured paneer brand from Shatkona Ventures. How a kitchen frustration became a category-defining product."
         structuredData={structuredData}
       />
 

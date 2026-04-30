@@ -35,8 +35,8 @@ export default function Nutrition() {
   return (
     <div className="w-full">
       <SEO
-        title="Nutrition & Protein"
-        description="The protein you've been underestimating. Lab-tested macros and clean ingredients."
+        title="Paneer Protein Per 100g — PANEVO Nutrition Facts & Comparison"
+        description="PANEVO paneer nutrition facts: ~18g protein per 100g, clean-label ingredients, and a head-to-head protein comparison with chicken breast, eggs, tofu and soya chunks."
         schema={JSON.stringify(faqSchema)}
       />
 

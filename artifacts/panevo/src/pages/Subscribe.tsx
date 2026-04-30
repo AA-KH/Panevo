@@ -138,8 +138,8 @@ export default function Subscribe() {
   return (
     <div className="w-full bg-background min-h-screen">
       <SEO
-        title="Subscribe"
-        description="Your weekly paneer box. Cancel any time. Stop thinking about paneer. Start eating it."
+        title="PANEVO Weekly Paneer Subscription — Fresh, Pre-Flavoured, Delivered"
+        description="Your weekly paneer box from PANEVO. Fresh, pre-flavoured paneer delivered on schedule. No lock-in, pause any time, cancel from your dashboard in one click."
       />
 
       {/* HERO */}
@@ -153,7 +153,7 @@ export default function Subscribe() {
           </Reveal>
 
           <Reveal delay={200}>
-            <ul className="flex flex-wrap justify-center gap-3 mb-10 list-none">
+            <ul className="flex flex-wrap justify-center gap-3 mb-6 list-none">
               {["No lock-in", "Pause any time", "Fresh every delivery"].map((label) => (
                 <li key={label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-secondary text-secondary text-sm font-semibold tracking-wide">
                   <Check className="w-4 h-4" /> {label}
@@ -162,7 +162,14 @@ export default function Subscribe() {
             </ul>
           </Reveal>
 
-          <Reveal delay={280}>
+          <Reveal delay={240}>
+            <p className="text-base md:text-lg text-foreground/80 max-w-2xl mx-auto mb-10">
+              Cancel or pause from your account dashboard in one click — no
+              emails, no calls, no fine print.
+            </p>
+          </Reveal>
+
+          <Reveal delay={300}>
             <button onClick={() => document.getElementById("plans")?.scrollIntoView({ behavior: "smooth" })} className="cta-primary bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br inline-flex items-center gap-2">
               See Plans <ArrowRight className="w-5 h-5 cta-arrow" />
             </button>

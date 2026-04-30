@@ -70,8 +70,8 @@ export default function Recipes() {
   return (
     <div className="w-full">
       <SEO
-        title="Recipes"
-        description="High protein, under 10 minutes. Stop marinating, start cooking."
+        title="High-Protein PANEVO Recipes — Under 15 Minutes, Zero Marination"
+        description="High-protein paneer recipes you can cook in under 15 minutes with zero marination. Tikka, bhurji, wraps and more — built around PANEVO pre-flavoured paneer."
         structuredData={structuredData}
       />
 

@@ -15,8 +15,8 @@ export default function Home() {
   return (
     <div className="w-full">
       <SEO
-        title="India's First Pre-Flavoured Fresh Paneer"
-        description="Open the pack. Cook in under 10 minutes. No marination. No prep. PANEVO is India's first pre-flavoured fresh paneer brand."
+        title="PANEVO — India's First Pre-Flavoured Fresh Paneer | Order on Blinkit, Zepto"
+        description="Open the pack. Cook in under 10 minutes. No marination. No prep. PANEVO is India's first pre-flavoured fresh paneer — order on Blinkit, Zepto and Swiggy Instamart."
       />
 
       {/* HERO — stagger sequence per spec §8.1 */}
@@ -209,14 +209,23 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 list-none p-0">
             {products.map((product, i) => (
               <Reveal key={product.id} delay={i * 80}>
+                <li className="h-full">
                 <Link
                   href={`/products#${product.id}`}
-                  className="card-lift group bg-card border border-border overflow-hidden flex flex-col h-full"
+                  className="card-lift group bg-card border border-border overflow-hidden flex flex-col h-full relative"
                   style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
                 >
+                  {i === 0 && (
+                    <span
+                      className="absolute top-3 left-3 z-10 bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1"
+                      aria-label="India's First Pre-Flavoured Paneer"
+                    >
+                      <span aria-hidden="true">✦</span> India's First
+                    </span>
+                  )}
                   <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-secondary/15 via-primary/10 to-accent/20">
                     <div className="absolute inset-0 group-hover:scale-[1.04] transition-transform duration-500 flex flex-col items-center justify-center gap-3">
                       <Shatkona className="w-16 h-16 text-primary/40" />
@@ -234,9 +243,10 @@ export default function Home() {
                     </div>
                   </div>
                 </Link>
+                </li>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 

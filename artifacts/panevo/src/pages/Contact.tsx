@@ -227,9 +227,14 @@ export default function Contact() {
                     <label htmlFor="tradeMessage" className="text-sm font-bold text-foreground">Additional Details</label>
                     <textarea id="tradeMessage" required rows={4} value={tradeData.message} onChange={(e) => setTradeData({...tradeData, message: e.target.value})} className="w-full p-3 bg-background border border-border focus:outline-none focus:border-primary resize-none" style={{ borderRadius: 8 }}></textarea>
                   </div>
-                  <button disabled={isTradeSubmitting} type="submit" className="cta-primary bg-primary text-primary-foreground px-8 py-4 font-bold w-full hover:bg-primary/90 transition-colors notch-br disabled:opacity-50" style={{ borderRadius: 4 }}>
-                    {isTradeSubmitting ? "Submitting..." : "Submit Trade Enquiry"}
-                  </button>
+                  <div className="space-y-3">
+                    <button disabled={isTradeSubmitting} type="submit" className="cta-primary bg-primary text-primary-foreground px-8 py-4 font-bold w-full hover:bg-primary/90 transition-colors notch-br disabled:opacity-50" style={{ borderRadius: 4 }}>
+                      {isTradeSubmitting ? "Submitting..." : "Submit Trade Enquiry"}
+                    </button>
+                    <p className="text-sm text-muted-foreground text-center">
+                      Our team responds within 48 hours.
+                    </p>
+                  </div>
                 </form>
               )}
               </div>
