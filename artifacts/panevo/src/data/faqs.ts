@@ -21,6 +21,50 @@ export const faqs = {
       answer: "Yes. Our Oregano flavour is completely non-spicy and very popular with children. It contains only milk, salt, oregano, and citric acid. No artificial colours, flavours, or preservatives."
     }
   ],
+  products: [
+    {
+      question: "Do I need to wash or marinate PANEVO?",
+      answer: "No. PANEVO is pre-flavoured and ready to cook. Washing it will wash away the surface spices, and marinating it is completely unnecessary. Just open the pack, cube it, and cook."
+    },
+    {
+      question: "How long does it stay fresh?",
+      answer: "When stored between 1–4°C, PANEVO stays fresh for up to 15 days from the date of manufacture. Once opened, consume it within 5 days."
+    },
+    {
+      question: "Is there any added colour or preservative?",
+      answer: "Absolutely zero. The red tint in our Red Chilli Flakes flavour comes entirely from the natural chilli infused into the milk. We do not use any artificial colours, flavours, or preservatives."
+    },
+    {
+      question: "Are there allergens?",
+      answer: "PANEVO contains milk. It is manufactured in a facility that also processes nuts and wheat, though our paneer lines are dedicated and rigorously cleaned."
+    },
+    {
+      question: "Can I eat it raw?",
+      answer: "Yes, PANEVO is fully pasteurised and safe to eat straight from the pack. It’s excellent in salads."
+    }
+  ],
+  cooking: [
+    {
+      question: "What is the best way to cook PANEVO?",
+      answer: "A quick pan-sear is best. Heat a drop of oil or ghee on a hot tawa or non-stick pan, add cubed PANEVO, and sear for 3-4 minutes until the edges are golden brown. Do not overcook."
+    },
+    {
+      question: "Does the flavour leach out into curries?",
+      answer: "Our infusion process locks the flavour into the paneer. While some surface spices may mix with your curry, the paneer itself retains its bold core flavour."
+    },
+    {
+      question: "Can I air-fry or bake it?",
+      answer: "Yes. Lightly toss the cubes in oil (to prevent drying) and air-fry at 180°C for 6-8 minutes. Baking works similarly at 200°C."
+    },
+    {
+      question: "Can I use it for making sweets?",
+      answer: "Given our savoury flavours (Black Pepper, Red Chilli Flakes, Oregano), PANEVO is strictly for savoury dishes, snacks, and salads."
+    },
+    {
+      question: "Should I soak it in warm water before cooking?",
+      answer: "No. Our paneer is already exceptionally soft. Soaking it will dilute the infused flavours and ruin the texture."
+    }
+  ],
   subscription: [
     {
       question: "Can I change my flavour between deliveries?",
@@ -41,6 +85,28 @@ export const faqs = {
     {
       question: "What payment methods are accepted?",
       answer: "We accept all major credit cards, debit cards, and UPI (GPay, PhonePe, Paytm) via Razorpay secure checkout."
+    }
+  ],
+  findUs: [
+    {
+      question: "How do I store PANEVO if I buy in bulk?",
+      answer: "Always store PANEVO in the refrigerator between 1–4°C. Do not freeze it, as freezing alters the texture of fresh paneer."
+    },
+    {
+      question: "Are you available outside Chandigarh Tri-City and Gurgaon?",
+      answer: "Not yet. We are perfecting our cold-chain supply in these regions first. However, we are actively evaluating our next cities. Submit your city request on this page."
+    },
+    {
+      question: "Why is the texture different from local dairy paneer?",
+      answer: "We use a precise temperature-controlled coagulation process that yields a denser, creamier block. This ensures the paneer doesn't crumble when you pan-sear it."
+    },
+    {
+      question: "Can I order directly from the factory?",
+      answer: "We do not offer factory-direct orders. Please use our website subscription, or order via Blinkit, Zepto, or Swiggy Instamart for 10-minute delivery."
+    },
+    {
+      question: "What should I do if my pack is puffed up?",
+      answer: "If the vacuum seal is broken or the pack is bloated before the expiry date, do not consume it. Contact us immediately for a replacement or refund."
     }
   ]
 };

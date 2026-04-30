@@ -1,25 +1,55 @@
 import { SEO } from "@/components/SEO";
 import { Shatkona } from "@/components/sections/Shatkona";
 import { roadmap } from "@/data/roadmap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { track } from "@/lib/analytics";
+import { toast } from "sonner";
 
 export default function OurStory() {
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    track("page_view", { page: "/our-story" });
+  }, []);
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    track("waitlist_signup", { source: "roadmap-phase2" });
-    console.log("Waitlist signup:", email);
-    alert("Thanks! We'll keep you updated.");
-    setEmail("");
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "roadmap-phase2" })
+      });
+      if (!res.ok) throw new Error("Failed to join waitlist");
+      track("waitlist_signup", { source: "roadmap-phase2" });
+      toast.success("Thanks! We'll keep you updated.");
+      setEmail("");
+    } catch (err) {
+      toast.error("Failed to join waitlist. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://panevo.in" },
+        { "@type": "ListItem", "position": 2, "name": "Our Story", "item": "https://panevo.in/our-story" }
+      ]
+    }
+  ];
 
   return (
     <div className="w-full">
       <SEO
         title="Our Story"
         description="How we decided to fix paneer. A brand doesn't start with a product, it starts with a problem."
+        structuredData={structuredData}
       />
 
       {/* HERO */}
@@ -58,7 +88,7 @@ export default function OurStory() {
             real spices into the milk exactly at the point of curdling. 
           </p>
 
-          <div className="bg-muted p-8 rounded-xl my-12 border border-border">
+          <div className="bg-muted p-8 rounded-xl my-12 border border-border border-l-4 border-l-secondary">
              <h3 className="text-foreground mt-0">DPIIT Recognised</h3>
              <p className="mb-0 text-muted-foreground text-base">Our innovative infusion process earned PANEVO formal recognition as an innovative startup by the Department for Promotion of Industry and Internal Trade (DPIIT), Government of India.</p>
           </div>
@@ -119,7 +149,7 @@ export default function OurStory() {
       </section>
 
       {/* ROADMAP */}
-      <section className="bg-muted py-24 border-t border-border">
+      <section className="bg-secondary/5 py-24 border-t border-border">
         <div className="container px-4 max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-foreground">The Bold Roadmap</h2>
@@ -138,7 +168,7 @@ export default function OurStory() {
                 {/* Content */}
                 <div className={`ml-12 md:ml-0 md:w-5/12 p-6 rounded-xl border ${
                   phase.status === 'live' ? 'bg-card border-border shadow-sm' : 
-                  phase.status === 'upcoming' ? 'bg-primary/5 border-primary shadow-md scale-105 z-20 relative' : 
+                  phase.status === 'upcoming' ? 'bg-primary/10 border-primary shadow-md scale-105 z-20 relative' : 
                   'bg-transparent border-border/50 opacity-60'
                 }`}>
                   <h3 className="font-bold text-lg mb-4 text-foreground">{phase.phase}</h3>
@@ -166,8 +196,8 @@ export default function OurStory() {
                  placeholder="Enter your email"
                  className="flex-1 bg-background border border-border text-foreground px-4 py-3 rounded-md focus:outline-none focus:border-primary"
                />
-               <button type="submit" className="bg-primary text-primary-foreground px-6 py-3 rounded-md font-bold hover:bg-primary/90 transition-colors whitespace-nowrap">
-                 Notify Me
+               <button disabled={isSubmitting} type="submit" className="bg-primary text-primary-foreground px-6 py-3 rounded-md font-bold hover:bg-primary/90 transition-colors whitespace-nowrap disabled:opacity-50">
+                 {isSubmitting ? "Submitting..." : "Notify Me"}
                </button>
              </form>
           </div>

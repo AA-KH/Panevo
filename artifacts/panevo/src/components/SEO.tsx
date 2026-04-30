@@ -5,9 +5,10 @@ interface SEOProps {
   description: string;
   ogImage?: string;
   schema?: string;
+  structuredData?: Record<string, any>[];
 }
 
-export function SEO({ title, description, ogImage, schema }: SEOProps) {
+export function SEO({ title, description, ogImage, schema, structuredData }: SEOProps) {
   useEffect(() => {
     document.title = `${title} | PANEVO`;
 
@@ -29,26 +30,34 @@ export function SEO({ title, description, ogImage, schema }: SEOProps) {
       ogImgMeta.setAttribute("content", ogImage);
     }
 
+    const scriptsToRemove: Element[] = [];
+
     if (schema) {
-      let script = document.querySelector('script[type="application/ld+json"]');
-      if (!script) {
-        script = document.createElement("script");
-        script.setAttribute("type", "application/ld+json");
-        document.head.appendChild(script);
-      }
+      let script = document.createElement("script");
+      script.setAttribute("type", "application/ld+json");
       script.textContent = schema;
+      document.head.appendChild(script);
+      scriptsToRemove.push(script);
+    }
+
+    if (structuredData && structuredData.length > 0) {
+      structuredData.forEach((data) => {
+        let script = document.createElement("script");
+        script.setAttribute("type", "application/ld+json");
+        script.textContent = JSON.stringify(data);
+        document.head.appendChild(script);
+        scriptsToRemove.push(script);
+      });
     }
 
     return () => {
-      // Cleanup script tag on unmount
-      if (schema) {
-        const script = document.querySelector('script[type="application/ld+json"]');
-        if (script) {
+      scriptsToRemove.forEach((script) => {
+        if (document.head.contains(script)) {
           document.head.removeChild(script);
         }
-      }
+      });
     };
-  }, [title, description, ogImage, schema]);
+  }, [title, description, ogImage, schema, structuredData]);
 
   return null;
 }

@@ -8,9 +8,92 @@
 import * as zod from "zod";
 
 /**
- * Returns server health status
- * @summary Health check
+ * @summary Add email to waitlist
  */
-export const HealthCheckResponse = zod.object({
-  status: zod.string(),
+export const AddToWaitlistBody = zod.object({
+  email: zod.string().email(),
+  city: zod.string().optional(),
+  source: zod.string(),
+});
+
+export const AddToWaitlistResponse = zod.object({
+  ok: zod.boolean(),
+  error: zod.string().optional(),
+});
+
+/**
+ * @summary Send trade/distributor enquiry
+ */
+export const SendTradeEnquiryBody = zod.object({
+  name: zod.string(),
+  businessName: zod.string(),
+  city: zod.string(),
+  type: zod.enum(["GT", "MT", "HoReCa", "Distributor"]),
+  monthlyVolume: zod.string().optional(),
+  message: zod.string(),
+});
+
+export const SendTradeEnquiryResponse = zod.object({
+  ok: zod.boolean(),
+  error: zod.string().optional(),
+});
+
+/**
+ * @summary Send contact form
+ */
+export const SendContactFormBody = zod.object({
+  name: zod.string(),
+  email: zod.string().email(),
+  phone: zod.string().optional(),
+  subject: zod.enum([
+    "general",
+    "trade",
+    "press",
+    "investor",
+    "careers",
+    "other",
+  ]),
+  message: zod.string(),
+});
+
+export const SendContactFormResponse = zod.object({
+  ok: zod.boolean(),
+  error: zod.string().optional(),
+});
+
+/**
+ * @summary Create Razorpay subscription
+ */
+export const CreateSubscriptionBody = zod.object({
+  planId: zod.string(),
+  customer: zod.object({
+    name: zod.string(),
+    email: zod.string().email(),
+    phone: zod.string(),
+    address: zod.object({
+      line1: zod.string(),
+      city: zod.string(),
+      state: zod.string(),
+      pincode: zod.string(),
+    }),
+  }),
+});
+
+export const CreateSubscriptionResponse = zod.object({
+  subscriptionId: zod.string(),
+  razorpayKeyId: zod.string(),
+  mock: zod.boolean().optional(),
+  customer: zod.object({
+    name: zod.string().optional(),
+    email: zod.string().email().optional(),
+    phone: zod.string().optional(),
+  }),
+});
+
+/**
+ * @summary Razorpay webhook receiver
+ */
+export const RazorpayWebhookResponse = zod.object({
+  ok: zod.boolean(),
+  error: zod.string().optional(),
 });

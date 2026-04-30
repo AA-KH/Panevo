@@ -1,5 +1,3 @@
-export const QCOM_LINKS = {
-  blinkit: '#', // REPLACE with live URLs once approved
-  zepto: '#', // REPLACE with live URLs once approved
-  instamart: '#' // REPLACE with live URLs once approved
-};
+import { QCOM_LINKS as BRAND_QCOM_LINKS } from "./brand";
+
+export const QCOM_LINKS = BRAND_QCOM_LINKS;

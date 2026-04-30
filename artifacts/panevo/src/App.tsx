@@ -15,6 +15,7 @@ import Products from "@/pages/Products";
 import OurStory from "@/pages/OurStory";
 import Nutrition from "@/pages/Nutrition";
 import Subscribe from "@/pages/Subscribe";
+import SubscribeThankYou from "@/pages/SubscribeThankYou";
 import FindUs from "@/pages/FindUs";
 import Contact from "@/pages/Contact";
 import Recipes from "@/pages/Recipes";
@@ -37,6 +38,7 @@ function Router() {
           <Route path="/our-story" component={OurStory} />
           <Route path="/nutrition" component={Nutrition} />
           <Route path="/subscribe" component={Subscribe} />
+          <Route path="/subscribe/thank-you" component={SubscribeThankYou} />
           <Route path="/find-us" component={FindUs} />
           <Route path="/contact" component={Contact} />
           <Route path="/recipes" component={Recipes} />

@@ -1,11 +1,11 @@
 import { useLocation } from "wouter";
-import { QCOM_LINKS } from "@/config/platforms";
+import { QCOM_LINKS } from "@/config/brand";
 import { track } from "@/lib/analytics";
 
 export function StickyBottomBar() {
   const [location] = useLocation();
 
-  if (location === "/subscribe") return null;
+  if (location === "/subscribe" || location === "/subscribe/thank-you") return null;
 
   const handleQComClick = (platform: string) => {
     track("qcom_click", { platform, source_page: location, source_element: "sticky_bottom_bar" });
@@ -20,7 +20,8 @@ export function StickyBottomBar() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => handleQComClick(platform)}
-          className="flex-1 flex flex-col items-center justify-center border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10"
+          className="flex-1 flex flex-col items-center justify-center border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10 outline-none focus-visible:bg-primary-foreground/10"
+          aria-label={`Order on ${platform}`}
         >
           <span className="text-primary-foreground text-xs font-bold capitalize">{platform}</span>
         </a>

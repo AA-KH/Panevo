@@ -1,11 +1,18 @@
 import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import { recipes } from "@/data/recipes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight, Clock } from "lucide-react";
+import { track } from "@/lib/analytics";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { faqs } from "@/data/faqs";
 
 export default function Recipes() {
   const [activeFilter, setActiveFilter] = useState("All");
+
+  useEffect(() => {
+    track("page_view", { page: "/recipes" });
+  }, []);
 
   const filters = ["All", "Black Pepper", "Red Chilli Flakes", "Oregano", "Under 10 min", "High Protein"];
 
@@ -17,11 +24,32 @@ export default function Recipes() {
     return recipe.tags.includes(activeFilter);
   });
 
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://panevo.in" },
+        { "@type": "ListItem", "position": 2, "name": "Recipes", "item": "https://panevo.in/recipes" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.cooking.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+      }))
+    }
+  ];
+
   return (
     <div className="w-full">
       <SEO
         title="Recipes"
         description="High protein, under 10 minutes. Stop marinating, start cooking."
+        structuredData={structuredData}
       />
 
       {/* HERO */}
@@ -40,7 +68,7 @@ export default function Recipes() {
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   activeFilter === filter ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground hover:bg-border'
                 }`}
               >
@@ -57,7 +85,7 @@ export default function Recipes() {
           {filteredRecipes.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredRecipes.map((recipe) => (
-                <Link key={recipe.slug} href={`/recipes/${recipe.slug}`} className="group bg-card border border-border rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-md transition-all flex flex-col sm:flex-row">
+                <Link key={recipe.slug} href={`/recipes/${recipe.slug}`} className="group bg-card border border-border rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-md transition-all flex flex-col sm:flex-row focus-visible:ring-2 focus-visible:ring-primary outline-none block">
                   <div className="w-full sm:w-2/5 aspect-square sm:aspect-auto bg-muted relative overflow-hidden">
                      {/* Image placeholder */}
                      <div className="absolute inset-0 bg-secondary/5 group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
@@ -98,6 +126,26 @@ export default function Recipes() {
           )}
         </div>
       </section>
+
+      {/* FAQ */}
+      <section className="bg-muted py-24 border-t border-border">
+        <div className="container px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Cooking FAQ</h2>
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.cooking.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-border">
+                <AccordionTrigger className="text-left font-bold text-lg hover:text-primary transition-colors py-6">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
     </div>
   );
 }

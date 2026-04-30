@@ -1,33 +1,38 @@
 import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import { Shatkona } from "@/components/sections/Shatkona";
-import { QCOM_LINKS } from "@/config/platforms";
+import { QCOM_LINKS } from "@/config/brand";
 import { products } from "@/data/products";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { ArrowRight, CheckCircle, Clock, Flame } from "lucide-react";
 
 export default function Home() {
   const [proteinCount, setProteinCount] = useState(0);
   const proteinRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          let start = 0;
-          const end = 18;
-          const duration = 800;
-          const increment = end / (duration / 16);
-          const timer = setInterval(() => {
-            start += increment;
-            if (start >= end) {
-              setProteinCount(end);
-              clearInterval(timer);
-            } else {
-              setProteinCount(Math.floor(start));
-            }
-          }, 16);
+          if (shouldReduceMotion) {
+            setProteinCount(18);
+          } else {
+            let start = 0;
+            const end = 18;
+            const duration = 800;
+            const increment = end / (duration / 16);
+            const timer = setInterval(() => {
+              start += increment;
+              if (start >= end) {
+                setProteinCount(end);
+                clearInterval(timer);
+              } else {
+                setProteinCount(Math.floor(start));
+              }
+            }, 16);
+          }
           observer.disconnect();
         }
       },
@@ -36,7 +41,7 @@ export default function Home() {
 
     if (proteinRef.current) observer.observe(proteinRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [shouldReduceMotion]);
 
   return (
     <div className="w-full">
@@ -53,7 +58,7 @@ export default function Home() {
 
         <div className="container relative z-10 px-4 flex flex-col items-center text-center">
           <motion.div
-             initial={{ opacity: 0, y: 20 }}
+             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.5, delay: 0.45 }}
              className="mb-6 bg-accent text-accent-foreground px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 notch-br"
@@ -62,7 +67,7 @@ export default function Home() {
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0 }}
             className="text-6xl md:text-8xl font-bold mb-4 max-w-4xl"
@@ -71,7 +76,7 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-xl md:text-2xl text-muted/80 mb-10 max-w-2xl"
@@ -80,24 +85,24 @@ export default function Home() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Link href="/products" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
+            <Link href="/products" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               Order Now <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="/products" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center">
+            <Link href="/products" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-white">
               See Our Flavours
             </Link>
           </motion.div>
 
           <motion.div
-             initial={{ opacity: 0, scale: 0.8 }}
-             animate={{ opacity: 1, scale: 1 }}
+             initial={shouldReduceMotion ? { opacity: 0.5, scale: 1 } : { opacity: 0, scale: 0.8 }}
+             animate={{ opacity: 0.5, scale: 1 }}
              transition={{ duration: 0.6, delay: 0.2 }}
-             className="mt-16 opacity-50"
+             className="mt-16"
           >
             <Shatkona className="w-24 h-24" />
           </motion.div>
@@ -315,7 +320,7 @@ export default function Home() {
             Ancient + Modern.<br />
             India's Protein. Evolved.
           </h2>
-          <Link href="/our-story" className="inline-flex items-center gap-2 text-background font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors">
+          <Link href="/our-story" className="inline-flex items-center gap-2 text-background font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary rounded p-1">
             Our Story <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -327,10 +332,10 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Cook Differently?</h2>
           <p className="text-xl opacity-90 mb-10 max-w-2xl mx-auto">Find PANEVO at your nearest store or order for delivery in minutes.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/find-us" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2 notch-br">
+            <Link href="/find-us" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2 notch-br outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary">
               Find Near You <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="/products" className="bg-transparent border-2 border-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors inline-flex items-center justify-center">
+            <Link href="/products" className="bg-transparent border-2 border-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors inline-flex items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-white">
               Explore All Flavours
             </Link>
           </div>

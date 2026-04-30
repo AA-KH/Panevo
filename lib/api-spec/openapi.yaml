@@ -11,19 +11,121 @@ tags:
   - name: health
     description: Health operations
 paths:
-  /healthz:
-    get:
-      operationId: healthCheck
-      tags: [health]
-      summary: Health check
-      description: Returns server health status
+  /waitlist:
+    post:
+      operationId: addToWaitlist
+      tags: [marketing]
+      summary: Add email to waitlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaitlistEntry"
       responses:
         "200":
-          description: Healthy
+          description: Success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HealthStatus"
+                $ref: "#/components/schemas/StandardResponse"
+
+  /trade-enquiry:
+    post:
+      operationId: sendTradeEnquiry
+      tags: [contact]
+      summary: Send trade/distributor enquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TradeEnquiry"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardResponse"
+
+  /contact:
+    post:
+      operationId: sendContactForm
+      tags: [contact]
+      summary: Send contact form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactForm"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardResponse"
+
+  /create-subscription:
+    post:
+      operationId: createSubscription
+      tags: [subscription]
+      summary: Create Razorpay subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSubscriptionRequest"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateSubscriptionResponse"
+
+  /razorpay-webhook:
+    post:
+      operationId: razorpayWebhook
+      tags: [subscription]
+      summary: Razorpay webhook receiver
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardResponse"
+
+  /sitemap.xml:
+    get:
+      operationId: getSitemap
+      tags: [seo]
+      summary: Get sitemap.xml
+      responses:
+        "200":
+          description: XML sitemap
+          content:
+            text/xml:
+              schema:
+                type: string
+
+  /robots.txt:
+    get:
+      operationId: getRobots
+      tags: [seo]
+      summary: Get robots.txt
+      responses:
+        "200":
+          description: robots.txt
+          content:
+            text/plain:
+              schema:
+                type: string
+
 components:
   schemas:
     HealthStatus:
@@ -33,4 +135,136 @@ components:
           type: string
       required:
         - status
+
+    StandardResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        error:
+          type: string
+      required:
+        - ok
+
+    WaitlistEntry:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        city:
+          type: string
+        source:
+          type: string
+      required:
+        - email
+        - source
+
+    TradeEnquiry:
+      type: object
+      properties:
+        name:
+          type: string
+        businessName:
+          type: string
+        city:
+          type: string
+        type:
+          type: string
+          enum: ["GT", "MT", "HoReCa", "Distributor"]
+        monthlyVolume:
+          type: string
+        message:
+          type: string
+      required:
+        - name
+        - businessName
+        - city
+        - type
+        - message
+
+    ContactForm:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        subject:
+          type: string
+          enum: ["general", "trade", "press", "investor", "careers", "other"]
+        message:
+          type: string
+      required:
+        - name
+        - email
+        - subject
+        - message
+
+    CreateSubscriptionRequest:
+      type: object
+      properties:
+        planId:
+          type: string
+        customer:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+            phone:
+              type: string
+            address:
+              type: object
+              properties:
+                line1:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                pincode:
+                  type: string
+              required:
+                - line1
+                - city
+                - state
+                - pincode
+          required:
+            - name
+            - email
+            - phone
+            - address
+      required:
+        - planId
+        - customer
+
+    CreateSubscriptionResponse:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        razorpayKeyId:
+          type: string
+        mock:
+          type: boolean
+        customer:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+            phone:
+              type: string
+      required:
+        - subscriptionId
+        - razorpayKeyId
+        - customer
 

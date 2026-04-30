@@ -2,31 +2,83 @@ import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import { products } from "@/data/products";
 import { QCOM_LINKS } from "@/config/platforms";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { track } from "@/lib/analytics";
+import { toast } from "sonner";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { faqs } from "@/data/faqs";
 
 export default function Products() {
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    track("product_view", {});
+  }, []);
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    track("waitlist_signup", { source: "phase2-flavour" });
-    // TODO: POST to API route in Phase 2
-    console.log("Waitlist signup:", email);
-    alert("Thanks for signing up!");
-    setEmail("");
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "phase2-flavour" })
+      });
+      if (!res.ok) throw new Error("Failed to join waitlist");
+      track("waitlist_signup", { source: "phase2-flavour" });
+      toast.success("Thanks for signing up!");
+      setEmail("");
+    } catch (err) {
+      toast.error("Failed to join waitlist. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleQComClick = (platform: string) => {
     track("qcom_click", { platform, source_page: "/products", source_element: "product_card" });
   };
 
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://panevo.in" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://panevo.in/products" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.products.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+      }))
+    },
+    ...products.map(p => ({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": `PANEVO ${p.name}`,
+      "image": "https://panevo.in/opengraph.jpg",
+      "description": p.description,
+      "brand": { "@type": "Brand", "name": "PANEVO" },
+      "offers": [
+        { "@type": "Offer", "priceCurrency": "INR", "price": "125", "availability": "https://schema.org/InStock", "itemCondition": "https://schema.org/NewCondition" },
+        { "@type": "Offer", "priceCurrency": "INR", "price": "275", "availability": "https://schema.org/InStock", "itemCondition": "https://schema.org/NewCondition" }
+      ]
+    }))
+  ];
+
   return (
     <div className="w-full">
       <SEO
         title="Our Flavours"
         description="Three bold flavours. One rule: zero marination. Pick your PANEVO."
+        structuredData={structuredData}
       />
 
       {/* PAGE HERO */}
@@ -159,6 +211,25 @@ export default function Products() {
           </div>
         </div>
       </section>
+      
+      {/* FAQ */}
+      <section className="bg-muted py-24 border-t border-border">
+        <div className="container px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Product FAQ</h2>
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.products.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-border">
+                <AccordionTrigger className="text-left font-bold text-lg hover:text-primary transition-colors py-6">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
 
       {/* COMING SOON */}
       <section className="bg-near-black text-warm-cream py-24">
@@ -185,8 +256,8 @@ export default function Products() {
                placeholder="Enter your email"
                className="bg-white/10 border border-white/20 text-white placeholder:text-white/50 px-6 py-4 rounded-full w-full focus:outline-none focus:border-primary"
              />
-             <button type="submit" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br hover:bg-primary/90 transition-colors">
-               Notify Me When It Launches →
+             <button disabled={isSubmitting} type="submit" className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br hover:bg-primary/90 transition-colors disabled:opacity-50">
+               {isSubmitting ? "Submitting..." : "Notify Me When It Launches →"}
              </button>
           </form>
         </div>

@@ -1,25 +1,42 @@
 import { SEO } from "@/components/SEO";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { track } from "@/lib/analytics";
 import { Check, ArrowRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { faqs } from "@/data/faqs";
+import { useLocation } from "wouter";
+import { PLAN_IDS } from "@/config/brand";
+import { toast } from "sonner";
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 
 export default function Subscribe() {
+  const [, setLocation] = useLocation();
   const [step, setStep] = useState(1);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(
+    new URLSearchParams(window.location.search).get("plan") || null
+  );
   const [selectedSize, setSelectedSize] = useState<"200g" | "500g">("500g");
   const [flavours, setFlavours] = useState<string[]>([]);
   
   const [formData, setFormData] = useState({
-    name: "", email: "", phone: "", address: ""
+    name: "", email: "", phone: "", line1: "", city: "", state: "", pincode: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    track("page_view", { page: "/subscribe" });
+    if (step === 1) track("subscription_wizard_start", {});
+  }, [step]);
 
   const handlePlanSelect = (plan: string) => {
     setSelectedPlan(plan);
     setStep(2);
     track("subscription_step_complete", { step: 1, plan });
-    // Scroll to wizard
     document.getElementById("wizard")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -31,17 +48,90 @@ export default function Subscribe() {
 
   const proceedToStep3 = () => {
     if (flavours.length === 0) {
-      alert("Please select at least one flavour.");
+      toast.error("Please select at least one flavour.");
       return;
     }
     setStep(3);
     track("subscription_step_complete", { step: 2, flavours });
+    
+    // Inject Razorpay script if not present
+    if (!document.getElementById("razorpay-script")) {
+      const script = document.createElement("script");
+      script.id = "razorpay-script";
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
   };
 
-  const handlePayment = (e: React.FormEvent) => {
+  const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     track("subscription_payment_initiated", { plan: selectedPlan, size: selectedSize, flavours });
-    alert("Razorpay integration pending — TODO Phase 2. \n\nForm Data: " + JSON.stringify(formData));
+
+    try {
+      const planKeyFlavour = flavours.length > 1 ? "mixed" : (
+        flavours[0] === "Black Pepper" ? "bp" :
+        flavours[0] === "Red Chilli Flakes" ? "rc" :
+        flavours[0] === "Oregano" ? "or" : "mixed"
+      );
+      
+      const planId = PLAN_IDS.get(selectedPlan || "weekly", selectedSize, planKeyFlavour);
+
+      const res = await fetch("/api/create-subscription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          planId,
+          customer: {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            address: {
+              line1: formData.line1,
+              city: formData.city,
+              state: formData.state,
+              pincode: formData.pincode
+            }
+          }
+        })
+      });
+
+      if (!res.ok) throw new Error("Failed to create subscription");
+      const data = await res.json();
+
+      if (data.mock) {
+        toast.success("Razorpay credentials not configured — this is a Phase 1 demo of the wizard");
+        setLocation("/subscribe/thank-you");
+        return;
+      }
+
+      const options = {
+        key: data.razorpayKeyId,
+        subscription_id: data.subscriptionId,
+        name: "PANEVO",
+        description: "Weekly Paneer Box",
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone
+        },
+        handler: function (response: any) {
+          toast.success("Payment successful!");
+          setLocation("/subscribe/thank-you");
+        },
+        theme: {
+          color: "#BF3D0B"
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      toast.error("An error occurred during checkout.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -86,7 +176,7 @@ export default function Subscribe() {
                 )}
                 <h3 className="text-3xl font-bold mb-4 text-foreground uppercase">{plan.title}</h3>
                 <p className="text-muted-foreground mb-8 flex-1">{plan.desc}</p>
-                <button onClick={() => handlePlanSelect(plan.id)} className={`w-full py-3 rounded-md font-bold transition-colors ${plan.btnClass}`}>
+                <button onClick={() => handlePlanSelect(plan.id)} className={`w-full py-3 rounded-md font-bold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary ${plan.btnClass}`}>
                   Subscribe {plan.title}
                 </button>
               </div>
@@ -98,7 +188,7 @@ export default function Subscribe() {
       {/* WIZARD */}
       <section id="wizard" className="py-24 bg-background">
         <div className="container px-4 max-w-3xl">
-          <div className="mb-8 flex justify-between items-center border-b border-border pb-4">
+          <div className="mb-8 flex justify-between items-center border-b border-border pb-4" aria-live="polite">
             <h2 className="text-2xl font-bold text-foreground">Build Your Box</h2>
             <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest bg-muted px-3 py-1 rounded">Step {step} of 3</span>
           </div>
@@ -119,18 +209,18 @@ export default function Subscribe() {
                 <div>
                   <h3 className="text-xl font-bold mb-4 text-foreground">Pack Size</h3>
                   <div className="grid grid-cols-2 gap-4">
-                    <button onClick={() => setSelectedSize("200g")} className={`p-4 rounded-lg border-2 font-bold transition-all ${selectedSize === "200g" ? 'border-primary bg-primary/5 text-primary' : 'border-border bg-background text-muted-foreground hover:border-foreground/20'}`}>
+                    <button onClick={() => setSelectedSize("200g")} className={`p-4 rounded-lg border-2 font-bold transition-all outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary ${selectedSize === "200g" ? 'border-primary bg-primary/5 text-primary' : 'border-border bg-background text-muted-foreground hover:border-foreground/20'}`}>
                       200g
                       <p className="text-xs font-normal mt-1 opacity-80">Weeknights</p>
                     </button>
-                    <button onClick={() => setSelectedSize("500g")} className={`p-4 rounded-lg border-2 font-bold transition-all ${selectedSize === "500g" ? 'border-primary bg-primary/5 text-primary' : 'border-border bg-background text-muted-foreground hover:border-foreground/20'}`}>
+                    <button onClick={() => setSelectedSize("500g")} className={`p-4 rounded-lg border-2 font-bold transition-all outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary ${selectedSize === "500g" ? 'border-primary bg-primary/5 text-primary' : 'border-border bg-background text-muted-foreground hover:border-foreground/20'}`}>
                       500g
                       <p className="text-xs font-normal mt-1 opacity-80">Family / Prep</p>
                     </button>
                   </div>
                 </div>
 
-                <button onClick={() => selectedPlan && setStep(2)} disabled={!selectedPlan} className="w-full bg-foreground text-background py-4 rounded-md font-bold hover:bg-foreground/90 disabled:opacity-50 transition-colors">
+                <button onClick={() => selectedPlan && setStep(2)} disabled={!selectedPlan} className="w-full bg-foreground text-background py-4 rounded-md font-bold hover:bg-foreground/90 disabled:opacity-50 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary">
                   Next: Choose Flavours
                 </button>
               </div>
@@ -148,7 +238,7 @@ export default function Subscribe() {
                   
                   <div className="space-y-3">
                     {["Black Pepper", "Red Chilli Flakes", "Oregano", "Surprise Me (Mixed)"].map(f => (
-                      <label key={f} className={`flex items-center p-4 border rounded-lg cursor-pointer transition-colors ${flavours.includes(f) ? 'border-primary bg-primary/5' : 'border-border bg-background hover:bg-muted'}`}>
+                      <label key={f} className={`flex items-center p-4 border rounded-lg cursor-pointer transition-colors outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary ${flavours.includes(f) ? 'border-primary bg-primary/5' : 'border-border bg-background hover:bg-muted'}`}>
                         <input type="checkbox" checked={flavours.includes(f)} onChange={() => handleFlavourToggle(f)} className="w-5 h-5 accent-primary rounded border-border" />
                         <span className="ml-3 font-bold text-foreground">{f}</span>
                       </label>
@@ -156,7 +246,7 @@ export default function Subscribe() {
                   </div>
                 </div>
 
-                <button onClick={proceedToStep3} className="w-full bg-foreground text-background py-4 rounded-md font-bold hover:bg-foreground/90 transition-colors">
+                <button onClick={proceedToStep3} className="w-full bg-foreground text-background py-4 rounded-md font-bold hover:bg-foreground/90 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary">
                   Next: Delivery Details
                 </button>
               </div>
@@ -174,14 +264,42 @@ export default function Subscribe() {
                 </div>
 
                 <form onSubmit={handlePayment} className="space-y-4">
-                  <input required type="text" placeholder="Full Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
-                  <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
-                  <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
-                  <textarea required placeholder="Full Delivery Address" rows={3} value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary resize-none" />
+                  <div className="space-y-2">
+                    <label htmlFor="subName" className="text-sm font-bold text-foreground">Full Name</label>
+                    <input id="subName" required type="text" placeholder="Full Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="subEmail" className="text-sm font-bold text-foreground">Email</label>
+                    <input id="subEmail" required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="subPhone" className="text-sm font-bold text-foreground">Phone</label>
+                    <input id="subPhone" required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label htmlFor="subAddress" className="text-sm font-bold text-foreground">Address Line 1</label>
+                    <input id="subAddress" required type="text" placeholder="House/Flat No., Building, Street" value={formData.line1} onChange={e => setFormData({...formData, line1: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="subCity" className="text-sm font-bold text-foreground">City</label>
+                      <input id="subCity" required type="text" placeholder="City" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="subState" className="text-sm font-bold text-foreground">State</label>
+                      <input id="subState" required type="text" placeholder="State" value={formData.state} onChange={e => setFormData({...formData, state: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="subPin" className="text-sm font-bold text-foreground">Pincode</label>
+                    <input id="subPin" required type="text" placeholder="Pincode" value={formData.pincode} onChange={e => setFormData({...formData, pincode: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                  </div>
                   
                   <div className="pt-4">
-                    <button type="submit" className="w-full bg-primary text-primary-foreground py-4 rounded-md font-bold hover:bg-primary/90 transition-colors notch-br flex items-center justify-center gap-2">
-                      Continue to Payment <ArrowRight className="w-5 h-5" />
+                    <button disabled={isSubmitting} type="submit" className="w-full bg-primary text-primary-foreground py-4 rounded-md font-bold hover:bg-primary/90 transition-colors notch-br flex items-center justify-center gap-2 disabled:opacity-50">
+                      {isSubmitting ? "Processing..." : "Continue to Payment"} {!isSubmitting && <ArrowRight className="w-5 h-5" />}
                     </button>
                     <p className="text-xs text-center text-muted-foreground mt-4 flex items-center justify-center gap-1">
                       <Check className="w-3 h-3" /> Secure payment via Razorpay. Account created automatically.

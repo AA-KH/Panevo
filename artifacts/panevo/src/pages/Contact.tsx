@@ -1,6 +1,9 @@
 import { SEO } from "@/components/SEO";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
+import { BRAND } from "@/config/brand";
+import { track } from "@/lib/analytics";
+import { toast } from "sonner";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -10,19 +13,80 @@ export default function Contact() {
     subject: "general",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [tradeData, setTradeData] = useState({
+    name: "",
+    businessName: "",
+    city: "",
+    type: "Retailer",
+    monthlyVolume: "",
+    message: ""
+  });
+  const [isTradeSubmitting, setIsTradeSubmitting] = useState(false);
+  const [isTradeMode, setIsTradeMode] = useState(false);
+
+  useEffect(() => {
+    track("page_view", { page: "/contact" });
+  }, []);
+
+  const handleGeneralSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Contact form submitted:", formData);
-    alert("Message sent successfully. We will get back to you shortly.");
-    setFormData({ name: "", email: "", phone: "", subject: "general", message: "" });
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+      if (!res.ok) throw new Error("Failed to send message");
+      track("contact_form_submit", { subject: formData.subject });
+      toast.success("Message sent successfully. We will get back to you shortly.");
+      setFormData({ name: "", email: "", phone: "", subject: "general", message: "" });
+    } catch (err) {
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const handleTradeSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsTradeSubmitting(true);
+    try {
+      const res = await fetch("/api/trade-enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tradeData)
+      });
+      if (!res.ok) throw new Error("Failed to submit trade enquiry");
+      track("trade_enquiry_submit", { type: tradeData.type, city: tradeData.city });
+      toast.success("Enquiry submitted successfully. Our trade team will contact you.");
+      setTradeData({ name: "", businessName: "", city: "", type: "Retailer", monthlyVolume: "", message: "" });
+    } catch (err) {
+      toast.error("Failed to submit enquiry. Please try again.");
+    } finally {
+      setIsTradeSubmitting(false);
+    }
+  };
+
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://panevo.in" },
+        { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://panevo.in/contact" }
+      ]
+    }
+  ];
 
   return (
     <div className="w-full">
       <SEO
         title="Contact Us"
         description="Get in touch with the PANEVO team for general inquiries, trade partnerships, or feedback."
+        structuredData={structuredData}
       />
 
       {/* HERO */}
@@ -46,21 +110,21 @@ export default function Contact() {
                     <Mail className="w-6 h-6 text-primary mt-1" />
                     <div>
                       <p className="font-bold text-foreground">General Enquiries</p>
-                      <a href="mailto:hello@panevo.in" className="text-muted-foreground hover:text-primary">hello@panevo.in</a>
+                      <a href={`mailto:${BRAND.emails[0]}`} className="text-muted-foreground hover:text-primary">{BRAND.emails[0]}</a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <Mail className="w-6 h-6 text-primary mt-1" />
                     <div>
                       <p className="font-bold text-foreground">Trade & Distribution</p>
-                      <a href="mailto:trade@panevo.in" className="text-muted-foreground hover:text-primary">trade@panevo.in</a>
+                      <a href={`mailto:${BRAND.emails[1]}`} className="text-muted-foreground hover:text-primary">{BRAND.emails[1]}</a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <MessageCircle className="w-6 h-6 text-primary mt-1" />
                     <div>
                       <p className="font-bold text-foreground">WhatsApp Support</p>
-                      <a href="https://wa.me/918975016500" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">+91 89750 16500</a>
+                      <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">{BRAND.phones[0]}</a>
                     </div>
                   </div>
                 </div>
@@ -71,9 +135,8 @@ export default function Contact() {
                 <div className="flex items-start gap-4">
                   <MapPin className="w-6 h-6 text-primary mt-1" />
                   <div className="text-muted-foreground">
-                    <p className="font-bold text-foreground mb-1">Shatkona Ventures Private Limited</p>
-                    <p>[Street Address Placeholder]</p>
-                    <p>[City, State, PIN Placeholder]</p>
+                    <p className="font-bold text-foreground mb-1">{BRAND.parentCompany}</p>
+                    <p>{BRAND.placeholders.address}</p>
                     <p>India</p>
                   </div>
                 </div>
@@ -82,71 +145,87 @@ export default function Contact() {
 
             {/* Contact Form */}
             <div className="w-full lg:w-2/3 bg-card border border-border p-8 rounded-xl shadow-sm">
-              <h3 className="text-2xl font-bold mb-8 text-foreground">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-foreground">Full Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-foreground">Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary"
-                    />
-                  </div>
+              <div className="flex justify-between items-center mb-8 border-b border-border pb-4">
+                <h3 className="text-2xl font-bold text-foreground">Send a Message</h3>
+                <div className="flex gap-2 bg-muted p-1 rounded-lg">
+                  <button onClick={() => setIsTradeMode(false)} className={`px-4 py-2 rounded-md text-sm font-bold transition-colors ${!isTradeMode ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'}`}>General</button>
+                  <button onClick={() => setIsTradeMode(true)} className={`px-4 py-2 rounded-md text-sm font-bold transition-colors ${isTradeMode ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'}`}>Trade</button>
                 </div>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-foreground">Phone Number (Optional)</label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary"
-                    />
+              {!isTradeMode ? (
+                <form onSubmit={handleGeneralSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="text-sm font-bold text-foreground">Full Name</label>
+                      <input id="name" type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="text-sm font-bold text-foreground">Email Address</label>
+                      <input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="text-sm font-bold text-foreground">Phone Number (Optional)</label>
+                      <input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="subject" className="text-sm font-bold text-foreground">Subject</label>
+                      <select id="subject" value={formData.subject} onChange={(e) => setFormData({...formData, subject: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary">
+                        <option value="general">General Enquiry</option>
+                        <option value="feedback">Product Feedback</option>
+                        <option value="press">Press / Media</option>
+                      </select>
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-foreground">Subject</label>
-                    <select
-                      value={formData.subject}
-                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                      className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary"
-                    >
-                      <option value="general">General Enquiry</option>
-                      <option value="feedback">Product Feedback</option>
-                      <option value="trade">Retail / Trade Partnership</option>
-                      <option value="press">Press / Media</option>
-                    </select>
+                    <label htmlFor="message" className="text-sm font-bold text-foreground">Message</label>
+                    <textarea id="message" required rows={5} value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary resize-none"></textarea>
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Message</label>
-                  <textarea
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary resize-none"
-                  ></textarea>
-                </div>
-
-                <button type="submit" className="bg-primary text-primary-foreground px-8 py-4 rounded-md font-bold w-full hover:bg-primary/90 transition-colors notch-br">
-                  Send Message
-                </button>
-              </form>
+                  <button disabled={isSubmitting} type="submit" className="bg-primary text-primary-foreground px-8 py-4 rounded-md font-bold w-full hover:bg-primary/90 transition-colors notch-br disabled:opacity-50">
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </button>
+                </form>
+              ) : (
+                <form onSubmit={handleTradeSubmit} className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="tradeName" className="text-sm font-bold text-foreground">Contact Name</label>
+                      <input id="tradeName" type="text" required value={tradeData.name} onChange={(e) => setTradeData({...tradeData, name: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="businessName" className="text-sm font-bold text-foreground">Business Name</label>
+                      <input id="businessName" type="text" required value={tradeData.businessName} onChange={(e) => setTradeData({...tradeData, businessName: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="city" className="text-sm font-bold text-foreground">City</label>
+                      <input id="city" type="text" required value={tradeData.city} onChange={(e) => setTradeData({...tradeData, city: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="type" className="text-sm font-bold text-foreground">Business Type</label>
+                      <select id="type" value={tradeData.type} onChange={(e) => setTradeData({...tradeData, type: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary">
+                        <option value="Retailer">Retailer (Grocery / Supermarket)</option>
+                        <option value="Distributor">Distributor / Wholesaler</option>
+                        <option value="HORECA">HORECA (Restaurant / Cafe)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="monthlyVolume" className="text-sm font-bold text-foreground">Expected Monthly Volume (Optional)</label>
+                    <input id="monthlyVolume" type="text" placeholder="e.g. 50kg, 200 packs" value={tradeData.monthlyVolume} onChange={(e) => setTradeData({...tradeData, monthlyVolume: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="tradeMessage" className="text-sm font-bold text-foreground">Additional Details</label>
+                    <textarea id="tradeMessage" required rows={4} value={tradeData.message} onChange={(e) => setTradeData({...tradeData, message: e.target.value})} className="w-full p-3 bg-background border border-border rounded-md focus:outline-none focus:border-primary resize-none"></textarea>
+                  </div>
+                  <button disabled={isTradeSubmitting} type="submit" className="bg-primary text-primary-foreground px-8 py-4 rounded-md font-bold w-full hover:bg-primary/90 transition-colors notch-br disabled:opacity-50">
+                    {isTradeSubmitting ? "Submitting..." : "Submit Trade Enquiry"}
+                  </button>
+                </form>
+              )}
             </div>
 
           </div>

@@ -5,18 +5,28 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
+  MutationFunction,
   QueryFunction,
   QueryKey,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
 
-import type { HealthStatus } from "./api.schemas";
+import type {
+  ContactForm,
+  CreateSubscriptionRequest,
+  CreateSubscriptionResponse,
+  StandardResponse,
+  TradeEnquiry,
+  WaitlistEntry,
+} from "./api.schemas";
 
 import { customFetch } from "../custom-fetch";
-import type { ErrorType } from "../custom-fetch";
+import type { ErrorType, BodyType } from "../custom-fetch";
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -25,32 +35,455 @@ type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 /**
- * Returns server health status
- * @summary Health check
+ * @summary Add email to waitlist
  */
-export const getHealthCheckUrl = () => {
-  return `/api/healthz`;
+export const getAddToWaitlistUrl = () => {
+  return `/api/waitlist`;
 };
 
-export const healthCheck = async (
+export const addToWaitlist = async (
+  waitlistEntry: WaitlistEntry,
   options?: RequestInit,
-): Promise<HealthStatus> => {
-  return customFetch<HealthStatus>(getHealthCheckUrl(), {
+): Promise<StandardResponse> => {
+  return customFetch<StandardResponse>(getAddToWaitlistUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(waitlistEntry),
+  });
+};
+
+export const getAddToWaitlistMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof addToWaitlist>>,
+    TError,
+    { data: BodyType<WaitlistEntry> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof addToWaitlist>>,
+  TError,
+  { data: BodyType<WaitlistEntry> },
+  TContext
+> => {
+  const mutationKey = ["addToWaitlist"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof addToWaitlist>>,
+    { data: BodyType<WaitlistEntry> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return addToWaitlist(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AddToWaitlistMutationResult = NonNullable<
+  Awaited<ReturnType<typeof addToWaitlist>>
+>;
+export type AddToWaitlistMutationBody = BodyType<WaitlistEntry>;
+export type AddToWaitlistMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Add email to waitlist
+ */
+export const useAddToWaitlist = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof addToWaitlist>>,
+    TError,
+    { data: BodyType<WaitlistEntry> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof addToWaitlist>>,
+  TError,
+  { data: BodyType<WaitlistEntry> },
+  TContext
+> => {
+  return useMutation(getAddToWaitlistMutationOptions(options));
+};
+
+/**
+ * @summary Send trade/distributor enquiry
+ */
+export const getSendTradeEnquiryUrl = () => {
+  return `/api/trade-enquiry`;
+};
+
+export const sendTradeEnquiry = async (
+  tradeEnquiry: TradeEnquiry,
+  options?: RequestInit,
+): Promise<StandardResponse> => {
+  return customFetch<StandardResponse>(getSendTradeEnquiryUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(tradeEnquiry),
+  });
+};
+
+export const getSendTradeEnquiryMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof sendTradeEnquiry>>,
+    TError,
+    { data: BodyType<TradeEnquiry> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof sendTradeEnquiry>>,
+  TError,
+  { data: BodyType<TradeEnquiry> },
+  TContext
+> => {
+  const mutationKey = ["sendTradeEnquiry"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof sendTradeEnquiry>>,
+    { data: BodyType<TradeEnquiry> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return sendTradeEnquiry(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type SendTradeEnquiryMutationResult = NonNullable<
+  Awaited<ReturnType<typeof sendTradeEnquiry>>
+>;
+export type SendTradeEnquiryMutationBody = BodyType<TradeEnquiry>;
+export type SendTradeEnquiryMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Send trade/distributor enquiry
+ */
+export const useSendTradeEnquiry = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof sendTradeEnquiry>>,
+    TError,
+    { data: BodyType<TradeEnquiry> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof sendTradeEnquiry>>,
+  TError,
+  { data: BodyType<TradeEnquiry> },
+  TContext
+> => {
+  return useMutation(getSendTradeEnquiryMutationOptions(options));
+};
+
+/**
+ * @summary Send contact form
+ */
+export const getSendContactFormUrl = () => {
+  return `/api/contact`;
+};
+
+export const sendContactForm = async (
+  contactForm: ContactForm,
+  options?: RequestInit,
+): Promise<StandardResponse> => {
+  return customFetch<StandardResponse>(getSendContactFormUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(contactForm),
+  });
+};
+
+export const getSendContactFormMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof sendContactForm>>,
+    TError,
+    { data: BodyType<ContactForm> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof sendContactForm>>,
+  TError,
+  { data: BodyType<ContactForm> },
+  TContext
+> => {
+  const mutationKey = ["sendContactForm"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof sendContactForm>>,
+    { data: BodyType<ContactForm> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return sendContactForm(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type SendContactFormMutationResult = NonNullable<
+  Awaited<ReturnType<typeof sendContactForm>>
+>;
+export type SendContactFormMutationBody = BodyType<ContactForm>;
+export type SendContactFormMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Send contact form
+ */
+export const useSendContactForm = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof sendContactForm>>,
+    TError,
+    { data: BodyType<ContactForm> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof sendContactForm>>,
+  TError,
+  { data: BodyType<ContactForm> },
+  TContext
+> => {
+  return useMutation(getSendContactFormMutationOptions(options));
+};
+
+/**
+ * @summary Create Razorpay subscription
+ */
+export const getCreateSubscriptionUrl = () => {
+  return `/api/create-subscription`;
+};
+
+export const createSubscription = async (
+  createSubscriptionRequest: CreateSubscriptionRequest,
+  options?: RequestInit,
+): Promise<CreateSubscriptionResponse> => {
+  return customFetch<CreateSubscriptionResponse>(getCreateSubscriptionUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createSubscriptionRequest),
+  });
+};
+
+export const getCreateSubscriptionMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createSubscription>>,
+    TError,
+    { data: BodyType<CreateSubscriptionRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createSubscription>>,
+  TError,
+  { data: BodyType<CreateSubscriptionRequest> },
+  TContext
+> => {
+  const mutationKey = ["createSubscription"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createSubscription>>,
+    { data: BodyType<CreateSubscriptionRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createSubscription(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateSubscriptionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createSubscription>>
+>;
+export type CreateSubscriptionMutationBody =
+  BodyType<CreateSubscriptionRequest>;
+export type CreateSubscriptionMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Create Razorpay subscription
+ */
+export const useCreateSubscription = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createSubscription>>,
+    TError,
+    { data: BodyType<CreateSubscriptionRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof createSubscription>>,
+  TError,
+  { data: BodyType<CreateSubscriptionRequest> },
+  TContext
+> => {
+  return useMutation(getCreateSubscriptionMutationOptions(options));
+};
+
+/**
+ * @summary Razorpay webhook receiver
+ */
+export const getRazorpayWebhookUrl = () => {
+  return `/api/razorpay-webhook`;
+};
+
+export const razorpayWebhook = async (
+  options?: RequestInit,
+): Promise<StandardResponse> => {
+  return customFetch<StandardResponse>(getRazorpayWebhookUrl(), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getRazorpayWebhookMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof razorpayWebhook>>,
+    TError,
+    void,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof razorpayWebhook>>,
+  TError,
+  void,
+  TContext
+> => {
+  const mutationKey = ["razorpayWebhook"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof razorpayWebhook>>,
+    void
+  > = () => {
+    return razorpayWebhook(requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type RazorpayWebhookMutationResult = NonNullable<
+  Awaited<ReturnType<typeof razorpayWebhook>>
+>;
+
+export type RazorpayWebhookMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Razorpay webhook receiver
+ */
+export const useRazorpayWebhook = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof razorpayWebhook>>,
+    TError,
+    void,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof razorpayWebhook>>,
+  TError,
+  void,
+  TContext
+> => {
+  return useMutation(getRazorpayWebhookMutationOptions(options));
+};
+
+/**
+ * @summary Get sitemap.xml
+ */
+export const getGetSitemapUrl = () => {
+  return `/api/sitemap.xml`;
+};
+
+export const getSitemap = async (options?: RequestInit): Promise<string> => {
+  return customFetch<string>(getGetSitemapUrl(), {
     ...options,
     method: "GET",
   });
 };
 
-export const getHealthCheckQueryKey = () => {
-  return [`/api/healthz`] as const;
+export const getGetSitemapQueryKey = () => {
+  return [`/api/sitemap.xml`] as const;
 };
 
-export const getHealthCheckQueryOptions = <
-  TData = Awaited<ReturnType<typeof healthCheck>>,
+export const getGetSitemapQueryOptions = <
+  TData = Awaited<ReturnType<typeof getSitemap>>,
   TError = ErrorType<unknown>,
 >(options?: {
   query?: UseQueryOptions<
-    Awaited<ReturnType<typeof healthCheck>>,
+    Awaited<ReturnType<typeof getSitemap>>,
     TError,
     TData
   >;
@@ -58,40 +491,105 @@ export const getHealthCheckQueryOptions = <
 }) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getHealthCheckQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetSitemapQueryKey();
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof healthCheck>>> = ({
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getSitemap>>> = ({
     signal,
-  }) => healthCheck({ signal, ...requestOptions });
+  }) => getSitemap({ signal, ...requestOptions });
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof healthCheck>>,
+    Awaited<ReturnType<typeof getSitemap>>,
     TError,
     TData
   > & { queryKey: QueryKey };
 };
 
-export type HealthCheckQueryResult = NonNullable<
-  Awaited<ReturnType<typeof healthCheck>>
+export type GetSitemapQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getSitemap>>
 >;
-export type HealthCheckQueryError = ErrorType<unknown>;
+export type GetSitemapQueryError = ErrorType<unknown>;
 
 /**
- * @summary Health check
+ * @summary Get sitemap.xml
  */
 
-export function useHealthCheck<
-  TData = Awaited<ReturnType<typeof healthCheck>>,
+export function useGetSitemap<
+  TData = Awaited<ReturnType<typeof getSitemap>>,
   TError = ErrorType<unknown>,
 >(options?: {
   query?: UseQueryOptions<
-    Awaited<ReturnType<typeof healthCheck>>,
+    Awaited<ReturnType<typeof getSitemap>>,
     TError,
     TData
   >;
   request?: SecondParameter<typeof customFetch>;
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getHealthCheckQueryOptions(options);
+  const queryOptions = getGetSitemapQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Get robots.txt
+ */
+export const getGetRobotsUrl = () => {
+  return `/api/robots.txt`;
+};
+
+export const getRobots = async (options?: RequestInit): Promise<string> => {
+  return customFetch<string>(getGetRobotsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetRobotsQueryKey = () => {
+  return [`/api/robots.txt`] as const;
+};
+
+export const getGetRobotsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getRobots>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<Awaited<ReturnType<typeof getRobots>>, TError, TData>;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetRobotsQueryKey();
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getRobots>>> = ({
+    signal,
+  }) => getRobots({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getRobots>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetRobotsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getRobots>>
+>;
+export type GetRobotsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Get robots.txt
+ */
+
+export function useGetRobots<
+  TData = Awaited<ReturnType<typeof getRobots>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<Awaited<ReturnType<typeof getRobots>>, TError, TData>;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetRobotsQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

@@ -8,3 +8,85 @@
 export interface HealthStatus {
   status: string;
 }
+
+export interface StandardResponse {
+  ok: boolean;
+  error?: string;
+}
+
+export interface WaitlistEntry {
+  email: string;
+  city?: string;
+  source: string;
+}
+
+export type TradeEnquiryType =
+  (typeof TradeEnquiryType)[keyof typeof TradeEnquiryType];
+
+export const TradeEnquiryType = {
+  GT: "GT",
+  MT: "MT",
+  HoReCa: "HoReCa",
+  Distributor: "Distributor",
+} as const;
+
+export interface TradeEnquiry {
+  name: string;
+  businessName: string;
+  city: string;
+  type: TradeEnquiryType;
+  monthlyVolume?: string;
+  message: string;
+}
+
+export type ContactFormSubject =
+  (typeof ContactFormSubject)[keyof typeof ContactFormSubject];
+
+export const ContactFormSubject = {
+  general: "general",
+  trade: "trade",
+  press: "press",
+  investor: "investor",
+  careers: "careers",
+  other: "other",
+} as const;
+
+export interface ContactForm {
+  name: string;
+  email: string;
+  phone?: string;
+  subject: ContactFormSubject;
+  message: string;
+}
+
+export type CreateSubscriptionRequestCustomerAddress = {
+  line1: string;
+  city: string;
+  state: string;
+  pincode: string;
+};
+
+export type CreateSubscriptionRequestCustomer = {
+  name: string;
+  email: string;
+  phone: string;
+  address: CreateSubscriptionRequestCustomerAddress;
+};
+
+export interface CreateSubscriptionRequest {
+  planId: string;
+  customer: CreateSubscriptionRequestCustomer;
+}
+
+export type CreateSubscriptionResponseCustomer = {
+  name?: string;
+  email?: string;
+  phone?: string;
+};
+
+export interface CreateSubscriptionResponse {
+  subscriptionId: string;
+  razorpayKeyId: string;
+  mock?: boolean;
+  customer: CreateSubscriptionResponseCustomer;
+}
