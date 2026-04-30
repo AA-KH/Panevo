@@ -18,9 +18,10 @@ declare global {
 export default function Subscribe() {
   const [, setLocation] = useLocation();
   const [step, setStep] = useState(1);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(
-    new URLSearchParams(window.location.search).get("plan") || null
-  );
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("plan") || params.get("frequency") || null;
+  });
   const [selectedSize, setSelectedSize] = useState<"200g" | "500g">("500g");
   const [flavours, setFlavours] = useState<string[]>([]);
   

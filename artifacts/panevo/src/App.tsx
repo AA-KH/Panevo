@@ -8,6 +8,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StickyBottomBar } from "@/components/layout/StickyBottomBar";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 // Pages
 import Home from "@/pages/Home";
@@ -36,6 +37,7 @@ function Router() {
       >
         Skip to main content
       </a>
+      <ScrollToTop />
       <Navbar />
       <main id="main-content" className="flex-1 w-full main-with-sticky-bar">
         <Switch>

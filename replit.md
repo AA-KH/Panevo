@@ -28,6 +28,14 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 - **panevo** (`/`) — PANEVO website (Phase 3 QA pass complete). Brand site for India's first pre-flavoured fresh paneer (Shatkona Ventures Pvt Ltd). 8 pages: Home, Products, Our Story, Nutrition, Subscribe, Find Us, Contact, Recipes (+ dynamic recipe detail). Three personas (Q-Com buyers, subscription households, health/gym). All integrations (Razorpay, Google Maps, GA4/Hotjar, MSG91 webhook) are stubbed in Phase 1 — wire real endpoints in Phase 2. See `attached_assets/PANEVO_Phase1_Master_Build_Prompt_*.md` for the full spec and `attached_assets/PANEVO_Phase3_MasterQA_Prompt_*.md` for the Phase 3 QA pass.
 
+  **Post-import polish (April 30, 2026):**
+  - Auto scroll-to-top on every route change via new `<ScrollToTop />` component (`src/components/ScrollToTop.tsx`); preserves native anchor jumps when URL contains a hash.
+  - PANEVO logo in Navbar now smooth-scrolls to top when clicked while already on `/`.
+  - Fixed CTA hover: replaced `background-color: color-mix(... white)` (which made white text disappear on a peach background) with `filter: brightness(0.92) saturate(1.05)`. Now darkens uniformly across `bg-primary`, `bg-secondary`, `bg-white` and text-only CTAs without colour conflicts.
+  - Hero gradient rebuilt: removed muddy mix-blend overlays; now uses a clean dark vignette + terracotta radial glow from bottom-left + subtle saffron highlight from top-right.
+  - Home → "Your Weekly Paneer Box. Sorted." section: Weekly / Fortnightly / Monthly are now real `<button role="radio">` controls in a radiogroup. Heading, body copy and CTA label all update live based on selection. CTA deep-links to `/subscribe?frequency=…`, which Subscribe.tsx now reads as a fallback for the `?plan=` param.
+  - Fixed pre-existing TS7030 in Navbar.tsx (early-return in body-scroll-lock effect).
+
   **Phase 3 QA fixes applied:**
   - Footer: replaced "Pending"/"Coming Soon" placeholder strings with FSSAI ("FSSAI licensed — licence number displayed on pack") + company info per spec; added panevoindia/trade emails + nav aria-label.
   - StickyBottomBar: bumped to ≥64px height with `env(safe-area-inset-bottom)` padding; added `role="navigation"` + `aria-label="Quick order"`. App `<main>` padding-bottom now matches via `.main-with-sticky-bar` CSS.

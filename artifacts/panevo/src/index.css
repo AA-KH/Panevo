@@ -199,9 +199,12 @@
   }
 }
 
-/* Primary CTA — text/icon shift on hover */
+/* Primary CTA — subtle darken + arrow shift on hover.
+   Using filter:brightness keeps the original background colour intact
+   (so a green or transparent CTA doesn't get repainted peach) and
+   guarantees the foreground text always stays readable. */
 .cta-primary {
-  transition: background-color 180ms ease;
+  transition: filter 180ms ease, transform 180ms ease;
 }
 .cta-primary .cta-arrow {
   transition: transform 180ms ease;
@@ -209,9 +212,12 @@
 }
 @media (hover: hover) {
   .cta-primary:hover {
-    background-color: color-mix(in srgb, hsl(var(--primary)) 92%, white);
+    filter: brightness(0.92) saturate(1.05);
   }
   .cta-primary:hover .cta-arrow { transform: translateX(4px); }
+  .cta-primary:active {
+    filter: brightness(0.85) saturate(1.05);
+  }
 }
 
 /* Q-Com shimmer — gated on hover-capable devices */

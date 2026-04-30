@@ -4,13 +4,35 @@ import { Shatkona } from "@/components/sections/Shatkona";
 import { QCOM_LINKS } from "@/config/brand";
 import { products } from "@/data/products";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, CheckCircle, Clock, Flame } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, Flame, Check } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { useCountUp } from "@/hooks/useCountUp";
+import { useState } from "react";
+
+type Frequency = "weekly" | "fortnightly" | "monthly";
+
+const FREQUENCY_COPY: Record<Frequency, { label: string; copy: string; cta: string }> = {
+  weekly: {
+    label: "Weekly",
+    copy: "Pick your flavours. Delivered fresh, on schedule, every week. Cancel any time — no questions, no fuss.",
+    cta: "Start Your Weekly Box",
+  },
+  fortnightly: {
+    label: "Fortnightly",
+    copy: "Pick your flavours. Delivered fresh every two weeks — perfect for couples and small households. Cancel any time.",
+    cta: "Start Your Fortnightly Box",
+  },
+  monthly: {
+    label: "Monthly",
+    copy: "Pick your flavours. A monthly top-up of your favourites, delivered fresh on the same day each month. Cancel any time.",
+    cta: "Start Your Monthly Box",
+  },
+};
 
 export default function Home() {
   const shouldReduceMotion = useReducedMotion();
   const { ref: proteinRef, value: proteinCount } = useCountUp(18, 800);
+  const [frequency, setFrequency] = useState<Frequency>("weekly");
 
   return (
     <div className="w-full">
@@ -21,11 +43,42 @@ export default function Home() {
 
       {/* HERO — stagger sequence per spec §8.1 */}
       <section className="relative min-h-[100dvh] bg-foreground text-background flex flex-col justify-center pt-16 overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-foreground/70 via-foreground/80 to-foreground/95 mix-blend-multiply"></div>
-        {/* Placeholder for lifestyle photo — warm-toned tawa shot */}
-        <div className="absolute inset-0 z-[-1] bg-[url('https://images.unsplash.com/photo-1631452180519-c014fe946bc0?q=80&w=2000')] bg-cover bg-center opacity-40 grayscale sepia mix-blend-overlay"></div>
-        {/* Terracotta accent gradient at bottom-left per spec §9.1 */}
-        <div className="absolute bottom-0 left-0 w-2/3 h-1/2 bg-gradient-to-tr from-primary/30 via-primary/10 to-transparent pointer-events-none" />
+        {/* Lifestyle photo background (warm-toned tawa shot) */}
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1631452180519-c014fe946bc0?q=80&w=2000')",
+          }}
+          aria-hidden="true"
+        />
+        {/* Dark vignette so text always reads */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, hsl(var(--near-black) / 0.78) 0%, hsl(var(--near-black) / 0.72) 45%, hsl(var(--near-black) / 0.92) 100%)",
+          }}
+          aria-hidden="true"
+        />
+        {/* Terracotta radial glow — soft fade from bottom-left per spec §9.1 */}
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 55% at 18% 100%, hsl(var(--primary) / 0.55) 0%, hsl(var(--primary) / 0.18) 35%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
+        {/* Subtle saffron highlight from top-right for depth */}
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 50% 40% at 90% 0%, hsl(var(--accent) / 0.18) 0%, transparent 65%)",
+          }}
+          aria-hidden="true"
+        />
 
         <div className="container relative z-10 px-4 flex flex-col items-center text-center">
           {/* 1. Shatkona symbol — 0ms */}
@@ -328,26 +381,64 @@ export default function Home() {
       <section className="bg-background py-20 border-t border-border/50">
         <div className="container px-4 max-w-4xl text-center">
           <Reveal>
-            <h2 className="text-4xl md:text-5xl mb-6 text-foreground">Your Weekly Paneer Box. Sorted.</h2>
+            <h2 className="text-4xl md:text-5xl mb-6 text-foreground">
+              Your{" "}
+              <span className="text-primary transition-colors">
+                {FREQUENCY_COPY[frequency].label}
+              </span>{" "}
+              Paneer Box. Sorted.
+            </h2>
           </Reveal>
           <Reveal delay={80}>
-            <p className="text-lg text-muted-foreground mb-12">Pick your flavours. Choose your frequency. Delivered fresh, on schedule, every week. Cancel any time — no questions, no fuss.</p>
+            <p className="text-lg text-muted-foreground mb-12 transition-opacity">
+              {FREQUENCY_COPY[frequency].copy}
+            </p>
           </Reveal>
 
           <Reveal delay={160}>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-              <div className="bg-card border-2 border-primary px-6 py-3 font-bold text-foreground flex items-center justify-center gap-2 relative overflow-hidden notch-br" style={{ borderRadius: 4 }}>
-                <div className="absolute top-0 right-0 w-8 h-8 bg-accent rotate-45 translate-x-4 -translate-y-4"></div>
-                Weekly
-              </div>
-              <div className="bg-card border border-border px-6 py-3 font-medium text-muted-foreground" style={{ borderRadius: 4 }}>Fortnightly</div>
-              <div className="bg-card border border-border px-6 py-3 font-medium text-muted-foreground" style={{ borderRadius: 4 }}>Monthly</div>
+            <div
+              role="radiogroup"
+              aria-label="Choose delivery frequency"
+              className="flex flex-col sm:flex-row justify-center gap-4 mb-12"
+            >
+              {(Object.keys(FREQUENCY_COPY) as Frequency[]).map((freq) => {
+                const isActive = frequency === freq;
+                return (
+                  <button
+                    key={freq}
+                    type="button"
+                    role="radio"
+                    aria-checked={isActive}
+                    onClick={() => setFrequency(freq)}
+                    className={`relative overflow-hidden px-6 py-3 font-bold transition-all outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                      isActive
+                        ? "bg-card border-2 border-primary text-foreground notch-br shadow-[var(--shadow-rest)]"
+                        : "bg-card border border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                    }`}
+                    style={{ borderRadius: 4 }}
+                  >
+                    {isActive && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute top-0 right-0 w-8 h-8 bg-accent rotate-45 translate-x-4 -translate-y-4"
+                      />
+                    )}
+                    <span className="inline-flex items-center gap-2">
+                      {isActive && <Check className="w-4 h-4 text-primary" strokeWidth={3} />}
+                      {FREQUENCY_COPY[freq].label}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </Reveal>
 
           <Reveal delay={240}>
-            <Link href="/subscribe" className="cta-primary bg-secondary text-secondary-foreground px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-2 notch-br">
-              Start Your Weekly Box <ArrowRight className="w-5 h-5 cta-arrow" />
+            <Link
+              href={`/subscribe?frequency=${frequency}`}
+              className="cta-primary bg-secondary text-secondary-foreground px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-2 notch-br"
+            >
+              {FREQUENCY_COPY[frequency].cta} <ArrowRight className="w-5 h-5 cta-arrow" />
             </Link>
           </Reveal>
         </div>

@@ -30,13 +30,12 @@ export function Navbar() {
 
   // Lock body scroll while mobile menu open
   useEffect(() => {
-    if (isMobileOpen) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
+    if (!isMobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [isMobileOpen]);
 
   // Close menus on route change
@@ -71,7 +70,13 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link
           href="/"
+          onClick={() => {
+            if (location === "/") {
+              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+            }
+          }}
           className="flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+          aria-label={`${BRAND.name} — Home`}
         >
           <span
             className="text-2xl tracking-tight text-foreground"
