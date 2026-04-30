@@ -124,13 +124,13 @@ export default function FindUs() {
       />
 
       {/* HERO */}
-      <section className="bg-primary text-primary-foreground py-24 text-center">
+      <section className="bg-primary text-primary-foreground py-16 md:py-24 text-center">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-5xl md:text-7xl mb-6">In Your Kitchen in 10 Minutes. Or at Your Corner Store.</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">In Your Kitchen in 10 Minutes. Or at Your Corner Store.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart — or find us at your nearest store across Chandigarh Tri-City and Gurgaon.</p>
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart — or find us at your nearest store across Chandigarh Tri-City and Gurgaon.</p>
           </Reveal>
         </div>
       </section>
@@ -152,7 +152,7 @@ export default function FindUs() {
                   className="qcom-shimmer card-lift bg-card border border-border p-8 text-center hover:border-primary transition-colors group block"
                   style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
                 >
-                  <div className="h-16 bg-muted mb-6 flex items-center justify-center font-bold text-muted-foreground uppercase" style={{ borderRadius: 8 }}>{platform} LOGO</div>
+                  <div className="h-16 mb-6 flex items-center justify-center font-bold uppercase tracking-widest text-2xl text-foreground" style={{ borderRadius: 8, fontFamily: "var(--app-font-display)", letterSpacing: "0.05em" }}>{platform === "instamart" ? "Instamart" : platform.charAt(0).toUpperCase() + platform.slice(1)}</div>
                   <div className="inline-flex items-center gap-2 text-primary font-bold text-lg">
                     Order Now <ArrowRight className="w-5 h-5 cta-arrow" />
                   </div>

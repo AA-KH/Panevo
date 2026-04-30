@@ -76,13 +76,13 @@ export default function Recipes() {
       />
 
       {/* HERO */}
-      <section className="bg-primary text-primary-foreground py-24 text-center">
+      <section className="bg-primary text-primary-foreground py-16 md:py-24 text-center">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-5xl md:text-7xl mb-6">The Recipes That Prove Paneer Doesn't Need 30 Minutes.</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">The Recipes That Prove Paneer Doesn't Need 30 Minutes.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">High protein. Under 10 minutes. Because the flavour is already in the paneer.</p>
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-2xl mx-auto">High protein. Under 10 minutes. Because the flavour is already in the paneer.</p>
           </Reveal>
         </div>
       </section>
@@ -125,9 +125,9 @@ export default function Recipes() {
                     animationDelay: `${Math.min(i, 5) * 40}ms`,
                   }}
                 >
-                  <div className="w-full sm:w-2/5 aspect-square sm:aspect-auto bg-muted relative overflow-hidden">
-                    <div className="absolute inset-0 bg-secondary/5 group-hover:scale-[1.04] transition-transform duration-500 flex items-center justify-center">
-                      <span className="text-muted-foreground font-bold uppercase text-xs tracking-wider">Recipe Photo</span>
+                  <div className="w-full sm:w-2/5 aspect-square sm:aspect-auto relative overflow-hidden bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/20">
+                    <div className="absolute inset-0 group-hover:scale-[1.04] transition-transform duration-500 flex items-center justify-center">
+                      <span className="text-foreground/40 font-bold uppercase tracking-widest text-3xl" style={{ fontFamily: "var(--app-font-display)" }}>{recipe.flavour.split(" ")[0]}</span>
                     </div>
                     <div className="absolute top-4 left-4 bg-background/90 backdrop-blur text-foreground px-2 py-1 text-xs font-bold flex items-center gap-1" style={{ borderRadius: 4 }}>
                       <Clock className="w-3 h-3" /> {recipe.time}

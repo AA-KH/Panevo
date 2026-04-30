@@ -31,7 +31,7 @@ function Router() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <Navbar />
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full pb-14 md:pb-0">
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/products" component={Products} />

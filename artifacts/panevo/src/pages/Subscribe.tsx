@@ -146,7 +146,7 @@ export default function Subscribe() {
       <section className="bg-background pt-24 pb-16 text-center border-b border-border">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-5xl md:text-7xl mb-6 text-foreground">Your Weekly Paneer Box.<br/><span className="text-primary">Cancel Any Time.</span></h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6 text-foreground">Your Weekly Paneer Box.<br/><span className="text-primary">Cancel Any Time.</span></h1>
           </Reveal>
           <Reveal delay={120}>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">Stop thinking about paneer. Start eating it.</p>

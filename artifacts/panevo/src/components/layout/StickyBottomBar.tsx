@@ -26,7 +26,8 @@ export function StickyBottomBar() {
           className="qcom-shimmer flex-1 flex flex-col items-center justify-center border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10 outline-none focus-visible:bg-primary-foreground/10"
           aria-label={`Order on ${platform}`}
         >
-          <span className="text-primary-foreground text-xs font-bold capitalize">{platform}</span>
+          <span className="text-primary-foreground text-[11px] uppercase tracking-wider font-bold leading-tight">Order on</span>
+          <span className="text-primary-foreground text-sm font-bold capitalize leading-tight" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.04em" }}>{platform}</span>
         </a>
       ))}
     </div>

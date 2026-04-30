@@ -91,13 +91,13 @@ export default function Contact() {
       />
 
       {/* HERO */}
-      <section className="bg-primary text-primary-foreground py-24 text-center">
+      <section className="bg-primary text-primary-foreground py-16 md:py-24 text-center">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-5xl md:text-7xl mb-6">We're Real People. Get in Touch.</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">We're Real People. Get in Touch.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">We're a small team. We read everything. We reply fast.</p>
+            <p className="text-lg sm:text-xl opacity-90 max-w-2xl mx-auto">We're a small team. We read everything. We reply fast.</p>
           </Reveal>
         </div>
       </section>

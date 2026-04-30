@@ -60,10 +60,10 @@ export default function OurStory() {
             <Shatkona className="w-16 h-16 mx-auto mb-6 text-secondary-foreground" />
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="text-5xl md:text-7xl mb-6">Tradition Transformed.</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">Tradition Transformed.</h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">The Shatkona is the ancient Indian symbol of union — fire and water, energy and nourishment, raw and ready. It's also the story of PANEVO.</p>
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">The Shatkona is the ancient Indian symbol of union — fire and water, energy and nourishment, raw and ready. It's also the story of PANEVO.</p>
           </Reveal>
         </div>
       </section>
@@ -161,7 +161,7 @@ export default function OurStory() {
               { name: "Harviinder", title: "Co-Founder", bio: "Obsessed with food systems and consumer behavior. Saw the gap in the dairy aisle and decided to build the bridge." },
               { name: "Shwetta", title: "Co-Founder", bio: "The operational force. Turns bold ideas into scalable, consistent products that taste the same in every single pack." },
               { name: "Palvit", title: "Head of Operations & R&D", bio: "The flavour architect. Spends his days balancing milk temperatures and spice densities to achieve the perfect infusion." },
-              { name: "Sandeep [Placeholder]", title: "Mentor & Senior Advisor", bio: "Industry veteran guiding the strategic vision and institutional partnerships." }
+              { name: "Sandeep", title: "Mentor & Senior Advisor", bio: "Industry veteran guiding the strategic vision and institutional partnerships." }
             ].map((member, idx) => (
               <Reveal key={member.name} delay={Math.min(idx, 4) * 80}>
                 <div className="card-lift bg-card border border-border overflow-hidden text-center group h-full" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>

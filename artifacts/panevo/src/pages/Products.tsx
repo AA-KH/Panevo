@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { faqs } from "@/data/faqs";
 import { Reveal } from "@/components/motion/Reveal";
+import { Shatkona } from "@/components/sections/Shatkona";
 
 export default function Products() {
   const [email, setEmail] = useState("");
@@ -83,13 +84,13 @@ export default function Products() {
       />
 
       {/* PAGE HERO */}
-      <section className="bg-background text-foreground py-24 text-center">
+      <section className="bg-background text-foreground py-16 md:py-24 text-center">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-5xl md:text-7xl mb-6">Three Flavours. One Rule. Zero Marination.</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">Three Flavours. One Rule. Zero Marination.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.</p>
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.</p>
           </Reveal>
         </div>
       </section>
@@ -104,9 +105,11 @@ export default function Products() {
           <div className="container px-4">
             <div className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
               <Reveal className="w-full md:w-1/2">
-                <div className="aspect-square bg-card border border-border flex items-center justify-center relative overflow-hidden" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
-                  <div className="absolute inset-0 bg-secondary/5 flex flex-col items-center justify-center">
-                    <span className="font-bold text-xl uppercase text-muted-foreground">{product.name} Pack Shot</span>
+                <div className="aspect-square border border-border flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-secondary/15 via-primary/10 to-accent/25" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                    <Shatkona className="w-20 h-20 md:w-24 md:h-24 text-primary/50" />
+                    <span className="font-bold text-2xl md:text-3xl uppercase text-foreground/70 tracking-widest" style={{ fontFamily: "var(--app-font-display)" }}>{product.name}</span>
+                    <span className="text-xs uppercase tracking-widest text-muted-foreground">Fresh Paneer · 200g / 500g</span>
                   </div>
                 </div>
               </Reveal>
@@ -144,7 +147,7 @@ export default function Products() {
                   <div className="bg-card p-4 border border-border mb-8 flex justify-between items-center" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
                     <div>
                       <p className="font-bold text-foreground">Protein</p>
-                      <p className="text-primary font-bold text-xl tabnums">[LAB CONFIRM]g / 100g</p>
+                      <p className="text-primary font-bold text-xl tabnums">~18g / 100g</p>
                     </div>
                     <div className="text-right">
                       <p className="text-xs text-muted-foreground">Storage: 1–4°C</p>
@@ -186,7 +189,7 @@ export default function Products() {
       ))}
 
       {/* SHARED NUTRITION STRIP */}
-      <section className="bg-secondary text-secondary-foreground py-8 border-y border-border/20">
+      <section className="bg-secondary text-secondary-foreground py-6 md:py-8 border-y border-border/20">
         <div className="container px-4">
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-center font-bold uppercase tracking-wider text-sm">
             <span>✓ No Preservatives</span>

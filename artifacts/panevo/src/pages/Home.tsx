@@ -43,7 +43,7 @@ export default function Home() {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
-            className="text-6xl md:text-8xl mb-6 max-w-4xl"
+            className="text-4xl sm:text-6xl md:text-8xl mb-6 max-w-4xl"
             style={{ letterSpacing: "0.02em" }}
           >
             No Marination. No Prep. Just Paneer.
@@ -54,7 +54,7 @@ export default function Home() {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 0.85, y: 0 }}
             transition={{ duration: 0.35, delay: 0.45, ease: "easeOut" }}
-            className="text-xl md:text-2xl text-white mb-10 max-w-2xl"
+            className="text-lg sm:text-xl md:text-2xl text-white mb-10 max-w-2xl px-2"
           >
             Bold. Ready. India's first pre-flavoured fresh paneer.
           </motion.p>
@@ -217,9 +217,10 @@ export default function Home() {
                   className="card-lift group bg-card border border-border overflow-hidden flex flex-col h-full"
                   style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
                 >
-                  <div className="aspect-[4/3] bg-muted relative overflow-hidden">
-                    <div className="absolute inset-0 bg-secondary/10 group-hover:scale-[1.04] transition-transform duration-500 flex items-center justify-center">
-                      <span className="text-muted-foreground font-bold uppercase tracking-widest">{product.name} MOCKUP</span>
+                  <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-secondary/15 via-primary/10 to-accent/20">
+                    <div className="absolute inset-0 group-hover:scale-[1.04] transition-transform duration-500 flex flex-col items-center justify-center gap-3">
+                      <Shatkona className="w-16 h-16 text-primary/40" />
+                      <span className="text-foreground/60 font-bold uppercase tracking-widest text-sm" style={{ fontFamily: "var(--app-font-display)" }}>{product.name}</span>
                     </div>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
