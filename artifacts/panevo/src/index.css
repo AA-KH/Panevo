@@ -4,6 +4,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Centered page container — Tailwind v4 dropped the built-in .container utility,
+   so define our own. Pages then add their own horizontal padding (px-4/px-6). */
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem; /* 1280px */
+}
+
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
