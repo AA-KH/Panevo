@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { QCOM_LINKS, BRAND } from "@/config/brand";
 import { track } from "@/lib/analytics";
 
@@ -11,6 +12,29 @@ export function Navbar() {
   const [isMobileQcomOpen, setIsMobileQcomOpen] = useState(false);
   const [navState, setNavState] = useState<"top" | "visible" | "hidden">("top");
   const lastScrollY = useRef(0);
+  const dropdownWrapRef = useRef<HTMLDivElement | null>(null);
+
+  // Close desktop dropdown on outside click / Escape
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (
+        dropdownWrapRef.current &&
+        !dropdownWrapRef.current.contains(e.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsDropdownOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isDropdownOpen]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -101,38 +125,51 @@ export function Navbar() {
             );
           })}
 
-          <div className="relative">
+          <div className="relative" ref={dropdownWrapRef}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="cta-primary flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 font-bold text-sm notch-br outline-none focus-visible:ring-2 focus-visible:ring-primary"
               style={{ borderRadius: 4 }}
               aria-expanded={isDropdownOpen}
+              aria-haspopup="menu"
             >
-              Order Now <ChevronDown className="w-4 h-4 cta-arrow" />
+              Order Now
+              <ChevronDown
+                className={`w-4 h-4 cta-arrow transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
+              />
             </button>
 
-            {isDropdownOpen && (
-              <div
-                className="absolute right-0 mt-2 w-52 bg-card border border-border py-1 flex flex-col z-50"
-                style={{ borderRadius: 8, boxShadow: "var(--shadow-hover)" }}
-              >
-                {Object.entries(QCOM_LINKS).map(([platform, url]) => (
-                  <a
-                    key={platform}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => {
-                      handleQComClick(platform);
-                      setIsDropdownOpen(false);
-                    }}
-                    className="qcom-shimmer px-4 py-2 text-sm text-foreground hover:bg-muted capitalize outline-none focus-visible:bg-muted"
-                  >
-                    Order on {platform}
-                  </a>
-                ))}
-              </div>
-            )}
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.div
+                  key="qcom-dropdown"
+                  role="menu"
+                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.16, ease: "easeOut" }}
+                  className="absolute right-0 mt-2 w-52 bg-card border border-border py-1 flex flex-col z-50 origin-top-right"
+                  style={{ borderRadius: 8, boxShadow: "var(--shadow-hover)" }}
+                >
+                  {Object.entries(QCOM_LINKS).map(([platform, url]) => (
+                    <a
+                      key={platform}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      role="menuitem"
+                      onClick={() => {
+                        handleQComClick(platform);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="qcom-shimmer px-4 py-2 text-sm text-foreground hover:bg-muted capitalize outline-none focus-visible:bg-muted"
+                    >
+                      Order on {platform}
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 

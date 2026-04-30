@@ -1,7 +1,8 @@
 import { Link } from "wouter";
-import { QCOM_LINKS, BRAND } from "@/config/brand";
+import { BRAND } from "@/config/brand";
 import { track } from "@/lib/analytics";
 import { Shatkona } from "../sections/Shatkona";
+import { NewsletterSignup } from "../sections/NewsletterSignup";
 
 export function Footer() {
   const handleSocialClick = (platform: string) => {
@@ -11,8 +12,8 @@ export function Footer() {
   return (
     <footer className="bg-secondary text-secondary-foreground" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div className="col-span-1 md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 mb-8">
+          <div className="md:col-span-3">
              <Link href="/" className="flex items-center gap-2 mb-4 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
               <span className="text-3xl tracking-tight uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>{BRAND.name}</span>
             </Link>
@@ -27,7 +28,7 @@ export function Footer() {
             </div>
           </div>
 
-          <nav aria-label="Footer">
+          <nav aria-label="Footer" className="md:col-span-2">
             <h4 className="mb-4 text-lg uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>Explore</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><Link href="/" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Home</Link></li>
@@ -41,7 +42,7 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div>
+          <div className="md:col-span-3">
             <h4 className="mb-4 text-lg uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>Legal & Contact</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><Link href="/privacy" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Privacy Policy</Link></li>
@@ -49,18 +50,13 @@ export function Footer() {
               <li><Link href="/refund-policy" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Refund Policy</Link></li>
               <li className="pt-2"><a href={`mailto:${BRAND.emails[0]}`} className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">{BRAND.emails[0]}</a></li>
               <li><a href={`mailto:${BRAND.emails[1]}`} className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">{BRAND.emails[1]}</a></li>
+              <li className="pt-3 font-semibold opacity-90">{BRAND.parentCompany}</li>
+              <li className="text-xs opacity-70">{BRAND.placeholders.address} · {BRAND.placeholders.fssai}</li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="mb-4 text-lg uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>Company</h4>
-            <ul className="space-y-2 text-sm opacity-80">
-              <li className="font-semibold">{BRAND.parentCompany}</li>
-              <li>{BRAND.placeholders.address}</li>
-              <li>{BRAND.placeholders.fssai}</li>
-              <li>{BRAND.placeholders.cin}</li>
-              <li>{BRAND.placeholders.gst}</li>
-            </ul>
+          <div className="md:col-span-4">
+            <NewsletterSignup />
           </div>
         </div>
 

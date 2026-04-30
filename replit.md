@@ -36,6 +36,14 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
   - Home → "Your Weekly Paneer Box. Sorted." section: Weekly / Fortnightly / Monthly are now real `<button role="radio">` controls in a radiogroup. Heading, body copy and CTA label all update live based on selection. CTA deep-links to `/subscribe?frequency=…`, which Subscribe.tsx now reads as a fallback for the `?plan=` param.
   - Fixed pre-existing TS7030 in Navbar.tsx (early-return in body-scroll-lock effect).
 
+  **Engagement / conversion additions (April 30, 2026):**
+  - New `TrustStrip` (`src/components/sections/TrustStrip.tsx`): 4-stat horizontal band on Home (10-min delivery, 76% reorder, 0 preservatives, FSSAI). Sits between hero and Q-Com strip.
+  - New `PincodeChecker` (`src/components/sections/PincodeChecker.tsx`): interactive widget on Home that validates 6-digit pincode against serviceable prefixes (160 / 140 / 134 / 122). On hit → reveals Q-Com platform buttons (tracked as `qcom_click` with `pincode_check_hit`). On miss → notify-me email form (tracked as `coming_soon_signup`). Uses framer-motion AnimatePresence for state transitions.
+  - New `TestimonialsCarousel` (`src/components/sections/TestimonialsCarousel.tsx`): replaced static 3-card grid with autoplay carousel (6s interval, pauses on hover/focus, respects `prefers-reduced-motion`), prev/next arrows, dot pagination, 5 testimonials with author + city + flavour.
+  - New `NewsletterSignup` (`src/components/sections/NewsletterSignup.tsx`): added as 4th column in Footer (`md:col-span-4`). Email capture with sonner toast, fires `waitlist_signup` analytics with `source: footer_newsletter`. 600ms simulated delay — wire to MSG91/Mailchimp endpoint in Phase 2.
+  - Home FAQ accordion: 5 hand-picked objection-handling questions from `data/faqs.ts` (no marination, pause anytime, zero preservatives, kid-friendly, city availability) using existing Radix Accordion. Includes "Still curious? Chat with us" link to `/contact`.
+  - Navbar Order-Now dropdown polish: outside-click + Escape key close, framer-motion enter/exit (`origin-top-right` scale+fade), chevron rotation, `aria-haspopup="menu"`, `role="menu"`/`menuitem`.
+
   **Phase 3 QA fixes applied:**
   - Footer: replaced "Pending"/"Coming Soon" placeholder strings with FSSAI ("FSSAI licensed — licence number displayed on pack") + company info per spec; added panevoindia/trade emails + nav aria-label.
   - StickyBottomBar: bumped to ≥64px height with `env(safe-area-inset-bottom)` padding; added `role="navigation"` + `aria-label="Quick order"`. App `<main>` padding-bottom now matches via `.main-with-sticky-bar` CSS.

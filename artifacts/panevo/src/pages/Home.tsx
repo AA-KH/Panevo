@@ -3,11 +3,62 @@ import { Link } from "wouter";
 import { Shatkona } from "@/components/sections/Shatkona";
 import { QCOM_LINKS } from "@/config/brand";
 import { products } from "@/data/products";
+import { faqs } from "@/data/faqs";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, CheckCircle, Clock, Flame, Check } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useState } from "react";
+import { TrustStrip } from "@/components/sections/TrustStrip";
+import { PincodeChecker } from "@/components/sections/PincodeChecker";
+import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const HOME_TESTIMONIALS = [
+  {
+    text: "Made paneer tikka in 8 minutes flat. The black pepper flavour is spot on — tasted like it had been marinating for hours.",
+    author: "Priya S.",
+    loc: "Chandigarh",
+    flavour: "Black Pepper",
+  },
+  {
+    text: "Finally a paneer that saves time without compromising on taste. My kids love the oregano one — it's now in our weekly box.",
+    author: "Rahul M.",
+    loc: "Gurgaon",
+    flavour: "Oregano",
+  },
+  {
+    text: "I use it for my meal prep every Sunday. 500g block, done in one go. Consistent every single time.",
+    author: "Sneha T.",
+    loc: "Mohali",
+    flavour: "Red Chilli Flakes",
+  },
+  {
+    text: "Hits 30g of protein per meal without the effort. The texture holds up beautifully in the air-fryer.",
+    author: "Arjun K.",
+    loc: "Chandigarh",
+    flavour: "Black Pepper",
+  },
+  {
+    text: "Honestly, I haven't bought regular paneer in two months. Why would I? This is just better.",
+    author: "Meera B.",
+    loc: "Panchkula",
+    flavour: "Oregano",
+  },
+];
+
+const HOME_FAQS = [
+  faqs.products[0],
+  faqs.subscription[1],
+  faqs.products[2],
+  faqs.nutrition[4],
+  faqs.findUs[1],
+];
 
 type Frequency = "weekly" | "fortnightly" | "monthly";
 
@@ -144,6 +195,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* TRUST STRIP — runs across desktop & mobile */}
+      <TrustStrip />
 
       {/* Q-COMMERCE STRIP (Hidden on mobile — sticky bottom bar covers mobile) */}
       <section className="hidden md:block bg-primary text-primary-foreground py-6">
@@ -338,42 +392,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SOCIAL PROOF */}
+      {/* SOCIAL PROOF — autoplay carousel */}
       <section className="bg-background py-20 border-t border-border">
         <div className="container px-4">
           <Reveal>
-            <div className="text-center mb-16 max-w-3xl mx-auto">
-              <h2 className="text-4xl mb-8 text-foreground">What People Are Saying</h2>
-              <p className="text-2xl md:text-3xl text-primary italic leading-tight" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.01em" }}>
+            <div className="text-center mb-12 max-w-3xl mx-auto">
+              <h2 className="text-4xl mb-6 text-foreground">What People Are Saying</h2>
+              <p className="text-xl md:text-2xl text-primary italic leading-tight" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.01em" }}>
                 "76% of first-time tasters committed to buying weekly or daily."
               </p>
-              <p className="text-sm text-muted-foreground mt-4 uppercase tracking-wider">Source: Sampling Event, Chitkara University</p>
+              <p className="text-xs text-muted-foreground mt-3 uppercase tracking-wider">Source: Sampling Event, Chitkara University</p>
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {[
-              { text: "Made paneer tikka in 8 minutes flat. The black pepper flavour is spot on — tasted like it had been marinating for hours.", author: "Priya S.", loc: "Chandigarh" },
-              { text: "Finally a paneer that saves time without compromising on taste. My kids love the oregano one.", author: "Rahul M.", loc: "Gurgaon" },
-              { text: "I use it for my meal prep every Sunday. 500g block, done in one go. Consistent every single time.", author: "Sneha T.", loc: "Mohali" }
-            ].map((testimonial, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <div
-                  className="card-lift bg-card p-8 border border-border relative h-full"
-                  style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
-                >
-                  <div className="text-5xl text-primary/20 absolute top-4 left-6 font-serif leading-none">"</div>
-                  <p className="text-foreground relative z-10 font-medium leading-relaxed mb-6 pt-4">
-                    {testimonial.text}
-                  </p>
-                  <div className="mt-auto">
-                    <p className="font-bold text-foreground">{testimonial.author}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.loc}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={120}>
+            <TestimonialsCarousel testimonials={HOME_TESTIMONIALS} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* DELIVERY CHECKER — interactive conversion driver */}
+      <section className="bg-background py-20 border-t border-border/50">
+        <div className="container px-4 max-w-3xl">
+          <Reveal>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl mb-3 text-foreground">Find PANEVO Near You</h2>
+              <p className="text-lg text-muted-foreground">Two taps. Real-time delivery check.</p>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <PincodeChecker />
+          </Reveal>
         </div>
       </section>
 
@@ -461,6 +510,44 @@ export default function Home() {
             <Link href="/our-story" className="cta-primary inline-flex items-center gap-2 text-background font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary rounded p-1">
               Our Story <ArrowRight className="w-4 h-4 cta-arrow" />
             </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FAQ — answers the top 5 objections to subtly drive conversion */}
+      <section className="bg-background py-20 border-t border-border/50">
+        <div className="container px-4 max-w-3xl">
+          <Reveal>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl mb-3 text-foreground">Quick Questions, Real Answers.</h2>
+              <p className="text-muted-foreground">
+                Everything you'd ask before opening the pack.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <Accordion type="single" collapsible className="bg-card border border-border divide-y divide-border" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+              {HOME_FAQS.map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="border-b-0 px-5">
+                  <AccordionTrigger className="text-left text-base md:text-lg font-bold text-foreground py-5 hover:no-underline">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-base leading-relaxed pb-5 pr-6">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </Reveal>
+          <Reveal delay={200}>
+            <div className="text-center mt-8">
+              <Link
+                href="/contact"
+                className="cta-primary inline-flex items-center gap-2 text-primary font-bold text-sm"
+              >
+                Still curious? Chat with us <ArrowRight className="w-4 h-4 cta-arrow" />
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
