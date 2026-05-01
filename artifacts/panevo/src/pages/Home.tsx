@@ -12,6 +12,7 @@ import { useState } from "react";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PincodeChecker } from "@/components/sections/PincodeChecker";
 import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
+import { LiveOrderNotification } from "@/components/sections/LiveOrderNotification";
 import {
   Accordion,
   AccordionContent,
@@ -194,6 +195,9 @@ export default function Home() {
             <span>✦</span> India's First Pre-Flavoured Paneer
           </motion.div>
         </div>
+
+        {/* Live social proof notification */}
+        <LiveOrderNotification />
       </section>
 
       {/* TRUST STRIP — runs across desktop & mobile */}
@@ -317,7 +321,14 @@ export default function Home() {
           </Reveal>
 
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 list-none p-0">
-            {products.map((product, i) => (
+            {products.map((product, i) => {
+              const flavourGrad = [
+                "from-slate-900/30 via-slate-700/15 to-slate-500/10",
+                "from-red-800/30 via-red-600/15 to-orange-500/10",
+                "from-green-900/30 via-green-700/15 to-emerald-500/10",
+              ][i] ?? "from-secondary/15 via-primary/10 to-accent/20";
+              const flavourDot = ["bg-slate-700", "bg-red-600", "bg-green-700"][i] ?? "bg-primary";
+              return (
               <Reveal key={product.id} delay={i * 80}>
                 <li className="h-full">
                 <Link
@@ -333,17 +344,20 @@ export default function Home() {
                       <span aria-hidden="true">✦</span> India's First
                     </span>
                   )}
-                  <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-secondary/15 via-primary/10 to-accent/20">
+                  <div className={`aspect-[4/3] relative overflow-hidden bg-gradient-to-br ${flavourGrad}`}>
                     <div className="absolute inset-0 group-hover:scale-[1.04] transition-transform duration-500 flex flex-col items-center justify-center gap-3">
                       <Shatkona className="w-16 h-16 text-primary/40" />
                       <span className="text-foreground/60 font-bold uppercase tracking-widest text-sm" style={{ fontFamily: "var(--app-font-display)" }}>{product.name}</span>
                     </div>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-2xl mb-2 text-foreground">{product.name}</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`w-2.5 h-2.5 rounded-full ${flavourDot}`} aria-hidden="true" />
+                      <h3 className="text-2xl text-foreground">{product.name}</h3>
+                    </div>
                     <p className="text-muted-foreground mb-6 flex-1">{product.tagline}</p>
                     <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
-                      <span className="text-sm font-bold text-foreground tabnums">200g ₹125 · 500g ₹275</span>
+                      <span className="text-sm font-bold text-foreground tabnums">200g · 500g</span>
                       <span className="text-primary font-bold text-sm flex items-center gap-1 cta-primary">
                         View <ArrowRight className="w-4 h-4 cta-arrow" />
                       </span>
@@ -352,7 +366,8 @@ export default function Home() {
                 </Link>
                 </li>
               </Reveal>
-            ))}
+              );
+            })}
           </ul>
         </div>
       </section>

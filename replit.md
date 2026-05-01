@@ -55,4 +55,11 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
   - Contact: Trade form now displays "Our team responds within 48 hours." adjacent to submit.
   - CSS: Hover effects on `.card-lift`, `.recipe-lift`, `.cta-primary`, `.qcom-shimmer` gated behind `@media (hover: hover)`. Global `:focus-visible` 2px Terracotta outline with 2px offset. `scroll-margin-top: 80px` on `section[id]`. Fluid clamp() for unsized headings.
 
+  **Interactivity additions (May 1, 2026):**
+  - New `BoxCalculator` (`src/components/sections/BoxCalculator.tsx`): fully interactive "Build Your Box" flavour mix calculator embedded in Subscribe wizard Step 2. Per-flavour +/- steppers (0–5 packs each), live animated price summary (per-delivery + per-month), frequency discount display (Weekly 0%, Fortnightly 5%, Monthly 10%), colour-coded flavour distribution bar using framer-motion AnimatePresence/layout animations.
+  - `Subscribe.tsx` overhauled: replaced flat checkbox flavour list with `BoxCalculator`, added animated step-progress bar (framer-motion spring), animated slide transitions between wizard steps (AnimatePresence mode="wait"), pack size cards now show price-per-pack.
+  - `TrustStrip.tsx` upgraded: "10 min", "76%", and "0" stats now count up using the existing `useCountUp` hook when the strip scrolls into view (respects `prefers-reduced-motion`).
+  - New `LiveOrderNotification` (`src/components/sections/LiveOrderNotification.tsx`): animated floating social-proof bubble in the Home hero that cycles through realistic "Priya in Chandigarh just ordered Black Pepper 500g" notifications every 7 s. Uses framer-motion AnimatePresence, respects `prefers-reduced-motion`.
+  - Home product cards: each card now has a flavour-specific colour gradient thumbnail (charcoal/slate for Black Pepper, red-orange for Red Chilli Flakes, green for Oregano) and a matching colour identity dot next to the flavour name.
+
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
