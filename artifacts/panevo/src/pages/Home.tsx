@@ -12,7 +12,6 @@ import { useState } from "react";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PincodeChecker } from "@/components/sections/PincodeChecker";
 import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
-import { LiveOrderNotification } from "@/components/sections/LiveOrderNotification";
 import {
   Accordion,
   AccordionContent,
@@ -195,9 +194,6 @@ export default function Home() {
             <span>✦</span> India's First Pre-Flavoured Paneer
           </motion.div>
         </div>
-
-        {/* Live social proof notification */}
-        <LiveOrderNotification />
       </section>
 
       {/* TRUST STRIP — runs across desktop & mobile */}

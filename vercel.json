@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm --filter @workspace/panevo build",
+  "outputDirectory": "artifacts/panevo/dist",
+  "installCommand": "pnpm install",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
