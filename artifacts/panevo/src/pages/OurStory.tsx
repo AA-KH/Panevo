@@ -7,33 +7,60 @@ import { toast } from "sonner";
 import { Reveal } from "@/components/motion/Reveal";
 import { motion, useInView } from "framer-motion";
 
-const STATUS_CONFIG: Record<string, { label: string; dotColor: string; cardBg: string; cardBorder: string; labelBg: string; labelText: string; pulse: boolean }> = {
+const STATUS_CONFIG: Record<
+  string,
+  {
+    label: string;
+    dotColor: string;
+    cardBg: string;
+    cardBorder: string;
+    labelBg: string;
+    labelText: string;
+    headingColor: string;
+    bodyColor: string;
+    bulletColor: string;
+    pulse: boolean;
+    dimmed: boolean;
+  }
+> = {
   live: {
     label: "LIVE",
     dotColor: "bg-accent",
-    cardBg: "bg-card",
-    cardBorder: "border-accent/60",
+    cardBg: "bg-white/[0.10]",
+    cardBorder: "border-accent/70",
     labelBg: "bg-accent",
     labelText: "text-white",
+    headingColor: "text-white",
+    bodyColor: "text-white/75",
+    bulletColor: "bg-accent",
     pulse: true,
+    dimmed: false,
   },
   upcoming: {
     label: "NEXT UP",
     dotColor: "bg-primary",
-    cardBg: "bg-primary/8",
+    cardBg: "bg-primary/[0.14]",
     cardBorder: "border-primary",
     labelBg: "bg-primary",
-    labelText: "text-primary-foreground",
+    labelText: "text-white",
+    headingColor: "text-white",
+    bodyColor: "text-white/65",
+    bulletColor: "bg-primary",
     pulse: false,
+    dimmed: false,
   },
   planned: {
     label: "COMING",
-    dotColor: "bg-muted-foreground/40",
-    cardBg: "bg-transparent",
-    cardBorder: "border-border/50",
-    labelBg: "bg-muted",
-    labelText: "text-muted-foreground",
+    dotColor: "bg-white/25",
+    cardBg: "bg-white/[0.04]",
+    cardBorder: "border-white/12",
+    labelBg: "bg-white/10",
+    labelText: "text-white/50",
+    headingColor: "text-white/55",
+    bodyColor: "text-white/35",
+    bulletColor: "bg-white/25",
     pulse: false,
+    dimmed: true,
   },
 };
 
@@ -52,23 +79,19 @@ function TimelineCard({
   return (
     <div className="relative flex items-center justify-center">
       {/* Timeline dot */}
-      <div className="absolute left-1/2 -translate-x-1/2 z-10">
-        <div
-          className={`w-4 h-4 rounded-full border-4 border-[hsl(0_0%_13%)] ${cfg.dotColor} relative`}
-        >
+      <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 z-10">
+        <div className={`w-4 h-4 rounded-full border-[3px] border-[hsl(0_0%_13%)] ${cfg.dotColor} relative`}>
           {cfg.pulse && (
-            <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-60" />
+            <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-50" />
           )}
         </div>
       </div>
 
-      {/* Spacer for opposite side on desktop */}
+      {/* Desktop layout: two half-width columns */}
       <div className="hidden md:block w-5/12" />
-
-      {/* Gap around dot */}
       <div className="hidden md:block w-[8%]" />
 
-      {/* Card — slides in from its side */}
+      {/* Card */}
       <motion.div
         ref={ref}
         className={`w-full md:w-5/12 ml-10 md:ml-0 ${isLeft ? "md:order-first" : ""}`}
@@ -77,23 +100,21 @@ function TimelineCard({
         transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: 0.05 }}
       >
         <div
-          className={`border ${cfg.cardBg} ${cfg.cardBorder} p-6 group hover:scale-[1.02] transition-transform duration-200 ${
-            phase.status === "planned" ? "opacity-60" : ""
-          }`}
+          className={`border ${cfg.cardBg} ${cfg.cardBorder} p-6 hover:scale-[1.02] transition-transform duration-200 ${cfg.dimmed ? "opacity-55" : ""}`}
           style={{
             borderRadius: 12,
-            boxShadow: phase.status === "planned" ? undefined : "var(--shadow-rest)",
+            boxShadow: cfg.dimmed ? undefined : "0 2px 20px hsl(0 0% 0% / 0.25)",
           }}
         >
-          <div className="flex items-start justify-between mb-4">
+          <div className="flex items-start justify-between mb-4 gap-3">
             <h3
-              className="text-lg text-foreground uppercase leading-tight"
+              className={`text-lg leading-tight ${cfg.headingColor}`}
               style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.02em" }}
             >
               {phase.phase}
             </h3>
             <span
-              className={`text-[10px] font-black uppercase tracking-[0.12em] px-2.5 py-1 rounded-full ml-3 shrink-0 ${cfg.labelBg} ${cfg.labelText}`}
+              className={`text-[10px] font-black uppercase tracking-[0.12em] px-2.5 py-1 rounded-full shrink-0 ${cfg.labelBg} ${cfg.labelText}`}
             >
               {cfg.label}
             </span>
@@ -101,17 +122,8 @@ function TimelineCard({
 
           <ul className="space-y-2">
             {phase.flavours.map((f) => (
-              <li
-                key={f}
-                className="flex items-center gap-2.5 text-sm text-muted-foreground font-medium"
-              >
-                <span
-                  className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                    phase.status === "live" || phase.status === "upcoming"
-                      ? "bg-primary"
-                      : "bg-border"
-                  }`}
-                />
+              <li key={f} className={`flex items-center gap-2.5 text-sm font-medium ${cfg.bodyColor}`}>
+                <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${cfg.bulletColor}`} />
                 {f}
               </li>
             ))}
@@ -342,7 +354,7 @@ export default function OurStory() {
       </section>
 
       {/* ROADMAP — cinematic animated timeline */}
-      <section className="py-28 border-t border-border" style={{ backgroundColor: "hsl(0 0% 13%)" }}>
+      <section className="py-28 border-t border-border" style={{ backgroundColor: "hsl(0 0% 11%)" }}>
         <div className="container px-4 max-w-4xl">
           <Reveal>
             <div className="text-center mb-20">
@@ -355,7 +367,7 @@ export default function OurStory() {
               >
                 The Bold Roadmap
               </h2>
-              <p className="text-white/50 text-lg">
+              <p className="text-white/45 text-lg">
                 We're just getting started. Four phases. Twenty flavours. One mission.
               </p>
             </div>
@@ -363,13 +375,12 @@ export default function OurStory() {
 
           {/* Timeline track */}
           <div className="relative" ref={lineRef}>
-            {/* Animated vertical line */}
-            <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-white/10 overflow-hidden">
+            <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-white/8 overflow-hidden">
               <motion.div
-                className="w-full bg-gradient-to-b from-primary via-primary/60 to-transparent"
+                className="w-full bg-gradient-to-b from-primary via-primary/50 to-transparent"
                 initial={{ height: "0%" }}
                 animate={lineIsInView ? { height: "100%" } : {}}
-                transition={{ duration: 1.8, ease: "easeOut", delay: 0.2 }}
+                transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
               />
             </div>
 
@@ -383,8 +394,12 @@ export default function OurStory() {
           {/* Phase 2 waitlist */}
           <Reveal>
             <div
-              className="mt-20 bg-white/5 border border-white/15 p-8 text-center"
-              style={{ borderRadius: 12 }}
+              className="mt-20 border p-8 text-center"
+              style={{
+                borderRadius: 12,
+                backgroundColor: "hsl(0 0% 16%)",
+                borderColor: "hsl(0 0% 22%)",
+              }}
             >
               <p className="text-xs font-black uppercase tracking-[0.15em] text-primary mb-3">
                 Early Access
@@ -392,7 +407,7 @@ export default function OurStory() {
               <h3 className="text-xl md:text-2xl text-white mb-2">
                 Want to be the first to taste Phase 2?
               </h3>
-              <p className="text-white/50 text-sm mb-6">
+              <p className="text-white/45 text-sm mb-6">
                 Gochujang, Mala, Chipotle-Lime and Za'atar. Sign up to get early access.
               </p>
               <form
@@ -405,8 +420,12 @@ export default function OurStory() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="flex-1 bg-white/10 border border-white/20 text-white placeholder:text-white/40 px-4 py-3 focus:outline-none focus:border-primary"
-                  style={{ borderRadius: 8 }}
+                  className="flex-1 border text-white placeholder:text-white/35 px-4 py-3 focus:outline-none focus:border-primary"
+                  style={{
+                    borderRadius: 8,
+                    backgroundColor: "hsl(0 0% 20%)",
+                    borderColor: "hsl(0 0% 28%)",
+                  }}
                 />
                 <button
                   disabled={isSubmitting}

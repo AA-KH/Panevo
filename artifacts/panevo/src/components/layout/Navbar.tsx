@@ -96,8 +96,8 @@ export function Navbar() {
             aria-label={`${BRAND.name} — Home`}
           >
             <span
-              className="text-2xl tracking-tight text-foreground"
-              style={{ fontFamily: "var(--app-font-display)" }}
+              className="text-[1.65rem] md:text-[1.85rem] text-foreground"
+              style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.1em" }}
             >
               {BRAND.name}
             </span>

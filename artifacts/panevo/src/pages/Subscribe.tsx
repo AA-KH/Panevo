@@ -19,6 +19,12 @@ declare global {
 
 const STEP_LABELS = ["Choose Frequency", "Build Your Box", "Delivery Details"];
 
+const PLAN_DISPLAY: Record<string, { label: string; adjective: string }> = {
+  weekly:      { label: "Weekly",      adjective: "Weekly" },
+  fortnightly: { label: "Fortnightly", adjective: "Fortnightly" },
+  monthly:     { label: "Monthly",     adjective: "Monthly" },
+};
+
 export default function Subscribe() {
   const [, setLocation] = useLocation();
   const [step, setStep] = useState(1);
@@ -108,7 +114,7 @@ export default function Subscribe() {
         key: data.razorpayKeyId,
         subscription_id: data.subscriptionId,
         name: "PANEVO",
-        description: "Weekly Paneer Box",
+        description: `${PLAN_DISPLAY[selectedPlan || "weekly"]?.label ?? "Paneer"} Paneer Box`,
         prefill: { name: formData.name, email: formData.email, contact: formData.phone },
         handler: function () {
           toast.success("Payment successful!");
@@ -126,18 +132,35 @@ export default function Subscribe() {
     }
   };
 
+  const planAdj = selectedPlan ? (PLAN_DISPLAY[selectedPlan]?.adjective ?? "Paneer") : "Paneer";
+
   return (
     <div className="w-full bg-background min-h-screen">
       <SEO
-        title="PANEVO Weekly Paneer Subscription — Fresh, Pre-Flavoured, Delivered"
-        description="Your weekly paneer box from PANEVO. Fresh, pre-flavoured paneer delivered on schedule. No lock-in, pause any time, cancel from your dashboard in one click."
+        title="PANEVO Paneer Subscription — Fresh, Pre-Flavoured, Delivered"
+        description="Your paneer box from PANEVO. Fresh, pre-flavoured paneer delivered on schedule. No lock-in, pause any time, cancel from your dashboard in one click."
       />
 
       {/* HERO */}
       <section className="bg-background pt-24 pb-16 text-center border-b border-border">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6 text-foreground">Your Weekly Paneer Box.<br /><span className="text-primary">Cancel Any Time.</span></h1>
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={planAdj}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="text-4xl sm:text-5xl md:text-7xl mb-6 text-foreground"
+              >
+                Your{" "}
+                <span className="text-primary">{planAdj}</span>
+                {" "}Paneer Box.
+                <br />
+                <span className="text-primary">Cancel Any Time.</span>
+              </motion.h1>
+            </AnimatePresence>
           </Reveal>
           <Reveal delay={120}>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">Stop thinking about paneer. Start eating it.</p>
@@ -172,9 +195,9 @@ export default function Subscribe() {
         <div className="container px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
-              { id: "weekly", title: "Weekly", desc: "Delivered every 7 days. Best for households that eat paneer 2–3x/week.", badge: "Most Popular", color: "border-accent", btnClass: "bg-primary text-white" },
-              { id: "fortnightly", title: "Fortnightly", desc: "Delivered every 14 days. Two-pack option available. Best for smaller households.", color: "border-border", btnClass: "bg-foreground text-background" },
-              { id: "monthly", title: "Monthly", desc: "One delivery per month. Best for families who batch-cook.", color: "border-border", btnClass: "bg-foreground text-background" }
+              { id: "weekly",      title: "Weekly",      desc: "Delivered every 7 days. Best for households that eat paneer 2–3x/week.",      badge: "Most Popular", color: "border-accent",  btnClass: "bg-primary text-white" },
+              { id: "fortnightly", title: "Fortnightly", desc: "Delivered every 14 days. Two-pack option available. Best for smaller households.", color: "border-border",  btnClass: "bg-foreground text-background" },
+              { id: "monthly",     title: "Monthly",     desc: "One delivery per month. Best for families who batch-cook.",                     color: "border-border",  btnClass: "bg-foreground text-background" }
             ].map(plan => (
               <Reveal key={plan.id} delay={0}>
                 <div className={`card-lift bg-card border-2 ${plan.color} p-8 relative flex flex-col h-full`} style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
@@ -333,10 +356,10 @@ export default function Subscribe() {
 
                   <form onSubmit={handlePayment} className="space-y-4">
                     {[
-                      { id: "subName", label: "Full Name", type: "text", placeholder: "Full Name", field: "name" as const },
-                      { id: "subEmail", label: "Email", type: "email", placeholder: "Email Address", field: "email" as const },
-                      { id: "subPhone", label: "Phone", type: "tel", placeholder: "Phone Number", field: "phone" as const },
-                      { id: "subAddress", label: "Address Line 1", type: "text", placeholder: "House/Flat No., Building, Street", field: "line1" as const },
+                      { id: "subName",    label: "Full Name",      type: "text",  placeholder: "Full Name",                         field: "name"  as const },
+                      { id: "subEmail",   label: "Email",          type: "email", placeholder: "Email Address",                     field: "email" as const },
+                      { id: "subPhone",   label: "Phone",          type: "tel",   placeholder: "Phone Number",                      field: "phone" as const },
+                      { id: "subAddress", label: "Address Line 1", type: "text",  placeholder: "House/Flat No., Building, Street",  field: "line1" as const },
                     ].map(({ id, label, type, placeholder, field }) => (
                       <div key={id} className="space-y-2">
                         <label htmlFor={id} className="text-sm font-bold text-foreground">{label}</label>
