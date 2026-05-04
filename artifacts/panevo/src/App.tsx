@@ -2,6 +2,7 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useState } from "react";
 
 // Layout
 import { Navbar } from "@/components/layout/Navbar";
@@ -9,6 +10,7 @@ import { Footer } from "@/components/layout/Footer";
 import { StickyBottomBar } from "@/components/layout/StickyBottomBar";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { SplashScreen } from "@/components/SplashScreen";
 
 // Pages
 import Home from "@/pages/Home";
@@ -25,8 +27,6 @@ import Legal from "@/pages/Legal";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
-
-// TODO: generate sitemap during build for Phase 2
 
 function Router() {
   return (
@@ -51,11 +51,11 @@ function Router() {
           <Route path="/contact" component={Contact} />
           <Route path="/recipes" component={Recipes} />
           <Route path="/recipes/:slug" component={RecipeDetail} />
-          
+
           <Route path="/privacy"><Legal type="privacy" /></Route>
           <Route path="/terms"><Legal type="terms" /></Route>
           <Route path="/refund-policy"><Legal type="refund" /></Route>
-          
+
           <Route component={NotFound} />
         </Switch>
       </main>
@@ -67,10 +67,24 @@ function Router() {
 }
 
 function App() {
+  const [showSplash, setShowSplash] = useState(() => {
+    try {
+      return !sessionStorage.getItem("splashShown");
+    } catch {
+      return false;
+    }
+  });
+
+  const handleSplashDone = () => {
+    try { sessionStorage.setItem("splashShown", "1"); } catch {}
+    setShowSplash(false);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          {showSplash && <SplashScreen onDone={handleSplashDone} />}
           <Router />
         </WouterRouter>
         <Toaster />

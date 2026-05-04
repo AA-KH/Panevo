@@ -37,11 +37,11 @@ export default function Recipes() {
     };
   }, [activeFilter, renderedFilter]);
 
-  const filters = ["All", "Black Pepper", "Red Chilli Flakes", "Oregano", "Under 10 min", "High Protein"];
+  const filters = ["All", "Oregano", "Red Chilli Flakes", "Black Pepper", "Under 10 min", "High Protein"];
 
   const filteredRecipes = recipes.filter(recipe => {
     if (renderedFilter === "All") return true;
-    if (["Black Pepper", "Red Chilli Flakes", "Oregano"].includes(renderedFilter)) {
+    if (["Oregano", "Red Chilli Flakes", "Black Pepper"].includes(renderedFilter)) {
       return recipe.flavour === renderedFilter;
     }
     return recipe.tags.includes(renderedFilter);

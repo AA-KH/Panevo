@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { faqs } from "@/data/faqs";
 import { Reveal } from "@/components/motion/Reveal";
+import { QComIcon, QComLabel } from "@/components/sections/QComIcon";
 
 export default function FindUs() {
   const [activeCity, setActiveCity] = useState("All");
@@ -22,7 +23,7 @@ export default function FindUs() {
 
   const filteredStores = stores.filter(store => {
     const matchesCity = activeCity === "All" || store.city === activeCity;
-    const matchesSearch = store.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    const matchesSearch = store.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           store.area.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCity && matchesSearch;
   });
@@ -63,7 +64,7 @@ export default function FindUs() {
       script.defer = true;
       window.initMap = () => {
         const map = new window.google.maps.Map(mapRef.current!, {
-          center: { lat: 30.7333, lng: 76.7794 }, // Chandigarh
+          center: { lat: 30.7333, lng: 76.7794 },
           zoom: 11,
           styles: [
             { "featureType": "all", "elementType": "geometry", "stylers": [{"color": "#F2EEE5"}] },
@@ -91,7 +92,7 @@ export default function FindUs() {
       };
       document.head.appendChild(script);
     } else if (window.google?.maps && mapRef.current) {
-       window.initMap?.();
+      window.initMap?.();
     }
   }, []);
 
@@ -152,7 +153,15 @@ export default function FindUs() {
                   className="qcom-shimmer card-lift bg-card border border-border p-8 text-center hover:border-primary transition-colors group block"
                   style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
                 >
-                  <div className="h-16 mb-6 flex items-center justify-center font-bold uppercase tracking-widest text-2xl text-foreground" style={{ borderRadius: 8, fontFamily: "var(--app-font-display)", letterSpacing: "0.05em" }}>{platform === "instamart" ? "Instamart" : platform.charAt(0).toUpperCase() + platform.slice(1)}</div>
+                  <div className="h-16 mb-6 flex items-center justify-center gap-4">
+                    <QComIcon platform={platform} size="lg" />
+                    <span
+                      className="font-bold text-2xl text-foreground"
+                      style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.05em" }}
+                    >
+                      <QComLabel platform={platform} />
+                    </span>
+                  </div>
                   <div className="inline-flex items-center gap-2 text-primary font-bold text-lg">
                     Order Now <ArrowRight className="w-5 h-5 cta-arrow" />
                   </div>
@@ -169,9 +178,9 @@ export default function FindUs() {
           <Reveal>
             <h2 className="text-4xl mb-12 text-center text-foreground">Find Us In-Store</h2>
           </Reveal>
-          
+
           <div className="flex flex-col lg:flex-row gap-8 bg-card border border-border overflow-hidden" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
-            
+
             {/* Map Placeholder */}
             <div ref={mapRef} className="w-full lg:w-1/2 bg-slate-200 min-h-[400px] relative flex flex-col items-center justify-center p-8 text-center border-b lg:border-b-0 lg:border-r border-border">
               {!import.meta.env.VITE_GOOGLE_MAPS_API_KEY && (
@@ -184,7 +193,7 @@ export default function FindUs() {
 
             {/* List and Filters */}
             <div className="w-full lg:w-1/2 p-6 flex flex-col max-h-[600px]">
-              
+
               <div className="flex gap-2 overflow-x-auto pb-4 mb-4 hide-scrollbar">
                 {cities.map(city => (
                   <button
@@ -240,7 +249,7 @@ export default function FindUs() {
           <Reveal delay={120}>
             <p className="text-lg opacity-80 mb-10">We are expanding rapidly. Tell us where we should go next.</p>
           </Reveal>
-          
+
           <Reveal delay={200}>
             <form className="flex flex-col sm:flex-row gap-4" onSubmit={handleCityRequest}>
               <input

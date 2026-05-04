@@ -1,6 +1,7 @@
 import { useLocation } from "wouter";
 import { QCOM_LINKS } from "@/config/brand";
 import { track } from "@/lib/analytics";
+import { QComIcon } from "@/components/sections/QComIcon";
 
 export function StickyBottomBar() {
   const [location] = useLocation();
@@ -30,11 +31,13 @@ export function StickyBottomBar() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => handleQComClick(platform)}
-          className="qcom-shimmer flex-1 flex flex-col items-center justify-center border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10 outline-none focus-visible:bg-primary-foreground/10 min-h-[64px]"
+          className="qcom-shimmer flex-1 flex flex-col items-center justify-center gap-1 border-r last:border-r-0 border-primary-foreground/20 active:bg-primary-foreground/10 outline-none focus-visible:bg-primary-foreground/10 min-h-[64px]"
           aria-label={`Order on ${platform}`}
         >
-          <span className="text-primary-foreground text-[11px] uppercase tracking-wider font-bold leading-tight">Order on</span>
-          <span className="text-primary-foreground text-sm font-bold capitalize leading-tight" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.04em" }}>{platform}</span>
+          <QComIcon platform={platform} size="sm" />
+          <span className="text-primary-foreground text-[10px] uppercase tracking-wider font-bold leading-none">
+            {platform === "instamart" ? "Instamart" : platform.charAt(0).toUpperCase() + platform.slice(1)}
+          </span>
         </a>
       ))}
     </nav>

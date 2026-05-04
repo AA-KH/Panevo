@@ -73,25 +73,25 @@ export default function Nutrition() {
               <thead>
                 <tr className="border-b border-border bg-muted">
                   <th className="p-4 font-bold text-foreground font-sans">Per 100g</th>
-                  <th className="p-4 font-bold text-foreground font-sans">Black Pepper</th>
-                  <th className="p-4 font-bold text-foreground font-sans">Red Chilli Flakes</th>
                   <th className="p-4 font-bold text-foreground font-sans">Oregano</th>
+                  <th className="p-4 font-bold text-foreground font-sans">Red Chilli Flakes</th>
+                  <th className="p-4 font-bold text-foreground font-sans">Black Pepper</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {[
-                  { label: "Energy (kcal)", bp: "~260", rc: "~260", or: "~260" },
-                  { label: "Protein (g)", bp: "~18", rc: "~18", or: "~18", highlight: true },
-                  { label: "Total Fat (g)", bp: "~20", rc: "~20", or: "~20" },
-                  { label: "Carbohydrates (g)", bp: "~3", rc: "~3", or: "~3" },
-                  { label: "Calcium (mg)", bp: "~480", rc: "~480", or: "~480" },
-                  { label: "Sodium (mg)", bp: "~35", rc: "~35", or: "~35" },
+                  { label: "Energy (kcal)", or: "~260", rc: "~260", bp: "~260" },
+                  { label: "Protein (g)", or: "~18", rc: "~18", bp: "~18", highlight: true },
+                  { label: "Total Fat (g)", or: "~20", rc: "~20", bp: "~20" },
+                  { label: "Carbohydrates (g)", or: "~3", rc: "~3", bp: "~3" },
+                  { label: "Calcium (mg)", or: "~480", rc: "~480", bp: "~480" },
+                  { label: "Sodium (mg)", or: "~35", rc: "~35", bp: "~35" },
                 ].map((row, i) => (
                   <tr key={i} className={row.highlight ? "bg-primary/5" : ""}>
                     <td className={`p-4 font-sans ${row.highlight ? "font-bold text-primary" : "text-muted-foreground"}`}>{row.label}</td>
-                    <td className={`p-4 ${row.highlight ? "font-bold text-primary" : "text-foreground"}`}>{row.bp}</td>
-                    <td className={`p-4 ${row.highlight ? "font-bold text-primary" : "text-foreground"}`}>{row.rc}</td>
                     <td className={`p-4 ${row.highlight ? "font-bold text-primary" : "text-foreground"}`}>{row.or}</td>
+                    <td className={`p-4 ${row.highlight ? "font-bold text-primary" : "text-foreground"}`}>{row.rc}</td>
+                    <td className={`p-4 ${row.highlight ? "font-bold text-primary" : "text-foreground"}`}>{row.bp}</td>
                   </tr>
                 ))}
               </tbody>
@@ -188,9 +188,9 @@ export default function Nutrition() {
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "Black Pepper Salad Bowl", desc: "The post-workout bowl.", cal: 380, pro: 28, time: "5 min" },
               { title: "Oregano Stir-Fry", desc: "The clean bulk meal.", cal: 290, pro: 22, time: "8 min" },
-              { title: "Red Chilli Tikka", desc: "The cutting phase favourite.", cal: 310, pro: 26, time: "10 min" }
+              { title: "Red Chilli Tikka", desc: "The cutting phase favourite.", cal: 310, pro: 26, time: "10 min" },
+              { title: "Black Pepper Salad Bowl", desc: "The post-workout bowl.", cal: 380, pro: 28, time: "5 min" },
             ].map((recipe, i) => (
               <Reveal key={i} delay={Math.min(i, 4) * 80}>
                 <div className="card-lift bg-white text-near-black overflow-hidden p-6 relative h-full" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>

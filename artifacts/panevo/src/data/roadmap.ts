@@ -2,7 +2,7 @@ export const roadmap = [
   {
     phase: "Launch (FY26–27)",
     status: "live",
-    flavours: ["Black Pepper", "Red Chilli Flakes", "Oregano"]
+    flavours: ["Oregano", "Red Chilli Flakes", "Black Pepper"]
   },
   {
     phase: "Phase 2 (FY27–28)",
