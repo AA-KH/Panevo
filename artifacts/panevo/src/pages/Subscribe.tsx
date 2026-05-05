@@ -28,6 +28,7 @@ const PLAN_DISPLAY: Record<string, { label: string; adjective: string }> = {
 export default function Subscribe() {
   const [, setLocation] = useLocation();
   const [step, setStep] = useState(1);
+  const [selectedPlan, setSelectedPlan] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get("plan") || params.get("frequency") || "weekly";
   });

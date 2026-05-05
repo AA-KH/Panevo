@@ -2,7 +2,7 @@ import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import { products } from "@/data/products";
 import { QCOM_LINKS } from "@/config/platforms";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight, X, Printer } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { toast } from "sonner";
@@ -14,16 +14,28 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const TICKER_SLIDES = [
   {
-    heading: "Three Flavours. One Rule. Zero Marination.",
+    label: "Our Flavours",
+    lines: ["Three Flavours.", "One Rule.", "Zero Marination."],
     sub: "Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.",
+    color: "#F97316",
+    rgba: "249, 115, 22",
+    idx: "01",
   },
   {
-    heading: "The Protein You've Been Underestimating.",
+    label: "Nutrition First",
+    lines: ["The Protein You've", "Been Underestimating."],
     sub: "Paneer has always been India's best-kept protein secret. PANEVO makes it impossible to ignore.",
+    color: "#16a34a",
+    rgba: "22, 163, 74",
+    idx: "02",
   },
   {
-    heading: "If you can't pronounce it, it's not in PANEVO.",
+    label: "Clean Label",
+    lines: ["If you can't pronounce it,", "it's not in PANEVO."],
     sub: "Milk · Salt · Spice · Citric Acid. That's it. That's the whole ingredient list.",
+    color: "#6366f1",
+    rgba: "99, 102, 241",
+    idx: "03",
   },
 ];
 
@@ -171,7 +183,6 @@ export default function Products() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [tickerIndex, setTickerIndex] = useState(0);
-  const [tickerDirection, setTickerDirection] = useState(1);
   const [nutritionModal, setNutritionModal] = useState<{ id: string; name: string } | null>(null);
 
   useEffect(() => {
@@ -180,16 +191,10 @@ export default function Products() {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setTickerDirection(1);
       setTickerIndex((i) => (i + 1) % TICKER_SLIDES.length);
-    }, 4000);
+    }, 5000);
     return () => clearInterval(id);
   }, []);
-
-  const goToSlide = useCallback((i: number) => {
-    setTickerDirection(i > tickerIndex ? 1 : -1);
-    setTickerIndex(i);
-  }, [tickerIndex]);
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -247,8 +252,6 @@ export default function Products() {
     }))
   ];
 
-  const slide = TICKER_SLIDES[tickerIndex];
-
   return (
     <div className="w-full">
       <SEO
@@ -268,51 +271,131 @@ export default function Products() {
         )}
       </AnimatePresence>
 
-      {/* HERO — infinite scrolling ticker */}
-      <section className="bg-background text-foreground py-16 md:py-24 text-center overflow-hidden">
-        <div className="container px-4">
-          <div className="relative min-h-[9rem] sm:min-h-[10rem] md:min-h-[11rem] flex flex-col items-center justify-center">
-            <AnimatePresence mode="wait" custom={tickerDirection}>
-              <motion.div
-                key={tickerIndex}
-                custom={tickerDirection}
-                variants={{
-                  enter: (d: number) => ({ opacity: 0, y: d * 28 }),
-                  center: { opacity: 1, y: 0 },
-                  exit:  (d: number) => ({ opacity: 0, y: d * -28 }),
-                }}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.48, ease: [0.25, 0.1, 0.25, 1] }}
-                className="w-full"
-              >
-                <h1 className="text-3xl sm:text-5xl md:text-7xl mb-4 text-foreground leading-tight">
-                  {slide.heading}
-                </h1>
-                <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-                  {slide.sub}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+      {/* HERO — vibrant animated ticker */}
+      <section
+        className="relative bg-background text-foreground overflow-hidden"
+        style={{ minHeight: "82vh" }}
+      >
+        {/* Animated background glow — shifts colour per slide */}
+        <AnimatePresence>
+          <motion.div
+            key={`prod-glow-${tickerIndex}`}
+            className="absolute inset-0 pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5 }}
+            style={{
+              background: `radial-gradient(ellipse 85% 60% at 50% -8%, rgba(${TICKER_SLIDES[tickerIndex].rgba}, 0.14), transparent 68%)`,
+            }}
+          />
+        </AnimatePresence>
 
-          {/* Dot navigation */}
-          <div className="flex justify-center gap-2 mt-8" role="tablist" aria-label="Hero slides">
-            {TICKER_SLIDES.map((_, i) => (
-              <button
-                key={i}
-                role="tab"
-                aria-selected={i === tickerIndex}
-                aria-label={`Slide ${i + 1}`}
-                onClick={() => goToSlide(i)}
-                className={`rounded-full transition-all duration-300 ${
-                  i === tickerIndex
-                    ? "w-6 h-2 bg-primary"
-                    : "w-2 h-2 bg-border hover:bg-primary/40"
-                }`}
-              />
-            ))}
+        {/* Decorative giant slide index — far right */}
+        <div className="absolute right-0 inset-y-0 flex items-center pointer-events-none select-none overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`prod-num-${tickerIndex}`}
+              className="font-black leading-none"
+              style={{
+                fontSize: "clamp(12rem, 32vw, 30rem)",
+                fontFamily: "var(--app-font-display)",
+                color: `rgba(${TICKER_SLIDES[tickerIndex].rgba}, 0.07)`,
+              }}
+              initial={{ opacity: 0, y: 48 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -48 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              {TICKER_SLIDES[tickerIndex].idx}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <div
+          className="container px-4 relative z-10 flex flex-col justify-center"
+          style={{ minHeight: "82vh", paddingTop: "9rem", paddingBottom: "6rem" }}
+        >
+          {/* Coloured label pill */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`prod-label-${tickerIndex}`}
+              className="mb-8"
+              initial={{ opacity: 0, x: -18 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 18 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span
+                className="inline-flex items-center gap-2.5 text-[11px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full"
+                style={{
+                  color: TICKER_SLIDES[tickerIndex].color,
+                  backgroundColor: `rgba(${TICKER_SLIDES[tickerIndex].rgba}, 0.13)`,
+                  border: `1.5px solid rgba(${TICKER_SLIDES[tickerIndex].rgba}, 0.4)`,
+                }}
+              >
+                <span
+                  className="w-1.5 h-1.5 rounded-full bg-current"
+                  style={{ animation: "pulse 2s cubic-bezier(0.4,0,0.6,1) infinite" }}
+                />
+                {TICKER_SLIDES[tickerIndex].label}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Heading — each line clips up from below */}
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={`prod-heading-${tickerIndex}`}
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] leading-[1.0] mb-8 text-foreground max-w-5xl"
+              exit={{ opacity: 0, y: -24, transition: { duration: 0.22, ease: [0.7, 0, 1, 0.4] } }}
+            >
+              {TICKER_SLIDES[tickerIndex].lines.map((line, li) => {
+                const isLast = li === TICKER_SLIDES[tickerIndex].lines.length - 1;
+                return (
+                  <div key={`${tickerIndex}-${li}`} className="overflow-hidden leading-[1.08]">
+                    <motion.span
+                      className="block"
+                      initial={{ y: "110%" }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.68, ease: [0.16, 1, 0.3, 1], delay: li * 0.1 }}
+                      style={isLast ? { color: TICKER_SLIDES[tickerIndex].color } : undefined}
+                    >
+                      {line}
+                    </motion.span>
+                  </div>
+                );
+              })}
+            </motion.h1>
+          </AnimatePresence>
+
+          {/* Sub text */}
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={`prod-sub-${tickerIndex}`}
+              className="text-xl sm:text-2xl text-muted-foreground max-w-xl leading-relaxed"
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.34, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              {TICKER_SLIDES[tickerIndex].sub}
+            </motion.p>
+          </AnimatePresence>
+
+          {/* Thin progress bar — no dots */}
+          <div className="mt-14 w-56 h-[2px] bg-border rounded-full overflow-hidden">
+            <motion.div
+              key={`prod-progress-${tickerIndex}`}
+              className="h-full rounded-full"
+              style={{
+                backgroundColor: TICKER_SLIDES[tickerIndex].color,
+                transformOrigin: "left center",
+              }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 5, ease: "linear" }}
+            />
           </div>
         </div>
       </section>

@@ -5,7 +5,34 @@ import { useState, useEffect, useRef } from "react";
 import { track } from "@/lib/analytics";
 import { toast } from "sonner";
 import { Reveal } from "@/components/motion/Reveal";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+
+const STORY_SLIDES = [
+  {
+    heading: "Tradition Transformed.",
+    sub: "Paneer. India's most-loved protein — reimagined from the ground up for the modern kitchen.",
+    color: "#F97316",
+    rgba: "249, 115, 22",
+  },
+  {
+    heading: "NDRI Incubated.",
+    sub: "We are incubated at ICAR-NDRI — the most trusted, most premier dairy-based research institute in India.",
+    color: "#16a34a",
+    rgba: "22, 163, 74",
+  },
+  {
+    heading: "Process Validated.",
+    sub: "Assuring you the best quality in each delivery, each bite — every single time, without exception.",
+    color: "#6366f1",
+    rgba: "99, 102, 241",
+  },
+  {
+    heading: "Quality Assured.",
+    sub: "From the first drop of milk to the seal on your pack — tested, certified, held to the highest dairy standards.",
+    color: "#ec4899",
+    rgba: "236, 72, 153",
+  },
+];
 
 const STATUS_CONFIG: Record<
   string,
@@ -137,11 +164,19 @@ function TimelineCard({
 export default function OurStory() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [storyIndex, setStoryIndex] = useState(0);
   const lineRef = useRef<HTMLDivElement>(null);
   const lineIsInView = useInView(lineRef, { once: true });
 
   useEffect(() => {
     track("page_view", { page: "/our-story" });
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setStoryIndex((i) => (i + 1) % STORY_SLIDES.length);
+    }, 5000);
+    return () => clearInterval(id);
   }, []);
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
@@ -183,24 +218,143 @@ export default function OurStory() {
         structuredData={structuredData}
       />
 
-      {/* HERO */}
-      <section className="bg-secondary text-secondary-foreground py-24 text-center">
-        <div className="container px-4">
+      {/* HERO — animated ticker */}
+      <section className="relative bg-secondary text-secondary-foreground overflow-hidden" style={{ minHeight: "85vh" }}>
+        {/* Per-slide background glow */}
+        <AnimatePresence>
+          <motion.div
+            key={`story-glow-${storyIndex}`}
+            className="absolute inset-0 pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.6 }}
+            style={{
+              background: `radial-gradient(ellipse 75% 55% at 50% -5%, rgba(${STORY_SLIDES[storyIndex].rgba}, 0.18), transparent 70%)`,
+            }}
+          />
+        </AnimatePresence>
+
+        {/* Giant decorative numeral */}
+        <div className="absolute right-0 inset-y-0 flex items-center pointer-events-none select-none overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`story-num-${storyIndex}`}
+              className="font-black leading-none"
+              style={{
+                fontSize: "clamp(14rem, 35vw, 32rem)",
+                fontFamily: "var(--app-font-display)",
+                color: `rgba(${STORY_SLIDES[storyIndex].rgba}, 0.07)`,
+              }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              {String(storyIndex + 1).padStart(2, "0")}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <div
+          className="container px-4 relative z-10 flex flex-col items-center justify-center text-center"
+          style={{ minHeight: "85vh", paddingTop: "7rem", paddingBottom: "5rem" }}
+        >
+          {/* Logo — fixed, never tickers */}
           <Reveal>
-            <Shatkona className="w-16 h-16 mx-auto mb-6 text-secondary-foreground" />
+            <Shatkona className="w-14 h-14 mx-auto mb-10 text-secondary-foreground/80" />
           </Reveal>
-          <Reveal delay={80}>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">Tradition Transformed.</h1>
-          </Reveal>
-          <Reveal delay={160}>
-            <div className="flex flex-wrap justify-center gap-4 mt-8">
-              {["NDRI Incubated", "Process validated", "Quality assured"].map((pill) => (
-                <span key={pill} className="px-6 py-2 rounded-full border-2 border-secondary-foreground/20 text-secondary-foreground font-bold text-sm tracking-widest uppercase bg-white/5">
-                  {pill}
-                </span>
+
+          {/* Slide counter badge */}
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={`story-badge-${storyIndex}`}
+              className="inline-flex items-center gap-2 mb-7 text-[10px] font-black uppercase tracking-[0.22em] px-4 py-1.5 rounded-full"
+              style={{
+                color: STORY_SLIDES[storyIndex].color,
+                backgroundColor: `rgba(${STORY_SLIDES[storyIndex].rgba}, 0.14)`,
+                border: `1.5px solid rgba(${STORY_SLIDES[storyIndex].rgba}, 0.45)`,
+              }}
+              initial={{ opacity: 0, scale: 0.88 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ duration: 0.32 }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full bg-current"
+                style={{ animation: "pulse 2s infinite" }}
+              />
+              {String(storyIndex + 1).padStart(2, "0")} / {String(STORY_SLIDES.length).padStart(2, "0")}
+            </motion.span>
+          </AnimatePresence>
+
+          {/* Heading — clips up line by line */}
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={`story-heading-${storyIndex}`}
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] leading-[1.0] text-secondary-foreground mb-7 max-w-4xl"
+              exit={{ opacity: 0, y: -28, transition: { duration: 0.22, ease: [0.7, 0, 1, 0.4] } }}
+            >
+              {STORY_SLIDES[storyIndex].heading.split(" ").reduce<string[][]>((acc, word) => {
+                const last = acc[acc.length - 1];
+                if (!last || last.join(" ").length + word.length > 18) acc.push([word]);
+                else last.push(word);
+                return acc;
+              }, []).map((words, li) => (
+                <div key={`${storyIndex}-${li}`} className="overflow-hidden">
+                  <motion.span
+                    className="block"
+                    initial={{ y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: li * 0.09 }}
+                  >
+                    {words.join(" ")}
+                  </motion.span>
+                </div>
               ))}
-            </div>
-          </Reveal>
+            </motion.h1>
+          </AnimatePresence>
+
+          {/* Sub text */}
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={`story-sub-${storyIndex}`}
+              className="text-lg sm:text-xl text-secondary-foreground/65 max-w-lg mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.45, delay: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              {STORY_SLIDES[storyIndex].sub}
+            </motion.p>
+          </AnimatePresence>
+
+          {/* Segment progress bars */}
+          <div className="flex items-center gap-2 mt-12">
+            {STORY_SLIDES.map((s, i) => (
+              <button
+                key={i}
+                onClick={() => setStoryIndex(i)}
+                aria-label={s.heading}
+                className="relative h-[3px] rounded-full overflow-hidden transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                style={{
+                  width: i === storyIndex ? 52 : 14,
+                  backgroundColor: "rgba(255,255,255,0.15)",
+                }}
+              >
+                {i === storyIndex && (
+                  <motion.div
+                    key={`story-bar-${storyIndex}`}
+                    className="absolute inset-y-0 left-0 rounded-full"
+                    style={{ backgroundColor: s.color, transformOrigin: "left center" }}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 5, ease: "linear" }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
