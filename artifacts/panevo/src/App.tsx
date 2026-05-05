@@ -16,7 +16,6 @@ import { SplashScreen } from "@/components/SplashScreen";
 import Home from "@/pages/Home";
 import Products from "@/pages/Products";
 import OurStory from "@/pages/OurStory";
-import Nutrition from "@/pages/Nutrition";
 import Subscribe from "@/pages/Subscribe";
 import SubscribeThankYou from "@/pages/SubscribeThankYou";
 import FindUs from "@/pages/FindUs";
@@ -44,7 +43,6 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/products" component={Products} />
           <Route path="/our-story" component={OurStory} />
-          <Route path="/nutrition" component={Nutrition} />
           <Route path="/subscribe" component={Subscribe} />
           <Route path="/subscribe/thank-you" component={SubscribeThankYou} />
           <Route path="/find-us" component={FindUs} />

@@ -65,7 +65,6 @@ export function Navbar() {
 
   const links = [
     { href: "/products", label: "Products" },
-    { href: "/nutrition", label: "Nutrition" },
     { href: "/subscribe", label: "Subscribe" },
     { href: "/recipes", label: "Recipes" },
     { href: "/our-story", label: "Our Story" },

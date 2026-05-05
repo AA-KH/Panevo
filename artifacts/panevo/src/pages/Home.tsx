@@ -5,7 +5,7 @@ import { QCOM_LINKS } from "@/config/brand";
 import { products } from "@/data/products";
 import { faqs } from "@/data/faqs";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, CheckCircle, Clock, Flame, Check } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, Flame, Check, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useState } from "react";
@@ -356,8 +356,8 @@ export default function Home() {
                 </table>
               </div>
               <div className="text-center">
-                <Link href="/nutrition" className="cta-primary inline-flex items-center gap-2 text-primary font-bold text-lg">
-                  See Full Nutrition <ArrowRight className="w-5 h-5 cta-arrow" />
+                <Link href="/products" className="cta-primary inline-flex items-center gap-2 text-primary font-bold text-lg">
+                  View All Products <ArrowRight className="w-5 h-5 cta-arrow" />
                 </Link>
               </div>
             </div>
