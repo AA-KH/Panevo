@@ -193,10 +193,13 @@ export default function OurStory() {
             <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">Tradition Transformed.</h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
-              The Shatkona is the ancient Indian symbol of union — fire and water, energy and
-              nourishment, raw and ready. It's also the story of PANEVO.
-            </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              {["NDRI Incubated", "Process validated", "Quality assured"].map((pill) => (
+                <span key={pill} className="px-6 py-2 rounded-full border-2 border-secondary-foreground/20 text-secondary-foreground font-bold text-sm tracking-widest uppercase bg-white/5">
+                  {pill}
+                </span>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
@@ -208,7 +211,7 @@ export default function OurStory() {
             <p className="lead font-medium text-foreground text-2xl">
               We love paneer. Every Indian household does. But we hated the process. The chopping,
               the marination, the messy hands, the 30-minute wait before you even turn on the stove.
-              We realised we were treating a convenient protein like a weekend project.
+              We realised we were treating a great protein like a weekend project.
             </p>
           </Reveal>
 
@@ -232,10 +235,11 @@ export default function OurStory() {
 
           <Reveal>
             <p>
-              So we started experimenting in our kitchen. We tried marinating, but it only coated
-              the surface. We needed the flavour inside. We collaborated with dairy technologists at
-              Kamdhenu Hitkari Manch and researchers at ICAR-NDRI Karnal to figure out how to infuse
-              real spices into the milk exactly at the point of curdling.
+              So we started experimenting in our kitchen. We tried marinating, but it only coated the
+              surface. We needed the flavour inside. We collaborated with dairy technologists and
+              researchers at <span className="text-foreground font-bold">ICAR-NDRI</span> (Indian Council of Agricultural Research - National Dairy
+              Research Institute) to figure out how to infuse real spices into the milk exactly at the
+              point of curdling.
             </p>
           </Reveal>
 
@@ -260,18 +264,28 @@ export default function OurStory() {
 
           <Reveal>
             <p>
-              The result? Oregano that transforms a simple wrap into a café-worthy meal. Red Chilli
-              Flakes with deep, sustained heat. Black Pepper that bites back.
+              The result? <span className="text-foreground font-bold">Oregano</span> that transforms a simple wrap. <span className="text-foreground font-bold">Black Pepper</span> that bites back. <span className="text-foreground font-bold">Red Chilli Flakes</span> with deep, sustained heat.
             </p>
           </Reveal>
 
           <Reveal>
             <p>
-              We took it to Chitkara University. We set up a tawa, sliced the paneer right out of
-              the pack, and pan-fried it with a drop of oil. No masala box. No waiting. Within
-              hours, we sold out. 76% of people who tasted it asked where they could buy it weekly.
-              That's when we knew we hadn't just made a better paneer; we had fixed the category.
+              We then took it to market test — sliced the paneer right out of the pack. No masala box.
+              No waiting. Within hours, we sold out. 76% of people who tasted it asked where they
+              could buy it daily or weekly. That's when we knew we hadn't just made a better paneer;
+              we had fixed the category.
             </p>
+          </Reveal>
+
+          <Reveal>
+            <div className="mt-16 pt-16 border-t border-border">
+              <p className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
+                PANEVO is not improving paneer — it is redefining how India consumes it.
+              </p>
+              <p className="text-primary font-bold uppercase tracking-widest text-sm mt-4">
+                The answer for CATEGORY EVOLUTION
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>

@@ -44,12 +44,11 @@ export function TrustStrip() {
   return (
     <section aria-label="Trust signals" className="bg-background border-y border-border/60">
       <div className="container px-4 py-6 md:py-8">
-        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-2 list-none p-0 m-0">
-          <StatItem icon={Sparkles} staticStat="NDRI" label="Incubated and tested" delay={0} />
-          <StatItem icon={Heart} staticStat="Science & Love" label="Built with" delay={50} />
-          <StatItem icon={Sparkles} numericValue={0} label="Preservatives, ever" delay={100} />
-          <StatItem icon={Heart} numericValue={76} suffix="%" label="First-time tasters reorder" delay={150} />
-          <StatItem icon={Truck} numericValue={10} suffix=" min" label="Q-Commerce delivery" delay={200} />
+        <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-2 list-none p-0 m-0">
+          <StatItem icon={Sparkles} staticStat="NDRI Incubated" label="Made with science and love" delay={0} />
+          <StatItem icon={Sparkles} numericValue={0} label="Preservatives, ever" delay={50} />
+          <StatItem icon={Heart} numericValue={76} suffix="%" label="First-time tasters reorder" delay={100} />
+          <StatItem icon={Truck} numericValue={10} suffix=" min" label="Q-Commerce delivery" delay={150} />
         </ul>
       </div>
     </section>

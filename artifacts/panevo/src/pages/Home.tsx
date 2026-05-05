@@ -220,7 +220,7 @@ export default function Home() {
               <div className="flex flex-col items-center text-center">
                 <Sparkles className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
                 <h3 className="text-xl mb-4">NDRI Incubated</h3>
-                <p className="opacity-90 leading-relaxed">Quality and flavours perfected at NDRI. NDRI incubated and tested.</p>
+                <p className="opacity-90 leading-relaxed">Rigorously perfected at the National Dairy Research Institute. PANEVO is where cutting-edge dairy science meets artisan quality.</p>
               </div>
             </Reveal>
           </div>

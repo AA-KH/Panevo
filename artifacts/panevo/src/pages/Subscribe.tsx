@@ -28,9 +28,8 @@ const PLAN_DISPLAY: Record<string, { label: string; adjective: string }> = {
 export default function Subscribe() {
   const [, setLocation] = useLocation();
   const [step, setStep] = useState(1);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(() => {
     const params = new URLSearchParams(window.location.search);
-    return params.get("plan") || params.get("frequency") || null;
+    return params.get("plan") || params.get("frequency") || "weekly";
   });
   const [selectedSize, setSelectedSize] = useState<"200g" | "500g">("500g");
   const [quantities, setQuantities] = useState<BoxQuantities>({});
@@ -158,16 +157,14 @@ export default function Subscribe() {
                 <span className="text-primary">{planAdj}</span>
                 {" "}Paneer Box.
                 <br />
-                <span className="text-primary">Cancel Any Time.</span>
+                <span className="text-primary font-bold">Stop thinking. Start eating real paneer.</span>
               </motion.h1>
             </AnimatePresence>
           </Reveal>
-          <Reveal delay={120}>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">Stop thinking about paneer. Start eating it.</p>
-          </Reveal>
+
           <Reveal delay={200}>
             <ul className="flex flex-wrap justify-center gap-3 mb-6 list-none">
-              {["No lock-in", "Pause any time", "Fresh every delivery"].map((label) => (
+              {["No lock-in", "Pause any time", "Delivered fresh."].map((label) => (
                 <li key={label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-secondary text-secondary text-sm font-semibold tracking-wide">
                   <Check className="w-4 h-4" /> {label}
                 </li>
@@ -176,7 +173,7 @@ export default function Subscribe() {
           </Reveal>
           <Reveal delay={240}>
             <p className="text-base md:text-lg text-foreground/80 max-w-2xl mx-auto mb-10">
-              Cancel or pause from your account dashboard in one click — no emails, no calls, no fine print.
+              Cancel or pause — no emails, no calls, no fine print.
             </p>
           </Reveal>
           <Reveal delay={300}>
