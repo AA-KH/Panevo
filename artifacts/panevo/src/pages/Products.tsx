@@ -12,14 +12,20 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Shatkona } from "@/components/sections/Shatkona";
 import { motion, AnimatePresence } from "framer-motion";
 
-const TICKER_SLIDES = [
+const TICKER_SLIDES: {
+  label: string;
+  lines: string[];
+  sub: string;
+  chips?: string[];
+  color: string;
+  rgba: string;
+}[] = [
   {
     label: "Our Flavours",
     lines: ["Three Flavours.", "One Rule.", "Zero Marination."],
     sub: "Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.",
     color: "#F97316",
     rgba: "249, 115, 22",
-    idx: "01",
   },
   {
     label: "Nutrition First",
@@ -27,15 +33,14 @@ const TICKER_SLIDES = [
     sub: "Paneer has always been India's best-kept protein secret. PANEVO makes it impossible to ignore.",
     color: "#16a34a",
     rgba: "22, 163, 74",
-    idx: "02",
   },
   {
     label: "Clean Label",
     lines: ["If you can't pronounce it,", "it's not in PANEVO."],
-    sub: "Milk · Salt · Spice · Citric Acid. That's it. That's the whole ingredient list.",
+    sub: "That's it. The whole ingredient list.",
+    chips: ["Milk", "Salt", "Spice", "Citric Acid"],
     color: "#6366f1",
     rgba: "99, 102, 241",
-    idx: "03",
   },
 ];
 
@@ -291,27 +296,6 @@ export default function Products() {
           />
         </AnimatePresence>
 
-        {/* Decorative giant slide index — far right */}
-        <div className="absolute right-0 inset-y-0 flex items-center pointer-events-none select-none overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`prod-num-${tickerIndex}`}
-              className="font-black leading-none"
-              style={{
-                fontSize: "clamp(12rem, 32vw, 30rem)",
-                fontFamily: "var(--app-font-display)",
-                color: `rgba(${TICKER_SLIDES[tickerIndex].rgba}, 0.07)`,
-              }}
-              initial={{ opacity: 0, y: 48 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -48 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              {TICKER_SLIDES[tickerIndex].idx}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
         <div
           className="container px-4 relative z-10 flex flex-col justify-center"
           style={{ minHeight: "82vh", paddingTop: "9rem", paddingBottom: "6rem" }}
@@ -343,45 +327,72 @@ export default function Products() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Heading — each line clips up from below */}
-          <AnimatePresence mode="wait">
-            <motion.h1
-              key={`prod-heading-${tickerIndex}`}
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] leading-[1.0] mb-8 text-foreground max-w-5xl"
-              exit={{ opacity: 0, y: -24, transition: { duration: 0.22, ease: [0.7, 0, 1, 0.4] } }}
-            >
-              {TICKER_SLIDES[tickerIndex].lines.map((line, li) => {
-                const isLast = li === TICKER_SLIDES[tickerIndex].lines.length - 1;
-                return (
-                  <div key={`${tickerIndex}-${li}`} className="overflow-hidden leading-[1.08]">
-                    <motion.span
-                      className="block"
-                      initial={{ y: "110%" }}
-                      animate={{ y: 0 }}
-                      transition={{ duration: 0.68, ease: [0.16, 1, 0.3, 1], delay: li * 0.1 }}
-                      style={isLast ? { color: TICKER_SLIDES[tickerIndex].color } : undefined}
-                    >
-                      {line}
-                    </motion.span>
-                  </div>
-                );
-              })}
-            </motion.h1>
-          </AnimatePresence>
+          {/* Heading — fixed-height wrapper prevents layout shift */}
+          <div className="relative h-[9.5rem] sm:h-[14rem] md:h-[19rem] lg:h-[23.5rem] mb-8">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={`prod-heading-${tickerIndex}`}
+                className="absolute top-0 left-0 w-full max-w-5xl text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] text-foreground"
+                style={{ lineHeight: 1.05 }}
+                exit={{ opacity: 0, y: -24, transition: { duration: 0.22, ease: [0.7, 0, 1, 0.4] } }}
+              >
+                {TICKER_SLIDES[tickerIndex].lines.map((line, li) => {
+                  const isLast = li === TICKER_SLIDES[tickerIndex].lines.length - 1;
+                  return (
+                    <div key={`${tickerIndex}-${li}`} className="overflow-hidden" style={{ lineHeight: 1.08 }}>
+                      <motion.span
+                        className="block"
+                        initial={{ y: "110%" }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.68, ease: [0.16, 1, 0.3, 1], delay: li * 0.1 }}
+                        style={isLast ? { color: TICKER_SLIDES[tickerIndex].color } : undefined}
+                      >
+                        {line}
+                      </motion.span>
+                    </div>
+                  );
+                })}
+              </motion.h1>
+            </AnimatePresence>
+          </div>
 
-          {/* Sub text */}
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={`prod-sub-${tickerIndex}`}
-              className="text-xl sm:text-2xl text-muted-foreground max-w-xl leading-relaxed"
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.34, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              {TICKER_SLIDES[tickerIndex].sub}
-            </motion.p>
-          </AnimatePresence>
+          {/* Sub text + ingredient chips — fixed min-height reserves space */}
+          <div className="min-h-[7rem]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`prod-sub-${tickerIndex}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.32, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                <p className="text-xl sm:text-2xl text-muted-foreground max-w-xl leading-relaxed mb-5">
+                  {TICKER_SLIDES[tickerIndex].sub}
+                </p>
+                {TICKER_SLIDES[tickerIndex].chips && (
+                  <div className="flex flex-wrap gap-3">
+                    {TICKER_SLIDES[tickerIndex].chips!.map((chip, ci) => (
+                      <motion.span
+                        key={chip}
+                        initial={{ opacity: 0, scale: 0.82, y: 14 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ delay: 0.52 + ci * 0.08, duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                        className="inline-flex items-center px-6 py-3 text-lg font-bold rounded-2xl border-2"
+                        style={{
+                          borderColor: `rgba(${TICKER_SLIDES[tickerIndex].rgba}, 0.55)`,
+                          color: TICKER_SLIDES[tickerIndex].color,
+                          backgroundColor: `rgba(${TICKER_SLIDES[tickerIndex].rgba}, 0.09)`,
+                          letterSpacing: "0.02em",
+                        }}
+                      >
+                        {chip}
+                      </motion.span>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           {/* Thin progress bar — no dots */}
           <div className="mt-14 w-56 h-[2px] bg-border rounded-full overflow-hidden">

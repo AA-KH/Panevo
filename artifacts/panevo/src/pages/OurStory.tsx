@@ -235,27 +235,6 @@ export default function OurStory() {
           />
         </AnimatePresence>
 
-        {/* Giant decorative numeral */}
-        <div className="absolute right-0 inset-y-0 flex items-center pointer-events-none select-none overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`story-num-${storyIndex}`}
-              className="font-black leading-none"
-              style={{
-                fontSize: "clamp(14rem, 35vw, 32rem)",
-                fontFamily: "var(--app-font-display)",
-                color: `rgba(${STORY_SLIDES[storyIndex].rgba}, 0.07)`,
-              }}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              {String(storyIndex + 1).padStart(2, "0")}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
         <div
           className="container px-4 relative z-10 flex flex-col items-center justify-center text-center"
           style={{ minHeight: "85vh", paddingTop: "7rem", paddingBottom: "5rem" }}
