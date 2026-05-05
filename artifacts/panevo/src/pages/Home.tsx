@@ -12,6 +12,7 @@ import { useState } from "react";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PincodeChecker } from "@/components/sections/PincodeChecker";
 import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
+import { ChalkHerbs, ChalkPaneer, ChalkPeppercorns, ChalkCowHead, ChalkFarmHills, ChalkStarburst } from "@/components/sections/ChalkIllustrations";
 import {
   Accordion,
   AccordionContent,
@@ -189,7 +190,18 @@ export default function Home() {
       </section>
 
       {/* PROBLEM SECTION */}
-      <section className="bg-secondary text-secondary-foreground py-20">
+      <section className="bg-secondary text-secondary-foreground py-20 relative overflow-hidden">
+        {/* Decorative herb illustration — right side, large, very faint */}
+        <div className="absolute right-0 bottom-0 pointer-events-none" aria-hidden="true">
+          <ChalkHerbs className="w-48 h-48 text-secondary-foreground opacity-10" />
+        </div>
+        {/* Small starburst accents */}
+        <div className="absolute top-8 left-8 pointer-events-none" aria-hidden="true">
+          <ChalkStarburst className="w-6 h-6 text-secondary-foreground opacity-10" />
+        </div>
+        <div className="absolute top-16 right-24 pointer-events-none hidden md:block" aria-hidden="true">
+          <ChalkStarburst className="w-4 h-4 text-secondary-foreground opacity-8" />
+        </div>
         <div className="container px-4">
           <Reveal>
             <h2 className="text-4xl md:text-5xl mb-16 text-center">Why PANEVO</h2>
@@ -290,7 +302,15 @@ export default function Home() {
       </section>
 
       {/* PROTEIN + COMPARISON — merged section */}
-      <section className="bg-card text-card-foreground py-24 border-t border-border/50">
+      <section className="bg-card text-card-foreground py-24 border-t border-border/50 relative overflow-hidden">
+        {/* Chalk paneer block — faint, bottom-left corner */}
+        <div className="absolute -bottom-4 -left-4 pointer-events-none" aria-hidden="true">
+          <ChalkPaneer className="w-40 h-32 text-foreground opacity-[0.055]" />
+        </div>
+        {/* Peppercorns scattered top-right */}
+        <div className="absolute top-10 right-6 pointer-events-none hidden md:block" aria-hidden="true">
+          <ChalkPeppercorns className="w-28 h-20 text-foreground opacity-[0.06]" />
+        </div>
         <div className="container px-4">
 
           {/* Protein hero number */}
@@ -441,7 +461,15 @@ export default function Home() {
       </section>
 
       {/* PAGE-CLOSING CTA BANNER */}
-      <section className="bg-secondary text-secondary-foreground py-20 text-center">
+      <section className="bg-secondary text-secondary-foreground py-20 text-center relative overflow-hidden">
+        {/* Cow head — far right, large, extremely faint */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden="true">
+          <ChalkCowHead className="w-56 h-56 text-secondary-foreground opacity-[0.08]" />
+        </div>
+        {/* Farm hills — bottom left */}
+        <div className="absolute left-0 bottom-0 pointer-events-none hidden md:block" aria-hidden="true">
+          <ChalkFarmHills className="w-64 h-20 text-secondary-foreground opacity-[0.08]" />
+        </div>
         <div className="container px-4">
           <Reveal>
             <h2 className="text-4xl md:text-5xl mb-6">Ready to Cook Differently?</h2>

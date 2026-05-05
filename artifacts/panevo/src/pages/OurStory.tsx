@@ -6,6 +6,7 @@ import { track } from "@/lib/analytics";
 import { toast } from "sonner";
 import { Reveal } from "@/components/motion/Reveal";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { ChalkCowHead, ChalkHerbs, ChalkMilkSplash, ChalkStarburst } from "@/components/sections/ChalkIllustrations";
 
 const STORY_SLIDES = [
   {
@@ -338,7 +339,15 @@ export default function OurStory() {
       </section>
 
       {/* BRAND STORY */}
-      <section className="bg-background py-20 md:py-32">
+      <section className="bg-background py-20 md:py-32 relative overflow-hidden">
+        {/* Large faint cow head — far right, halfway down */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block" aria-hidden="true">
+          <ChalkCowHead className="w-72 h-72 text-foreground opacity-[0.04]" />
+        </div>
+        {/* Herb cluster — left side, lower */}
+        <div className="absolute left-0 bottom-16 pointer-events-none hidden lg:block" aria-hidden="true">
+          <ChalkHerbs className="w-32 h-36 text-foreground opacity-[0.05]" />
+        </div>
         <div className="container px-4 max-w-3xl mx-auto prose prose-lg md:prose-xl text-foreground font-sans prose-headings:text-foreground prose-p:text-muted-foreground">
           <Reveal>
             <p className="lead font-medium text-foreground text-2xl">
@@ -424,7 +433,14 @@ export default function OurStory() {
       </section>
 
       {/* SHATKONA SYMBOL */}
-      <section className="bg-secondary text-secondary-foreground py-24 text-center border-t border-border/20">
+      <section className="bg-secondary text-secondary-foreground py-24 text-center border-t border-border/20 relative overflow-hidden">
+        {/* Milk splash — top-right corner accent */}
+        <div className="absolute top-6 right-8 pointer-events-none hidden md:block" aria-hidden="true">
+          <ChalkMilkSplash className="w-16 h-20 text-secondary-foreground opacity-[0.12]" />
+        </div>
+        <div className="absolute bottom-6 left-8 pointer-events-none hidden md:block" aria-hidden="true">
+          <ChalkStarburst className="w-8 h-8 text-secondary-foreground opacity-[0.12]" />
+        </div>
         <div className="container px-4">
           <Reveal>
             <Shatkona className="w-32 h-32 mx-auto mb-12 text-primary" />

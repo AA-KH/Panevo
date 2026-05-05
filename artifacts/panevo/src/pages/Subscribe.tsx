@@ -10,6 +10,7 @@ import { PLAN_IDS } from "@/config/brand";
 import { toast } from "sonner";
 import { BoxCalculator, flavoursFromQuantities, type BoxQuantities } from "@/components/sections/BoxCalculator";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChalkMilkSplash, ChalkPaneer, ChalkHerbs, ChalkChilli } from "@/components/sections/ChalkIllustrations";
 
 declare global {
   interface Window {
@@ -142,7 +143,15 @@ export default function Subscribe() {
       />
 
       {/* HERO */}
-      <section className="bg-background pt-24 pb-16 text-center border-b border-border">
+      <section className="bg-background pt-24 pb-16 text-center border-b border-border relative overflow-hidden">
+        {/* Milk splash — top right */}
+        <div className="absolute top-8 right-8 pointer-events-none hidden md:block" aria-hidden="true">
+          <ChalkMilkSplash className="w-16 h-20 text-foreground opacity-[0.07]" />
+        </div>
+        {/* Paneer block — bottom left, partially cut off */}
+        <div className="absolute -bottom-4 -left-6 pointer-events-none hidden lg:block" aria-hidden="true">
+          <ChalkPaneer className="w-32 h-24 text-foreground opacity-[0.06]" />
+        </div>
         <div className="container px-4">
           <Reveal>
             <AnimatePresence mode="wait">
@@ -189,7 +198,15 @@ export default function Subscribe() {
       </section>
 
       {/* PLANS */}
-      <section id="plans" className="py-20 bg-muted">
+      <section id="plans" className="py-20 bg-muted relative overflow-hidden">
+        {/* Herbs on the far right */}
+        <div className="absolute right-0 bottom-0 pointer-events-none hidden lg:block" aria-hidden="true">
+          <ChalkHerbs className="w-36 h-40 text-foreground opacity-[0.05]" />
+        </div>
+        {/* Chilli — top left corner accent */}
+        <div className="absolute left-8 top-8 pointer-events-none hidden md:block" aria-hidden="true">
+          <ChalkChilli className="w-10 h-14 text-foreground opacity-[0.06]" />
+        </div>
         <div className="container px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[

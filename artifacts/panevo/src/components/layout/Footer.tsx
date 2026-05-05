@@ -49,8 +49,18 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-secondary text-secondary-foreground overflow-hidden" style={{ paddingTop: 80, paddingBottom: 0 }}>
-      <div className="container mx-auto px-4">
+    <footer className="bg-secondary text-secondary-foreground overflow-hidden relative" style={{ paddingTop: 80, paddingBottom: 0 }}>
+
+      {/* Farm illustration — overlaid as a background, fading in from the bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        aria-hidden="true"
+        style={{ zIndex: 0 }}
+      >
+        <FooterIllustration className="text-secondary-foreground w-full" style={{ opacity: 0.18 }} />
+      </div>
+
+      <div className="container mx-auto px-4 relative" style={{ zIndex: 1 }}>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 mb-8">
           <div className="md:col-span-3">
              <Link href="/" className="flex items-center gap-2 mb-4 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
@@ -112,17 +122,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/20 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4 pb-8">
+        <div className="border-t border-white/20 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4 pb-12">
           <p className="text-xs opacity-60">© 2026 {BRAND.name}. All rights reserved. Made in India.</p>
           <div className="opacity-40" aria-hidden="true">
              <Shatkona className="w-8 h-8" />
           </div>
         </div>
-      </div>
-
-      {/* Farm-to-table illustration strip */}
-      <div className="w-full" aria-hidden="true">
-        <FooterIllustration className="text-secondary-foreground" />
       </div>
     </footer>
   );

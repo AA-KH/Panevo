@@ -9,7 +9,7 @@
  *   barn silo → rolling hills with a cow → herb sprigs → paneer block → milk jug
  * with subtle decorative lines below.
  */
-export function FooterIllustration({ className = "" }: { className?: string }) {
+export function FooterIllustration({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@ export function FooterIllustration({ className = "" }: { className?: string }) {
       fill="none"
       aria-hidden="true"
       className={className}
-      style={{ display: "block", width: "100%", height: "auto" }}
+      style={{ display: "block", width: "100%", height: "auto", ...style }}
     >
       {/* ── STROKE STYLE: all strokes are currentColor (inherits footer text colour) */}
       <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" opacity="0.25">
