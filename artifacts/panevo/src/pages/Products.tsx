@@ -428,7 +428,6 @@ export default function Products() {
             <span>✓ No Artificial Colours</span>
             <span>✓ No Artificial Flavours</span>
             <span>✓ High Protein</span>
-            <span>✓ Source of Calcium</span>
           </div>
         </div>
       </section>
