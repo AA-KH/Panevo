@@ -6,8 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { ArrowRight, MapPin, Search } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { toast } from "sonner";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { faqs } from "@/data/faqs";
+
 import { Reveal } from "@/components/motion/Reveal";
 import { QComIcon, QComLabel } from "@/components/sections/QComIcon";
 
@@ -104,15 +103,6 @@ export default function FindUs() {
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://panevo.in" },
         { "@type": "ListItem", "position": 2, "name": "Find Us", "item": "https://panevo.in/find-us" }
       ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqs.findUs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
-      }))
     }
   ];
 
@@ -278,28 +268,7 @@ export default function FindUs() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-background py-24">
-        <div className="container px-4 max-w-3xl">
-          <Reveal>
-            <h2 className="text-3xl mb-12 text-center text-foreground">Storage & Quality</h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <Accordion type="single" collapsible className="w-full">
-              {faqs.findUs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-border">
-                  <AccordionTrigger className="text-left font-bold text-lg hover:text-primary transition-colors py-6">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </Reveal>
-        </div>
-      </section>
+
 
     </div>
   );

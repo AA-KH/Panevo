@@ -88,7 +88,7 @@ export default function Recipes() {
       </section>
 
       {/* FILTERS */}
-      <section className="bg-background py-4 border-b border-border sticky top-16 z-30" style={{ boxShadow: "var(--shadow-nav)" }}>
+      <section className="bg-background py-4 border-b border-border relative z-10" style={{ boxShadow: "var(--shadow-nav)" }}>
         <div className="container px-4">
           <div className="flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
             {filters.map(filter => (
