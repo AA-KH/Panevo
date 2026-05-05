@@ -11,6 +11,15 @@ import { faqs } from "@/data/faqs";
 import { Reveal } from "@/components/motion/Reveal";
 import { Shatkona } from "@/components/sections/Shatkona";
 
+const VegSymbol = () => (
+  <div className="flex items-center gap-1.5 border border-green-600/30 px-2 py-0.5 rounded bg-green-50/50 w-fit">
+    <div className="w-2.5 h-2.5 border border-green-600 flex items-center justify-center p-0.5 bg-white">
+      <div className="w-full h-full bg-green-600 rounded-full" />
+    </div>
+    <span className="text-[10px] font-bold text-green-700 uppercase tracking-tighter">100% Veg</span>
+  </div>
+);
+
 export default function Products() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,7 +99,27 @@ export default function Products() {
             <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">Three Flavours. One Rule. Zero Marination.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.</p>
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+              Pick your <span className="text-primary font-bold">PANEVO</span>. Cook it in under 10 minutes. Eat <span className="text-primary font-bold">REAL PANEER</span> every day.
+            </p>
+          </Reveal>
+
+          {/* HIGHLIGHTED CLEAN LABEL STRIP */}
+          <Reveal delay={200}>
+            <div className="mt-16 flex flex-wrap justify-center gap-6 md:gap-12">
+              {[
+                { label: "No Preservatives", icon: "Zero" },
+                { label: "No Artificial Colours", icon: "Zero" },
+                { label: "No Artificial Flavours", icon: "Zero" },
+              ].map((item) => (
+                <div key={item.label} className="flex flex-col items-center gap-2">
+                  <div className="w-16 h-16 rounded-full border-2 border-primary/20 flex items-center justify-center text-primary font-bold text-sm bg-primary/5">
+                    {item.icon}
+                  </div>
+                  <span className="text-xs md:text-sm font-bold text-foreground uppercase tracking-widest text-center max-w-[120px] leading-tight">{item.label}</span>
+                </div>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
@@ -106,6 +135,11 @@ export default function Products() {
             <div className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
               <Reveal className="w-full md:w-1/2">
                 <div className="aspect-square border border-border flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-secondary/15 via-primary/10 to-accent/25" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
+                  {product.id === "oregano" && (
+                    <div className="absolute top-4 left-4 z-20 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
+                      Most Loved
+                    </div>
+                  )}
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                     <Shatkona className="w-20 h-20 md:w-24 md:h-24 text-primary/50" />
                     <span className="font-bold text-2xl md:text-3xl uppercase text-foreground/70 tracking-widest" style={{ fontFamily: "var(--app-font-display)" }}>{product.name}</span>
@@ -115,6 +149,9 @@ export default function Products() {
               </Reveal>
               <div className="w-full md:w-1/2">
                 <Reveal>
+                  <div className="mb-4">
+                    <VegSymbol />
+                  </div>
                   <h2 className="text-4xl md:text-5xl mb-2 text-foreground">{product.name}</h2>
                 </Reveal>
                 <Reveal delay={80}>
@@ -151,7 +188,7 @@ export default function Products() {
                     </div>
                     <div className="text-right">
                       <p className="text-xs text-muted-foreground">Storage: 1–4°C</p>
-                      <p className="text-xs text-muted-foreground">Use within 5 days of opening</p>
+                      <p className="text-xs text-muted-foreground">use within 5-7 days</p>
                     </div>
                   </div>
                 </Reveal>
@@ -188,40 +225,10 @@ export default function Products() {
         </section>
       ))}
 
-      {/* SHARED NUTRITION STRIP */}
-      <section className="bg-secondary text-secondary-foreground py-6 md:py-8 border-y border-border/20">
-        <div className="container px-4">
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-center font-bold uppercase tracking-wider text-sm">
-            <span>✓ No Preservatives</span>
-            <span>✓ No Artificial Colours</span>
-            <span>✓ No Artificial Flavours</span>
-            <span>✓ High Protein</span>
-            <span>✓ Source of Calcium</span>
-          </div>
-        </div>
-      </section>
+
 
 
       
-      {/* FAQ */}
-      <section className="bg-muted py-24 border-t border-border">
-        <div className="container px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Product FAQ</h2>
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.products.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-border">
-                <AccordionTrigger className="text-left font-bold text-lg hover:text-primary transition-colors py-6">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
-
       {/* COMING SOON */}
       <section className="bg-near-black text-warm-cream py-24">
         <div className="container px-4 text-center">
@@ -251,6 +258,30 @@ export default function Products() {
                {isSubmitting ? "Submitting..." : "Notify Me When It Launches →"}
              </button>
           </form>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-background py-24 border-t border-border/50">
+        <div className="container px-4 max-w-3xl">
+          <Reveal>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Nutrition & Quality FAQ</h2>
+              <p className="text-muted-foreground">Everything you need to know about what's inside PANEVO.</p>
+            </div>
+          </Reveal>
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.nutrition.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-border">
+                <AccordionTrigger className="text-left font-bold text-lg hover:text-primary transition-colors py-6">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 

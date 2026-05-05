@@ -93,7 +93,7 @@ export const faqs = {
       answer: "Always store PANEVO in the refrigerator between 1–4°C. Do not freeze it, as freezing alters the texture of fresh paneer."
     },
     {
-      question: "Are you available outside Chandigarh Tri-City and Gurgaon?",
+      question: "Are you available outside Chandigarh Tri-City?",
       answer: "Not yet. We are perfecting our cold-chain supply in these regions first. However, we are actively evaluating our next cities. Submit your city request on this page."
     },
     {

@@ -3,6 +3,7 @@ import { BRAND } from "@/config/brand";
 import { track } from "@/lib/analytics";
 import { Shatkona } from "../sections/Shatkona";
 import { NewsletterSignup } from "../sections/NewsletterSignup";
+import { FooterIllustration } from "./FooterIllustration";
 
 function InstagramIcon({ className = "" }: { className?: string }) {
   return (
@@ -48,7 +49,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-secondary text-secondary-foreground" style={{ paddingTop: 80, paddingBottom: 80 }}>
+    <footer className="bg-secondary text-secondary-foreground overflow-hidden" style={{ paddingTop: 80, paddingBottom: 0 }}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 mb-8">
           <div className="md:col-span-3">
@@ -85,7 +86,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm opacity-80">
               <li><Link href="/" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Home</Link></li>
               <li><Link href="/products" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Products</Link></li>
-              <li><Link href="/nutrition" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Nutrition & Protein</Link></li>
+              <li><Link href="/nutrition" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Nutrition &amp; Protein</Link></li>
               <li><Link href="/subscribe" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Subscribe</Link></li>
               <li><Link href="/recipes" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Recipes</Link></li>
               <li><Link href="/our-story" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Our Story</Link></li>
@@ -95,7 +96,7 @@ export function Footer() {
           </nav>
 
           <div className="md:col-span-3">
-            <h4 className="mb-4 text-lg uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>Legal & Contact</h4>
+            <h4 className="mb-4 text-lg uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>Legal &amp; Contact</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><Link href="/privacy" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Terms of Use</Link></li>
@@ -112,12 +113,17 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/20 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/20 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4 pb-8">
           <p className="text-xs opacity-60">© 2026 {BRAND.name}. All rights reserved. Made in India.</p>
           <div className="opacity-40" aria-hidden="true">
              <Shatkona className="w-8 h-8" />
           </div>
         </div>
+      </div>
+
+      {/* Farm-to-table illustration strip */}
+      <div className="w-full" aria-hidden="true">
+        <FooterIllustration className="text-secondary-foreground" />
       </div>
     </footer>
   );

@@ -6,7 +6,5 @@ export const stores = [
   { id: "5", name: "Garg Store", city: "Mohali", area: "Sector 68", address: "Booth 15, Sector 68", lat: 30.6860, lng: 76.7320 },
   { id: "6", name: "Vadilal Store", city: "Panchkula", area: "Sector 11", address: "SCO 55, Sector 11", lat: 30.6911, lng: 76.8512 },
   { id: "7", name: "Bansal Supermarket", city: "Zirakpur", area: "VIP Road", address: "SCO 12, VIP Road", lat: 30.6499, lng: 76.8173 },
-  { id: "8", name: "Le Marche", city: "Gurgaon", area: "Galleria Market", address: "SG-54, Galleria Market, DLF Phase 4", lat: 28.4682, lng: 77.0847 },
-  { id: "9", name: "Needs Supermarket", city: "Gurgaon", area: "Sector 50", address: "Baani Square, Sector 50", lat: 28.4116, lng: 77.0601 },
-  { id: "10", name: "Modern Bazaar", city: "Gurgaon", area: "Cyber Hub", address: "DLF Cyber Hub", lat: 28.4950, lng: 77.0894 }
+
 ];

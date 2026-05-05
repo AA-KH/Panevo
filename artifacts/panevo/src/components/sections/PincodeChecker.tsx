@@ -9,7 +9,7 @@ const SERVICEABLE_PREFIXES: Record<string, string> = {
   "160": "Chandigarh",
   "140": "Mohali / Zirakpur",
   "134": "Panchkula",
-  "122": "Gurgaon",
+
 };
 
 type Result =

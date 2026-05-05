@@ -120,7 +120,7 @@ export default function FindUs() {
     <div className="w-full">
       <SEO
         title="Where to Buy PANEVO — Blinkit, Zepto, Instamart, Chandigarh Stores"
-        description="Find PANEVO on Blinkit, Zepto and Swiggy Instamart in Chandigarh Tri-City and Gurgaon, plus our growing list of physical retail stores."
+        description="Find PANEVO on Blinkit, Zepto and Swiggy Instamart in Chandigarh Tri-City, plus our growing list of physical retail stores."
         structuredData={structuredData}
       />
 
@@ -131,7 +131,7 @@ export default function FindUs() {
             <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">In Your Kitchen in 10 Minutes. Or at Your Corner Store.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart — or find us at your nearest store across Chandigarh Tri-City and Gurgaon.</p>
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart — or find us at your nearest store across Chandigarh Tri-City.</p>
           </Reveal>
         </div>
       </section>

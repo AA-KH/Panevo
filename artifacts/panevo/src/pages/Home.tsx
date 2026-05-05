@@ -29,7 +29,7 @@ const HOME_TESTIMONIALS = [
   {
     text: "Finally a paneer that saves time without compromising on taste. My kids love the oregano one — it's now in our weekly box.",
     author: "Rahul M.",
-    loc: "Gurgaon",
+    loc: "Chandigarh",
     flavour: "Oregano",
   },
   {
@@ -74,19 +74,19 @@ export default function Home() {
       />
 
       {/* HERO */}
-      <section className="relative min-h-[100dvh] bg-background text-foreground flex flex-col justify-center pt-16 overflow-hidden">
+      <section className="relative min-h-[100dvh] bg-foreground text-background flex flex-col justify-center pt-16 overflow-hidden">
+        {/* Chalk illustration background */}
         <div
-          className="absolute inset-0 z-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/hero-bg-artsy.png')",
-          }}
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-40"
+          style={{ backgroundImage: "url('/hero-chalk.png')" }}
           aria-hidden="true"
         />
+        {/* Subtle dark overlay to keep text readable */}
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
             background:
-              "linear-gradient(180deg, hsl(var(--background) / 0.85) 0%, hsl(var(--background) / 0.7) 45%, hsl(var(--background) / 0.95) 100%)",
+              "linear-gradient(180deg, hsl(var(--near-black) / 0.55) 0%, hsl(var(--near-black) / 0.40) 45%, hsl(var(--near-black) / 0.78) 100%)",
           }}
           aria-hidden="true"
         />
@@ -94,7 +94,7 @@ export default function Home() {
           className="absolute inset-0 z-[2] pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 70% 55% at 18% 100%, hsl(var(--primary) / 0.25) 0%, hsl(var(--primary) / 0.05) 35%, transparent 70%)",
+              "radial-gradient(ellipse 70% 55% at 18% 100%, hsl(var(--primary) / 0.30) 0%, hsl(var(--primary) / 0.08) 35%, transparent 70%)",
           }}
           aria-hidden="true"
         />
@@ -102,7 +102,7 @@ export default function Home() {
           className="absolute inset-0 z-[2] pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 50% 40% at 90% 0%, hsl(var(--accent) / 0.1) 0%, transparent 65%)",
+              "radial-gradient(ellipse 50% 40% at 90% 0%, hsl(var(--accent) / 0.12) 0%, transparent 65%)",
           }}
           aria-hidden="true"
         />
@@ -114,14 +114,14 @@ export default function Home() {
             transition={{ duration: 0.4, delay: 0, ease: "easeOut" }}
             className="mb-6"
           >
-            <Shatkona className="w-10 h-10 text-primary" />
+            <Shatkona className="w-10 h-10 text-white" />
           </motion.div>
 
           <motion.h1
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
-            className="text-4xl sm:text-6xl md:text-8xl mb-6 max-w-4xl text-foreground drop-shadow-sm"
+            className="text-4xl sm:text-6xl md:text-8xl mb-6 max-w-4xl text-white"
             style={{ letterSpacing: "0.02em" }}
           >
             No Marination. No Prep. Just Paneer.
@@ -131,7 +131,7 @@ export default function Home() {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 0.85, y: 0 }}
             transition={{ duration: 0.35, delay: 0.45, ease: "easeOut" }}
-            className="text-lg sm:text-xl md:text-2xl text-foreground/80 mb-10 max-w-2xl px-2 font-medium"
+            className="text-lg sm:text-xl md:text-2xl text-white/85 mb-10 max-w-2xl px-2"
           >
             Bold. Ready. The difference is built in.
           </motion.p>
@@ -144,13 +144,13 @@ export default function Home() {
           >
             <Link
               href="/products"
-              className="cta-primary bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br flex items-center justify-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background shadow-md"
+              className="cta-primary bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br flex items-center justify-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Order Now <ArrowRight className="w-5 h-5 cta-arrow" />
             </Link>
             <Link
               href="/products"
-              className="bg-card/80 backdrop-blur-sm border-2 border-primary/20 text-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-card hover:border-primary/40 transition-colors flex items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-sm"
+              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               See Our Flavours
             </Link>
@@ -167,7 +167,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
               <h2 className="text-2xl">In Your Kitchen in 10 Minutes.</h2>
-              <p className="text-sm opacity-90 mt-1">Available now in Chandigarh Tri-City and Gurgaon</p>
+              <p className="text-sm opacity-90 mt-1">Available now in Chandigarh Tri-City</p>
             </div>
             <div className="flex gap-8">
               {Object.entries(QCOM_LINKS).map(([platform, url]) => (
@@ -192,28 +192,35 @@ export default function Home() {
       <section className="bg-secondary text-secondary-foreground py-20">
         <div className="container px-4">
           <Reveal>
-            <h2 className="text-4xl md:text-5xl mb-16 text-center">Why PANEVO Exists</h2>
+            <h2 className="text-4xl md:text-5xl mb-16 text-center">Why PANEVO</h2>
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
             <Reveal delay={0}>
+              <div className="flex flex-col items-center text-center">
+                <Flame className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
+                <h3 className="text-xl mb-4">Bold Flavour, Built In</h3>
+                <p className="opacity-90 leading-relaxed">Oregano. Red Chilli Flakes. Black Pepper. Crafted into the paneer itself, not added on top.</p>
+              </div>
+            </Reveal>
+            <Reveal delay={80}>
               <div className="flex flex-col items-center text-center">
                 <Clock className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
                 <h3 className="text-xl mb-4">No More Marinating</h3>
                 <p className="opacity-90 leading-relaxed">Every paneer recipe used to start the same way — marination, seasoning, waiting. We removed 30 minutes from your kitchen routine.</p>
               </div>
             </Reveal>
-            <Reveal delay={80}>
+            <Reveal delay={160}>
               <div className="flex flex-col items-center text-center">
                 <CheckCircle className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
-                <h3 className="text-xl mb-4">Consistent, Every Time</h3>
+                <h3 className="text-xl mb-4">Quality, Every Time</h3>
                 <p className="opacity-90 leading-relaxed">Same texture. Same flavour. Same result — whether it's a Tuesday dinner or a weekend gathering.</p>
               </div>
             </Reveal>
-            <Reveal delay={160}>
+            <Reveal delay={240}>
               <div className="flex flex-col items-center text-center">
-                <Flame className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
-                <h3 className="text-xl mb-4">Bold Flavour, Built In</h3>
-                <p className="opacity-90 leading-relaxed">Black Pepper. Red Chilli Flakes. Oregano. Crafted into the paneer itself, not added on top.</p>
+                <Sparkles className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
+                <h3 className="text-xl mb-4">NDRI Incubated</h3>
+                <p className="opacity-90 leading-relaxed">Quality and flavours perfected at NDRI. NDRI incubated and tested.</p>
               </div>
             </Reveal>
           </div>
@@ -250,6 +257,11 @@ export default function Home() {
                   style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
                 >
                   <div className={`aspect-[4/3] relative overflow-hidden bg-gradient-to-br ${flavourGrad}`}>
+                    {product.id === "oregano" && (
+                      <div className="absolute top-4 left-4 z-20 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
+                        Most Loved
+                      </div>
+                    )}
                     <div className="absolute inset-0 group-hover:scale-[1.04] transition-transform duration-500 flex flex-col items-center justify-center gap-3">
                       <Shatkona className="w-16 h-16 text-primary/40" />
                       <span className="text-foreground/60 font-bold uppercase tracking-widest text-sm" style={{ fontFamily: "var(--app-font-display)" }}>{product.name}</span>
@@ -338,7 +350,7 @@ export default function Home() {
                     <tr>
                       <td className="p-4 md:p-6 font-medium text-foreground">Protein</td>
                       <td className="p-4 md:p-6 text-muted-foreground">Same fresh dairy nutrition</td>
-                      <td className="p-4 md:p-6 text-foreground font-medium">Same fresh dairy nutrition — nothing removed or added.</td>
+                      <td className="p-4 md:p-6 text-foreground font-medium">Same fresh dairy nutrition — BOLDNESS &amp; UNIQUENESS added.</td>
                     </tr>
                   </tbody>
                 </table>
