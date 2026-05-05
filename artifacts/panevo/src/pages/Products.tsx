@@ -12,6 +12,15 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Shatkona } from "@/components/sections/Shatkona";
 import { motion, AnimatePresence } from "framer-motion";
 
+const VegSymbol = () => (
+  <div className="flex items-center gap-1.5 border border-green-600/30 px-2 py-0.5 rounded bg-green-50/50 w-fit shadow-sm">
+    <div className="w-2.5 h-2.5 border border-green-600 flex items-center justify-center p-0.5 bg-white">
+      <div className="w-full h-full bg-green-600 rounded-full" />
+    </div>
+    <span className="text-[10px] font-bold text-green-700 uppercase tracking-tighter">100% Veg</span>
+  </div>
+);
+
 const TICKER_SLIDES: {
   label: string;
   lines: string[];
@@ -411,6 +420,19 @@ export default function Products() {
         </div>
       </section>
 
+      {/* SHARED NUTRITION STRIP */}
+      <section className="bg-secondary text-secondary-foreground py-6 md:py-8 border-y border-border/20">
+        <div className="container px-4">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-center font-bold uppercase tracking-wider text-sm">
+            <span>✓ No Preservatives</span>
+            <span>✓ No Artificial Colours</span>
+            <span>✓ No Artificial Flavours</span>
+            <span>✓ High Protein</span>
+            <span>✓ Source of Calcium</span>
+          </div>
+        </div>
+      </section>
+
       {/* PRODUCT DETAIL SECTIONS */}
       {products.map((product, index) => (
         <section
@@ -425,6 +447,9 @@ export default function Products() {
                   className="aspect-square border border-border flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-secondary/15 via-primary/10 to-accent/25"
                   style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
                 >
+                  <div className="absolute top-4 left-4 z-20">
+                    <VegSymbol />
+                  </div>
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                     <Shatkona className="w-20 h-20 md:w-24 md:h-24 text-primary/50" />
                     <span className="font-bold text-2xl md:text-3xl uppercase text-foreground/70 tracking-widest" style={{ fontFamily: "var(--app-font-display)" }}>
@@ -534,53 +559,7 @@ export default function Products() {
         </section>
       ))}
 
-      {/* SHARED NUTRITION STRIP */}
-      <section className="bg-secondary text-secondary-foreground py-6 md:py-8 border-y border-border/20">
-        <div className="container px-4">
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-center font-bold uppercase tracking-wider text-sm">
-            <span>✓ No Preservatives</span>
-            <span>✓ No Artificial Colours</span>
-            <span>✓ No Artificial Flavours</span>
-            <span>✓ High Protein</span>
-            <span>✓ Source of Calcium</span>
-          </div>
-        </div>
-      </section>
 
-      {/* SIZE COMPARISON */}
-      <section className="bg-background py-20">
-        <div className="container px-4 max-w-4xl">
-          <h2 className="text-3xl font-bold mb-10 text-center text-foreground">Which size is right for you?</h2>
-          <div className="bg-card rounded-xl border border-border overflow-hidden">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-border bg-muted/50">
-                  <th className="p-4 font-bold text-foreground">Size</th>
-                  <th className="p-4 font-bold text-foreground">Price</th>
-                  <th className="p-4 font-bold text-foreground">Ideal For</th>
-                  <th className="p-4 font-bold text-foreground">Servings</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                <tr>
-                  <td className="p-4 font-bold text-foreground">200g</td>
-                  <td className="p-4 font-medium text-muted-foreground">₹125</td>
-                  <td className="p-4 text-muted-foreground">Solo meals, weeknight dinners, meal prep</td>
-                  <td className="p-4 text-muted-foreground">2-3</td>
-                </tr>
-                <tr>
-                  <td className="p-4 font-bold text-foreground">500g</td>
-                  <td className="p-4 font-medium text-muted-foreground">
-                    ₹275 <span className="text-primary text-xs ml-1 bg-primary/10 px-2 py-0.5 rounded-full">SAVE 12%</span>
-                  </td>
-                  <td className="p-4 text-muted-foreground">Families, batch cooking, weekend gatherings</td>
-                  <td className="p-4 text-muted-foreground">5-6</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
 
       {/* FAQ */}
       <section className="bg-muted py-24 border-t border-border">

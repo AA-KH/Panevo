@@ -39,10 +39,8 @@ export function Navbar() {
       const y = window.scrollY;
       if (y < 8) {
         setNavState("top");
-      } else if (y < lastScrollY.current) {
+      } else {
         setNavState("visible");
-      } else if (y > lastScrollY.current && y > 80) {
-        setNavState("hidden");
       }
       lastScrollY.current = y;
     };
