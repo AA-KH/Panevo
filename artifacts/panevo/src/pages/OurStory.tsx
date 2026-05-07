@@ -14,10 +14,9 @@ const STORY_SLIDES = [
     heading: "Tradition",
     headingAccent: "Transformed.",
     sub: "India's most-loved protein — reimagined from the ground up for the modern kitchen.",
-    color: "#e85d04",
-    colorDark: "#9a3412",
-    rgba: "232, 93, 4",
-    icon: "🌿",
+    color: "#9A3412",
+    colorDark: "#7C2D12",
+    rgba: "154, 52, 18",
     shapes: [
       { size: 120, top: "12%", left: "8%", opacity: 0.13, delay: 0 },
       { size: 60, top: "70%", left: "85%", opacity: 0.1, delay: 0.3 },
@@ -29,10 +28,9 @@ const STORY_SLIDES = [
     heading: "NDRI",
     headingAccent: "Incubated.",
     sub: "Backed by ICAR-NDRI — India's most trusted dairy research institute. Science-first, always.",
-    color: "#0891b2",
-    colorDark: "#164e63",
-    rgba: "8, 145, 178",
-    icon: "🔬",
+    color: "#1E40AF",
+    colorDark: "#1E3A8A",
+    rgba: "30, 64, 175",
     shapes: [
       { size: 90, top: "18%", left: "80%", opacity: 0.12, delay: 0.1 },
       { size: 50, top: "65%", left: "6%", opacity: 0.15, delay: 0.25 },
@@ -44,10 +42,9 @@ const STORY_SLIDES = [
     heading: "Process",
     headingAccent: "Validated.",
     sub: "Every bite tested. Every batch certified. Held to the highest dairy standards — no exceptions.",
-    color: "#a855f7",
-    colorDark: "#581c87",
-    rgba: "168, 85, 247",
-    icon: "✅",
+    color: "#6B21A8",
+    colorDark: "#581C87",
+    rgba: "107, 33, 168",
     shapes: [
       { size: 100, top: "8%", left: "75%", opacity: 0.11, delay: 0.2 },
       { size: 44, top: "72%", left: "10%", opacity: 0.16, delay: 0 },
@@ -59,10 +56,9 @@ const STORY_SLIDES = [
     heading: "Quality",
     headingAccent: "Assured.",
     sub: "From the first drop of milk to the seal on your pack — consistent, clean, certified.",
-    color: "#f59e0b",
-    colorDark: "#78350f",
-    rgba: "245, 158, 11",
-    icon: "⭐",
+    color: "#166534",
+    colorDark: "#14532D",
+    rgba: "22, 101, 52",
     shapes: [
       { size: 80, top: "15%", left: "82%", opacity: 0.14, delay: 0.05 },
       { size: 55, top: "68%", left: "7%", opacity: 0.12, delay: 0.2 },
@@ -332,20 +328,6 @@ export default function OurStory() {
             <Shatkona className="w-14 h-14 mx-auto mb-8 text-secondary-foreground/80" />
           </Reveal>
 
-          {/* Large emoji icon — per slide, floats in */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`icon-${storyIndex}`}
-              className="text-5xl mb-6 select-none"
-              initial={{ opacity: 0, y: 16, scale: 0.7, rotate: -12 }}
-              animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.7, rotate: 12 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              aria-hidden="true"
-            >
-              {STORY_SLIDES[storyIndex].icon}
-            </motion.div>
-          </AnimatePresence>
 
           {/* Two-part heading: white + coloured accent word */}
           <AnimatePresence mode="wait">
