@@ -122,7 +122,7 @@ export default function Home() {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
-            className="text-4xl sm:text-6xl md:text-8xl mb-6 max-w-4xl text-white"
+            className="text-5xl sm:text-7xl md:text-9xl mb-6 max-w-4xl text-white"
             style={{ letterSpacing: "0.02em" }}
           >
             No Marination. No Prep. Just Paneer.
@@ -132,7 +132,7 @@ export default function Home() {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 0.85, y: 0 }}
             transition={{ duration: 0.35, delay: 0.45, ease: "easeOut" }}
-            className="text-lg sm:text-xl md:text-2xl text-white/85 mb-10 max-w-2xl px-2"
+            className="text-xl sm:text-2xl md:text-3xl text-white/85 mb-10 max-w-2xl px-2"
           >
             Bold. Ready. The difference is built in.
           </motion.p>
@@ -167,8 +167,8 @@ export default function Home() {
         <div className="container px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
-              <h2 className="text-2xl">In Your Kitchen in 10 Minutes.</h2>
-              <p className="text-sm opacity-90 mt-1">Available now in Chandigarh Tri-City</p>
+              <h2 className="text-3xl md:text-4xl">In Your Kitchen in 10 Minutes.</h2>
+              <p className="text-base md:text-lg opacity-90 mt-1">Available now in Chandigarh Tri-City</p>
             </div>
             <div className="flex gap-8">
               {Object.entries(QCOM_LINKS).map(([platform, url]) => (
@@ -204,35 +204,35 @@ export default function Home() {
         </div>
         <div className="container px-4">
           <Reveal>
-            <h2 className="text-4xl md:text-5xl mb-16 text-center">Why PANEVO</h2>
+            <h2 className="text-5xl md:text-6xl mb-16 text-center">Why PANEVO</h2>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
             <Reveal delay={0}>
               <div className="flex flex-col items-center text-center">
                 <Flame className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
-                <h3 className="text-xl mb-4">Bold Flavour, Built In</h3>
-                <p className="opacity-90 leading-relaxed">Oregano. Red Chilli Flakes. Black Pepper. Crafted into the paneer itself, not added on top.</p>
+                <h3 className="text-2xl mb-4">Bold Flavour, Built In</h3>
+                <p className="text-lg opacity-90 leading-relaxed">Oregano. Red Chilli Flakes. Black Pepper. Crafted into the paneer itself, not added on top.</p>
               </div>
             </Reveal>
             <Reveal delay={80}>
               <div className="flex flex-col items-center text-center">
                 <Clock className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
-                <h3 className="text-xl mb-4">No More Marinating</h3>
-                <p className="opacity-90 leading-relaxed">30 minutes of marination, seasoning & waiting removed from your kitchen routine.</p>
+                <h3 className="text-2xl mb-4">No More Marinating</h3>
+                <p className="text-lg opacity-90 leading-relaxed">30 minutes of marination, seasoning & waiting removed from your kitchen routine.</p>
               </div>
             </Reveal>
             <Reveal delay={160}>
               <div className="flex flex-col items-center text-center">
                 <CheckCircle className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
-                <h3 className="text-xl mb-4">Quality, Every Time</h3>
-                <p className="opacity-90 leading-relaxed">Same texture. Same flavour. Same result — whether it's a Tuesday dinner or a weekend gathering.</p>
+                <h3 className="text-2xl mb-4">Quality, Every Time</h3>
+                <p className="text-lg opacity-90 leading-relaxed">Same texture. Same flavour. Same result — whether it's a Tuesday dinner or a weekend gathering.</p>
               </div>
             </Reveal>
             <Reveal delay={240}>
               <div className="flex flex-col items-center text-center">
                 <Sparkles className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
-                <h3 className="text-xl mb-4">NDRI Incubated</h3>
-                <p className="opacity-90 leading-relaxed">Perfected at the National Dairy Research Institute. PANEVO is where cutting-edge dairy science meets artisan quality.</p>
+                <h3 className="text-2xl mb-4">NDRI Incubated</h3>
+                <p className="text-lg opacity-90 leading-relaxed">Perfected at the National Dairy Research Institute. PANEVO is where cutting-edge dairy science meets artisan quality.</p>
               </div>
             </Reveal>
           </div>
@@ -247,8 +247,8 @@ export default function Home() {
         <div className="container px-4">
           <Reveal>
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl mb-4 text-foreground">Pick Your Flavour. Cook in Minutes.</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Three bold flavours. Two sizes — 200g for weeknights, 500g for the whole family.</p>
+              <h2 className="text-5xl md:text-6xl mb-4 text-foreground">Pick Your Flavour. Cook in Minutes.</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Three bold flavours. Two sizes — 200g for weeknights, 500g for the whole family.</p>
             </div>
           </Reveal>
 
@@ -282,9 +282,9 @@ export default function Home() {
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-2 mb-2">
                       <span className={`w-2.5 h-2.5 rounded-full ${flavourDot}`} aria-hidden="true" />
-                      <h3 className="text-2xl text-foreground">{product.name}</h3>
+                      <h3 className="text-3xl text-foreground">{product.name}</h3>
                     </div>
-                    <p className="text-muted-foreground mb-6 flex-1">{product.tagline}</p>
+                    <p className="text-lg text-muted-foreground mb-6 flex-1">{product.tagline}</p>
                     <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
                       <span className="text-sm font-bold text-foreground tabnums">200g · 500g</span>
                       <span className="text-primary font-bold text-sm flex items-center gap-1 cta-primary">
@@ -323,15 +323,14 @@ export default function Home() {
               ~{proteinCount}g
             </div>
             <Reveal>
-              <h2 className="text-2xl md:text-4xl mb-3 text-foreground">Protein per 100g. The Difference Is Built In.</h2>
+              <h2 className="text-3xl md:text-5xl mb-3 text-foreground">Protein per 100g. The Difference Is Built In.</h2>
             </Reveal>
             <Reveal delay={80}>
-              <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">Same fresh dairy. Zero compromises. Flavour infused at the point of curdling.</p>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-xl mx-auto">Same fresh dairy. Zero compromises. Flavour infused at the point of curdling.</p>
             </Reveal>
             <Reveal delay={140}>
               <div className="flex flex-nowrap md:flex-wrap overflow-x-auto pb-4 md:pb-0 justify-start md:justify-center gap-3 mb-4 snap-x">
-                {['18g Protein', '~260 kcal', 'ZERO Preservatives', 'No Artificial Additives'].map((stat) => (
-                  <div key={stat} className="snap-center shrink-0 bg-muted px-5 py-2.5 rounded-full text-sm font-bold text-foreground whitespace-nowrap">
+                  <div key={stat} className="snap-center shrink-0 bg-muted px-5 py-2.5 rounded-full text-base font-bold text-foreground whitespace-nowrap">
                     {stat}
                   </div>
                 ))}
@@ -347,11 +346,11 @@ export default function Home() {
                   <thead>
                     <tr className="border-b border-border bg-muted/50">
                       <th className="p-4 md:p-6 font-bold text-muted-foreground w-1/3"></th>
-                      <th className="p-4 md:p-6 font-bold text-foreground text-lg w-1/3">Plain Paneer</th>
-                      <th className="p-4 md:p-6 font-bold text-primary text-lg w-1/3">PANEVO</th>
+                      <th className="p-4 md:p-6 font-bold text-foreground text-xl w-1/3">Plain Paneer</th>
+                      <th className="p-4 md:p-6 font-bold text-primary text-xl w-1/3">PANEVO</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-border text-sm md:text-base">
+                  <tbody className="divide-y divide-border text-base md:text-lg">
                     <tr>
                       <td className="p-4 md:p-6 font-medium text-foreground">Prep Time</td>
                       <td className="p-4 md:p-6 text-muted-foreground">30+ min marination</td>
@@ -391,8 +390,8 @@ export default function Home() {
         <div className="container px-4">
           <Reveal>
             <div className="text-center mb-12 max-w-3xl mx-auto">
-              <h2 className="text-4xl mb-6 text-foreground">What People Are Saying</h2>
-              <p className="text-xl md:text-2xl text-primary italic leading-tight" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.01em" }}>
+              <h2 className="text-5xl md:text-6xl mb-6 text-foreground">What People Are Saying</h2>
+              <p className="text-2xl md:text-3xl lg:text-4xl text-primary italic leading-tight" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.01em" }}>
                 "MORE THAN 75% of first-time tasters committed to buying weekly or daily."
               </p>
               <p className="text-xs text-muted-foreground mt-3 uppercase tracking-wider">Source: Sampling Event, Chitkara University</p>
@@ -414,8 +413,8 @@ export default function Home() {
         <div className="container px-4 max-w-3xl">
           <Reveal>
             <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl mb-3 text-foreground">Quick Questions, Real Answers.</h2>
-              <p className="text-muted-foreground">
+              <h2 className="text-4xl md:text-5xl mb-3 text-foreground">Quick Questions, Real Answers.</h2>
+              <p className="text-lg text-muted-foreground">
                 Everything you'd ask before opening the pack.
               </p>
             </div>
@@ -424,10 +423,10 @@ export default function Home() {
             <Accordion type="single" collapsible className="bg-card border border-border divide-y divide-border" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
               {HOME_FAQS.map((faq, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="border-b-0 px-5">
-                  <AccordionTrigger className="text-left text-base md:text-lg font-bold text-foreground py-5 hover:no-underline">
+                  <AccordionTrigger className="text-left text-lg md:text-xl font-bold text-foreground py-5 hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-base leading-relaxed pb-5 pr-6">
+                  <AccordionContent className="text-muted-foreground text-lg leading-relaxed pb-5 pr-6">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -459,13 +458,13 @@ export default function Home() {
         </div>
         <div className="container px-4">
           <Reveal>
-            <h2 className="text-4xl md:text-5xl mb-6">Ready to Cook Differently?</h2>
+            <h2 className="text-5xl md:text-6xl mb-6">Ready to Cook Differently?</h2>
           </Reveal>
           <Reveal delay={80}>
-            <p className="text-xl opacity-90 mb-10 max-w-2xl mx-auto">Find PANEVO at your nearest store or order for delivery in minutes.</p>
+            <p className="text-2xl opacity-90 mb-10 max-w-2xl mx-auto">Find PANEVO at your nearest store or order for delivery in minutes.</p>
           </Reveal>
           <Reveal delay={120}>
-            <div className="max-w-md mx-auto mb-10 text-left">
+            <div className="max-w-xl mx-auto mb-10 text-left">
               <PincodeChecker />
             </div>
           </Reveal>
