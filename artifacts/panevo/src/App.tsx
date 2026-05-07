@@ -11,6 +11,7 @@ import { StickyBottomBar } from "@/components/layout/StickyBottomBar";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SplashScreen } from "@/components/SplashScreen";
+import { NewsletterPopup } from "@/components/NewsletterPopup";
 
 // Pages
 import Home from "@/pages/Home";
@@ -83,6 +84,7 @@ function App() {
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           {showSplash && <SplashScreen onDone={handleSplashDone} />}
+          {!showSplash && <NewsletterPopup />}
           <Router />
         </WouterRouter>
         <Toaster />
