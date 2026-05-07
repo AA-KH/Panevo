@@ -32,7 +32,7 @@ export const faqs = {
     },
     {
       question: "Is there any added colour or preservative?",
-      answer: "Absolutely zero. The red tint in our Red Chilli Flakes flavour comes entirely from the natural chilli infused into the milk. We do not use any artificial colours, flavours, or preservatives."
+      answer: "Absolutely zero. We do not use any artificial colours, flavours, or preservatives."
     },
     {
       question: "Are there allergens?",
@@ -62,7 +62,7 @@ export const faqs = {
     },
     {
       question: "Should I soak it in warm water before cooking?",
-      answer: "No. Our paneer is already exceptionally soft. Soaking it will dilute the infused flavours and ruin the texture."
+      answer: "Not needed. Our paneer is already exceptionally soft. Soaking it can dilute the flavours on the surface and might ruin the texture."
     }
   ],
   subscription: [
@@ -94,7 +94,7 @@ export const faqs = {
     },
     {
       question: "Are you available outside Chandigarh Tri-City?",
-      answer: "Not yet. We are perfecting our cold-chain supply in these regions first. However, we are actively evaluating our next cities. Submit your city request on this page."
+      answer: "Not yet. We are perfecting our cold-chain supply in these regions first. However, we are actively evaluating our next cities. Submit your city request & we will notify you as soon as the PANEVO magic is in your city."
     },
     {
       question: "Why is the texture different from local dairy paneer?",

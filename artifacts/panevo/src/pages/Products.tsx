@@ -33,23 +33,23 @@ const TICKER_SLIDES: {
     label: "Our Flavours",
     lines: ["Three Flavours.", "One Rule.", "Zero Marination."],
     sub: "Pick your PANEVO. Cook it in under 10 minutes. Eat better every day.",
-    color: "#F97316",
-    rgba: "249, 115, 22",
+    color: "#C2410C",
+    rgba: "194, 65, 12",
   },
   {
     label: "Nutrition First",
     lines: ["The Protein You've", "Been Underestimating."],
     sub: "Paneer has always been India's best-kept protein secret. PANEVO makes it impossible to ignore.",
-    color: "#16a34a",
-    rgba: "22, 163, 74",
+    color: "#15803D",
+    rgba: "21, 128, 61",
   },
   {
     label: "Clean Label",
     lines: ["If you can't pronounce it,", "it's not in PANEVO."],
     sub: "That's it. The whole ingredient list.",
     chips: ["Milk", "Salt", "Spice", "Citric Acid"],
-    color: "#6366f1",
-    rgba: "99, 102, 241",
+    color: "#4338CA",
+    rgba: "67, 56, 202",
   },
 ];
 
@@ -423,7 +423,7 @@ export default function Products() {
       {/* SHARED NUTRITION STRIP */}
       <section className="bg-secondary text-secondary-foreground py-6 md:py-8 border-y border-border/20">
         <div className="container px-4">
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-center font-bold uppercase tracking-wider text-sm">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-center font-bold uppercase tracking-wider text-base md:text-lg">
             <span>✓ No Preservatives</span>
             <span>✓ No Artificial Colours</span>
             <span>✓ No Artificial Flavours</span>

@@ -218,7 +218,7 @@ export default function Home() {
               <div className="flex flex-col items-center text-center">
                 <Clock className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
                 <h3 className="text-xl mb-4">No More Marinating</h3>
-                <p className="opacity-90 leading-relaxed">Every paneer recipe used to start the same way — marination, seasoning, waiting. We removed 30 minutes from your kitchen routine.</p>
+                <p className="opacity-90 leading-relaxed">30 minutes of marination, seasoning & waiting removed from your kitchen routine.</p>
               </div>
             </Reveal>
             <Reveal delay={160}>
@@ -232,7 +232,7 @@ export default function Home() {
               <div className="flex flex-col items-center text-center">
                 <Sparkles className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
                 <h3 className="text-xl mb-4">NDRI Incubated</h3>
-                <p className="opacity-90 leading-relaxed">Rigorously perfected at the National Dairy Research Institute. PANEVO is where cutting-edge dairy science meets artisan quality.</p>
+                <p className="opacity-90 leading-relaxed">Perfected at the National Dairy Research Institute. PANEVO is where cutting-edge dairy science meets artisan quality.</p>
               </div>
             </Reveal>
           </div>
@@ -330,7 +330,7 @@ export default function Home() {
             </Reveal>
             <Reveal delay={140}>
               <div className="flex flex-nowrap md:flex-wrap overflow-x-auto pb-4 md:pb-0 justify-start md:justify-center gap-3 mb-4 snap-x">
-                {['18g Protein', '~260 kcal', 'Zero Preservatives', 'No Artificial Additives'].map((stat) => (
+                {['18g Protein', '~260 kcal', 'ZERO Preservatives', 'No Artificial Additives'].map((stat) => (
                   <div key={stat} className="snap-center shrink-0 bg-muted px-5 py-2.5 rounded-full text-sm font-bold text-foreground whitespace-nowrap">
                     {stat}
                   </div>
@@ -393,7 +393,7 @@ export default function Home() {
             <div className="text-center mb-12 max-w-3xl mx-auto">
               <h2 className="text-4xl mb-6 text-foreground">What People Are Saying</h2>
               <p className="text-xl md:text-2xl text-primary italic leading-tight" style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.01em" }}>
-                "76% of first-time tasters committed to buying weekly or daily."
+                "MORE THAN 75% of first-time tasters committed to buying weekly or daily."
               </p>
               <p className="text-xs text-muted-foreground mt-3 uppercase tracking-wider">Source: Sampling Event, Chitkara University</p>
             </div>
@@ -405,20 +405,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DELIVERY CHECKER */}
-      <section className="bg-background py-20 border-t border-border/50">
-        <div className="container px-4 max-w-3xl">
-          <Reveal>
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl mb-3 text-foreground">Find PANEVO Near You</h2>
-              <p className="text-lg text-muted-foreground">Two taps. Real-time delivery check.</p>
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <PincodeChecker />
-          </Reveal>
-        </div>
-      </section>
+
 
 
 
@@ -477,11 +464,13 @@ export default function Home() {
           <Reveal delay={80}>
             <p className="text-xl opacity-90 mb-10 max-w-2xl mx-auto">Find PANEVO at your nearest store or order for delivery in minutes.</p>
           </Reveal>
+          <Reveal delay={120}>
+            <div className="max-w-md mx-auto mb-10 text-left">
+              <PincodeChecker />
+            </div>
+          </Reveal>
           <Reveal delay={160}>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/find-us" className="cta-primary bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center gap-2 notch-br outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-secondary">
-                Find Near You <ArrowRight className="w-5 h-5 cta-arrow" />
-              </Link>
               <Link href="/products" className="bg-transparent border-2 border-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors inline-flex items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-white">
                 Explore All Flavours
               </Link>

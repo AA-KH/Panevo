@@ -10,28 +10,32 @@ import { ChalkCowHead, ChalkHerbs, ChalkMilkSplash, ChalkStarburst } from "@/com
 
 const STORY_SLIDES = [
   {
+    label: "Origin",
     heading: "Tradition Transformed.",
     sub: "Paneer. India's most-loved protein — reimagined from the ground up for the modern kitchen.",
-    color: "#F97316",
-    rgba: "249, 115, 22",
+    color: "#b45309",
+    rgba: "180, 83, 9",
   },
   {
+    label: "Incubation",
     heading: "NDRI Incubated.",
     sub: "We are incubated at ICAR-NDRI — the most trusted, most premier dairy-based research institute in India.",
-    color: "#16a34a",
-    rgba: "22, 163, 74",
+    color: "#0e7490",
+    rgba: "14, 116, 144",
   },
   {
+    label: "Validation",
     heading: "Process Validated.",
     sub: "Assuring you the best quality in each delivery, each bite — every single time, without exception.",
-    color: "#6366f1",
-    rgba: "99, 102, 241",
+    color: "#c026d3",
+    rgba: "192, 38, 211",
   },
   {
+    label: "Quality",
     heading: "Quality Assured.",
     sub: "From the first drop of milk to the seal on your pack — tested, certified, held to the highest dairy standards.",
-    color: "#ec4899",
-    rgba: "236, 72, 153",
+    color: "#0284c7",
+    rgba: "2, 132, 199",
   },
 ];
 
@@ -264,7 +268,7 @@ export default function OurStory() {
                 className="w-1.5 h-1.5 rounded-full bg-current"
                 style={{ animation: "pulse 2s infinite" }}
               />
-              {String(storyIndex + 1).padStart(2, "0")} / {String(STORY_SLIDES.length).padStart(2, "0")}
+              {STORY_SLIDES[storyIndex].label}
             </motion.span>
           </AnimatePresence>
 
@@ -475,13 +479,13 @@ export default function OurStory() {
             {[
               {
                 name: "Harviinder",
-                title: "Co-Founder",
-                bio: "Obsessed with food systems and consumer behavior. Saw the gap in the dairy aisle and decided to build the bridge.",
+                title: "Business & Partnerships",
+                bio: "Drives PANEVO's business strategy, partnerships, and institutional relationships — turning bold ideas into operational reality.",
               },
               {
-                name: "Shwetta",
-                title: "Co-Founder",
-                bio: "The operational force. Turns bold ideas into scalable, consistent products that taste the same in every single pack.",
+                name: "Shweta",
+                title: "Branding & Marketing",
+                bio: "The creative force behind PANEVO's identity, crafting the brand's voice, visual world, and consumer story — making sure every pack, post, and product leaves a lasting impression.",
               },
               {
                 name: "Palvit",
