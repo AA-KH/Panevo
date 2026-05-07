@@ -47,7 +47,7 @@ export function TrustStrip() {
         <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-2 list-none p-0 m-0">
           <StatItem icon={Sparkles} staticStat="NDRI Incubated" label="Made with science and love" delay={0} />
           <StatItem icon={Sparkles} staticStat="ZERO" label="Preservatives, ever" delay={50} />
-          <StatItem icon={Heart} staticStat=">75%" label="First-time tasters reorder" delay={100} />
+          <StatItem icon={Heart} staticStat="MORE THAN 75%" label="First-time tasters reorder" delay={100} />
           <StatItem icon={Truck} numericValue={10} suffix=" min" label="Q-Commerce delivery" delay={150} />
         </ul>
       </div>
