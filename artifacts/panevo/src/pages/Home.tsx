@@ -330,6 +330,7 @@ export default function Home() {
             </Reveal>
             <Reveal delay={140}>
               <div className="flex flex-nowrap md:flex-wrap overflow-x-auto pb-4 md:pb-0 justify-start md:justify-center gap-3 mb-4 snap-x">
+                {['18g Protein', '~260 kcal', 'ZERO Preservatives', 'No Artificial Additives'].map((stat) => (
                   <div key={stat} className="snap-center shrink-0 bg-muted px-5 py-2.5 rounded-full text-base font-bold text-foreground whitespace-nowrap">
                     {stat}
                   </div>
