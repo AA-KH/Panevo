@@ -1,9 +1,9 @@
 import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
-import imgBlackPepperHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.35_upscayl_4x_upscayl-stand_1778870855059.png";
-import imgRedChilliHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.37_(2)_upscayl_4x_upscayl-s_1778870896417.png";
-import imgOreganoHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.46_upscayl_4x_upscayl-stand_1778870896417.png";
+import imgBlackPepperHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.35_upscayl_4x_upscayl-stand_1778870855059_opt.webp";
+import imgRedChilliHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.37_(2)_upscayl_4x_upscayl-s_1778870896417_opt.webp";
+import imgOreganoHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.46_upscayl_4x_upscayl-stand_1778870896417_opt.webp";
 
 import { QCOM_LINKS } from "@/config/brand";
 import { products } from "@/data/products";
