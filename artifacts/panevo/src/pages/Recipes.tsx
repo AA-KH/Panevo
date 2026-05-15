@@ -7,6 +7,15 @@ import { track } from "@/lib/analytics";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { faqs } from "@/data/faqs";
 import { Reveal } from "@/components/motion/Reveal";
+import imgBlackPepper from "@assets/WhatsApp_Image_2026-05-01_at_16.24.34_upscayl_4x_upscayl-stand_1778870855059.png";
+import imgRedChilli from "@assets/WhatsApp_Image_2026-05-01_at_16.24.37_(2)_upscayl_4x_upscayl-s_1778870896417.png";
+import imgOregano from "@assets/WhatsApp_Image_2026-05-01_at_16.24.46_upscayl_4x_upscayl-stand_1778870896417.png";
+
+const RECIPE_IMAGES: Record<string, string> = {
+  "Black Pepper": imgBlackPepper,
+  "Red Chilli Flakes": imgRedChilli,
+  "Oregano": imgOregano,
+};
 
 export default function Recipes() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -126,10 +135,13 @@ export default function Recipes() {
                   }}
                 >
                   <div className="w-full sm:w-2/5 aspect-square sm:aspect-auto relative overflow-hidden bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/20">
-                    <div className="absolute inset-0 group-hover:scale-[1.04] transition-transform duration-500 flex items-center justify-center">
-                      <span className="text-foreground/40 font-bold uppercase tracking-widest text-3xl" style={{ fontFamily: "var(--app-font-display)" }}>{recipe.flavour.split(" ")[0]}</span>
-                    </div>
-                    <div className="absolute top-4 left-4 bg-background/90 backdrop-blur text-foreground px-2 py-1 text-xs font-bold flex items-center gap-1" style={{ borderRadius: 4 }}>
+                    <img 
+                      src={RECIPE_IMAGES[recipe.flavour]} 
+                      alt={recipe.title}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute top-4 left-4 bg-background/90 backdrop-blur text-foreground px-2 py-1 text-xs font-bold flex items-center gap-1 z-10" style={{ borderRadius: 4 }}>
                       <Clock className="w-3 h-3" /> {recipe.time}
                     </div>
                   </div>

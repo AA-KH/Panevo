@@ -4,6 +4,15 @@ import { recipes } from "@/data/recipes";
 import { ArrowLeft, Clock, Flame, Info } from "lucide-react";
 import NotFound from "./not-found";
 import { Reveal } from "@/components/motion/Reveal";
+import imgBlackPepper from "@assets/WhatsApp_Image_2026-05-01_at_16.24.34_upscayl_4x_upscayl-stand_1778870855059.png";
+import imgRedChilli from "@assets/WhatsApp_Image_2026-05-01_at_16.24.37_(2)_upscayl_4x_upscayl-s_1778870896417.png";
+import imgOregano from "@assets/WhatsApp_Image_2026-05-01_at_16.24.46_upscayl_4x_upscayl-stand_1778870896417.png";
+
+const RECIPE_IMAGES: Record<string, string> = {
+  "Black Pepper": imgBlackPepper,
+  "Red Chilli Flakes": imgRedChilli,
+  "Oregano": imgOregano,
+};
 
 export default function RecipeDetail() {
   const [, params] = useRoute("/recipes/:slug");
@@ -55,9 +64,14 @@ export default function RecipeDetail() {
           {/* Left Column - Image & CTA */}
           <Reveal className="w-full lg:w-5/12 space-y-8">
             <div className="aspect-[4/5] bg-muted relative overflow-hidden border border-border" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
-              <div className="absolute inset-0 bg-secondary/5 flex flex-col items-center justify-center p-6 text-center">
-                <span className="text-muted-foreground font-bold uppercase tracking-widest mb-2">Recipe Photo</span>
-                <span className="text-sm font-medium text-foreground">{recipe.title}</span>
+              <img 
+                src={RECIPE_IMAGES[recipe.flavour]} 
+                alt={recipe.title}
+                className="absolute inset-0 w-full h-full object-cover" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 right-6 text-white text-center">
+                <span className="text-sm font-medium opacity-90 tracking-wide uppercase drop-shadow-md">{recipe.flavour} base</span>
               </div>
             </div>
 
