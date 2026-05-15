@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 import { track } from "@/lib/analytics";
+import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
 
 const STORAGE_KEY = "panevo_newsletter_dismissed";
 
@@ -87,14 +88,14 @@ export function NewsletterPopup() {
                   {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/70 via-transparent to-transparent" />
 
-                  {/* Badge */}
-                  <div className="absolute top-5 left-5">
-                    <span
-                      className="inline-block text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full"
-                      style={{ background: "rgba(255,255,255,0.15)", color: "#fff", border: "1px solid rgba(255,255,255,0.25)" }}
-                    >
-                      India's First
-                    </span>
+                  {/* Logo mark top-left */}
+                  <div className="absolute top-4 left-4">
+                    <img
+                      src={panevoCircle}
+                      alt="PANEVO"
+                      draggable={false}
+                      className="w-10 h-10 object-contain rounded-full shadow-md"
+                    />
                   </div>
 
                   {/* Bottom text on image */}

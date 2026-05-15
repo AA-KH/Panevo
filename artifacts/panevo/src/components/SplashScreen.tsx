@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import panevoStacked from "@assets/chk_04_square_stacked_terracotta_1778837617882.png";
 
 interface SplashScreenProps {
   onDone: () => void;
@@ -91,48 +92,24 @@ export function SplashScreen({ onDone }: SplashScreenProps) {
             </svg>
           </motion.div>
 
-          {/* PANEVO wordmark */}
+          {/* PANEVO stacked logo */}
           <motion.div
             className="absolute"
-            style={{ top: "calc(50% + 96px)" }}
+            style={{ top: "calc(50% + 80px)" }}
             initial={{ opacity: 0, y: 6 }}
             animate={
               isDrift
                 ? { opacity: 0, y: 18, transition: { duration: 0.4, ease: "easeIn" } }
-                : { opacity: phase === "enter" ? 0 : 0.85, y: 0,
+                : { opacity: phase === "enter" ? 0 : 1, y: 0,
                     transition: { duration: 0.55, delay: 0.18, ease: [0.22, 1, 0.36, 1] } }
             }
           >
-            <span
-              className="text-3xl sm:text-4xl select-none"
-              style={{
-                fontFamily: "var(--app-font-display)",
-                letterSpacing: "0.22em",
-                color: "hsl(17 89% 35%)",
-              }}
-            >
-              PANEVO
-            </span>
-          </motion.div>
-
-          {/* Tagline beneath wordmark */}
-          <motion.div
-            className="absolute"
-            style={{ top: "calc(50% + 148px)" }}
-            initial={{ opacity: 0 }}
-            animate={
-              isDrift
-                ? { opacity: 0, transition: { duration: 0.3 } }
-                : { opacity: phase === "enter" ? 0 : 0.5,
-                    transition: { duration: 0.5, delay: 0.32, ease: "easeOut" } }
-            }
-          >
-            <span
-              className="text-xs sm:text-sm select-none tracking-[0.25em] uppercase"
-              style={{ color: "hsl(17 50% 45%)", fontFamily: "var(--app-font-display)" }}
-            >
-              Made in India
-            </span>
+            <img
+              src={panevoStacked}
+              alt="PANEVO"
+              draggable={false}
+              className="w-28 h-28 sm:w-32 sm:h-32 object-cover rounded-xl select-none shadow-lg"
+            />
           </motion.div>
         </motion.div>
       )}

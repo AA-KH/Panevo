@@ -4,6 +4,8 @@ import { track } from "@/lib/analytics";
 import { Shatkona } from "../sections/Shatkona";
 import { NewsletterSignup } from "../sections/NewsletterSignup";
 import { FooterIllustration } from "./FooterIllustration";
+import panevoStacked from "@assets/chk_04_square_stacked_terracotta_1778837617882.png";
+import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
 
 function InstagramIcon({ className = "" }: { className?: string }) {
   return (
@@ -53,8 +55,13 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 mb-8">
           <div className="md:col-span-3">
-             <Link href="/" className="flex items-center gap-2 mb-4 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
-              <span className="text-3xl tracking-tight uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>{BRAND.name}</span>
+            <Link href="/" className="inline-block mb-5 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg" aria-label={`${BRAND.name} — Home`}>
+              <img
+                src={panevoStacked}
+                alt="PANEVO"
+                draggable={false}
+                className="w-24 h-24 object-cover rounded-lg"
+              />
             </Link>
             <p className="text-sm opacity-80 mb-4">Made in India ✦ Soon to be delivered in 10 minutes</p>
             <div className="flex gap-4">
@@ -114,8 +121,8 @@ export function Footer() {
 
         <div className="border-t border-white/20 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4 pb-8">
           <p className="text-xs opacity-60">© 2026 {BRAND.name}. All rights reserved. Made in India.</p>
-          <div className="opacity-40" aria-hidden="true">
-             <Shatkona className="w-8 h-8" />
+          <div aria-hidden="true">
+            <img src={panevoCircle} alt="" draggable={false} className="w-8 h-8 object-contain rounded-full opacity-50" />
           </div>
         </div>
       </div>

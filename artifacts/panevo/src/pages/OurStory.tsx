@@ -1,5 +1,6 @@
 import { SEO } from "@/components/SEO";
 import { Shatkona } from "@/components/sections/Shatkona";
+import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
 import { roadmap } from "@/data/roadmap";
 import { useState, useEffect, useRef } from "react";
 import { track } from "@/lib/analytics";
@@ -323,9 +324,14 @@ export default function OurStory() {
           className="container px-4 relative z-10 flex flex-col items-center justify-center text-center"
           style={{ minHeight: "85vh", paddingTop: "7rem", paddingBottom: "5rem" }}
         >
-          {/* Shatkona logo */}
+          {/* PANEVO circle logo */}
           <Reveal>
-            <Shatkona className="w-14 h-14 mx-auto mb-8 text-foreground/80" />
+            <img
+              src={panevoCircle}
+              alt="PANEVO"
+              draggable={false}
+              className="w-16 h-16 mx-auto mb-8 object-contain rounded-full"
+            />
           </Reveal>
 
 

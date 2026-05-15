@@ -1,6 +1,7 @@
 import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import { Shatkona } from "@/components/sections/Shatkona";
+import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
 import { QCOM_LINKS } from "@/config/brand";
 import { products } from "@/data/products";
 import { faqs } from "@/data/faqs";
@@ -111,12 +112,17 @@ export default function Home() {
 
         <div className="container relative z-10 px-4 flex flex-col items-center text-center">
           <motion.div
-            initial={shouldReduceMotion ? { opacity: 0.85, y: 0 } : { opacity: 0, y: 4 }}
-            animate={{ opacity: 0.85, y: 0 }}
+            initial={shouldReduceMotion ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 4 }}
+            animate={{ opacity: 0.9, y: 0 }}
             transition={{ duration: 0.4, delay: 0, ease: "easeOut" }}
             className="mb-6"
           >
-            <Shatkona className="w-10 h-10 text-white" />
+            <img
+              src={panevoCircle}
+              alt="PANEVO"
+              draggable={false}
+              className="w-14 h-14 object-contain rounded-full"
+            />
           </motion.div>
 
           <motion.h1

@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Shatkona } from "@/components/sections/Shatkona";
 import { SEO } from "@/components/SEO";
+import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
 
 export default function NotFound() {
   return (
@@ -13,7 +14,7 @@ export default function NotFound() {
       <section className="min-h-[70vh] flex items-center justify-center bg-background py-20 px-4">
         <div className="max-w-xl mx-auto text-center">
           <div className="flex justify-center mb-6">
-            <Shatkona className="w-12 h-12 opacity-70" />
+            <img src={panevoCircle} alt="PANEVO" draggable={false} className="w-16 h-16 object-contain rounded-full" />
           </div>
           <p
             className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4"

@@ -3,35 +3,16 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { QCOM_LINKS, BRAND } from "@/config/brand";
+import { BRAND } from "@/config/brand";
 import { track } from "@/lib/analytics";
-import { QComIcon, QComLabel } from "@/components/sections/QComIcon";
 import { WaitlistPopup } from "@/components/WaitlistPopup";
+import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
 
 export function Navbar() {
   const [location] = useLocation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [navState, setNavState] = useState<"top" | "visible" | "hidden">("top");
   const lastScrollY = useRef(0);
-  const dropdownWrapRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!isDropdownOpen) return;
-    const onDown = (e: MouseEvent) => {
-      if (dropdownWrapRef.current && !dropdownWrapRef.current.contains(e.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsDropdownOpen(false);
-    };
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [isDropdownOpen]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -48,11 +29,11 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (!isMobileOpen && !isMobileQcomOpen) return;
+    if (!isMobileOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = prev; };
-  }, [isMobileOpen, isMobileQcomOpen]);
+  }, [isMobileOpen]);
 
   useEffect(() => {
     setIsMobileOpen(false);
@@ -65,10 +46,6 @@ export function Navbar() {
     { href: "/our-story", label: "Our Story" },
     { href: "/find-us", label: "Find Us" },
   ];
-
-  const handleQComClick = (platform: string) => {
-    track("qcom_click", { platform, source_page: location, source_element: "navbar" });
-  };
 
   const navTransform =
     navState === "hidden" ? "-translate-y-full" : "translate-y-0";
@@ -86,9 +63,16 @@ export function Navbar() {
             onClick={() => {
               if (location === "/") window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
             }}
-            className="flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+            className="flex items-center gap-2.5 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
             aria-label={`${BRAND.name} — Home`}
           >
+            <img
+              src={panevoCircle}
+              alt=""
+              aria-hidden="true"
+              draggable={false}
+              className="h-9 w-9 object-contain rounded-full flex-shrink-0"
+            />
             <span
               className="text-[1.65rem] md:text-[1.85rem] text-foreground"
               style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.1em" }}
