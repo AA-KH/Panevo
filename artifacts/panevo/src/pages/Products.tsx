@@ -523,7 +523,7 @@ export default function Products() {
                     </div>
                     <div className="flex flex-col items-end gap-1.5">
                       <p className="text-xs text-muted-foreground">Storage: 1–4°C</p>
-                      <p className="text-xs text-muted-foreground">Use within 5 days</p>
+                      <p className="text-xs text-muted-foreground">Use within 5-7 days</p>
                       <button
                         onClick={() => setNutritionModal({ id: product.id, name: product.name })}
                         className="mt-1 text-xs font-bold text-primary hover:underline flex items-center gap-1 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"

@@ -536,12 +536,6 @@ export default function OurStory() {
           <Reveal>
             <div className="flex flex-col items-center gap-8 mb-12">
               <Shatkona className="w-32 h-32 text-primary" />
-              <img
-                src={panevoStoryLogo}
-                alt="PANEVO"
-                draggable={false}
-                className="h-20 w-auto object-contain"
-              />
             </div>
           </Reveal>
           <Reveal delay={120}>
@@ -561,12 +555,12 @@ export default function OurStory() {
               <p className="font-black text-xl md:text-2xl tracking-widest text-primary uppercase">
                 PANEER + FLAVOR + HEAT = READY TO EAT.
               </p>
-              <div className="pt-6 border-t border-border/30 text-foreground/90">
-                <p className="mb-4">
+              <div className="mt-12 bg-background border border-border/50 rounded-2xl p-8 md:p-10 shadow-lg text-foreground transform transition-transform hover:scale-[1.02]">
+                <p className="mb-6 text-xl md:text-2xl font-bold leading-relaxed">
                   The two triangles together (△ ▽) also form the Shatkona in Indian sacred geometry - called the Anahata (heart chakra) symbol.
                 </p>
-                <p>
-                  It represents the union of opposites - earth and sky, tradition and modernity, raw and ready. Tradition transformed. India's Modern Protein.
+                <p className="text-lg md:text-xl font-medium opacity-90 leading-relaxed">
+                  It represents the union of opposites - earth and sky, tradition and modernity, raw and ready. <span className="text-primary font-bold">Tradition transformed. India's Modern Protein.</span>
                 </p>
               </div>
             </div>
