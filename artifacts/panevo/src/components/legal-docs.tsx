@@ -48,7 +48,7 @@ export function PrivacyPolicy() {
         <li><strong>Account management:</strong> To create and manage your PANEVO account; to remember your delivery preferences and subscription settings.</li>
         <li><strong>Customer support:</strong> To respond to your queries, complaints, or returns requests promptly.</li>
         <li><strong>Product quality communication:</strong> To share batch Certificate of Analysis (COA) information linked to your QR scan; to notify you of any product recalls or quality alerts.</li>
-        <li><strong>Marketing & promotions:</strong> To send promotional offers, new product announcements, recipe ideas, and brand updates — only if you have opted in. You may opt out at any time.</li>
+        <li><strong>Marketing & promotions:</strong> To send promotional offers, new product announcements, recipe ideas, and brand updates - only if you have opted in. You may opt out at any time.</li>
         <li><strong>WhatsApp communications:</strong> If you join our WhatsApp community or broadcast list, to send recipe content, product updates, and announcements.</li>
         <li><strong>Platform improvement:</strong> To analyse usage patterns and improve our website, app, and checkout experience.</li>
         <li><strong>Legal compliance:</strong> To comply with applicable Indian laws, FSSAI regulations, GST requirements, and court orders.</li>
@@ -120,7 +120,7 @@ export function PrivacyPolicy() {
       <p>In accordance with the Information Technology Act 2000, the IT (Intermediary Guidelines and Digital Media Ethics Code) Rules 2021, and the Digital Personal Data Protection Act 2023, the details of our Grievance Officer are:</p>
       
       <div className="bg-muted p-6 rounded-xl border border-border mt-4">
-        <h4 className="mt-0">Grievance Officer — Shatkona Ventures Private Limited (PANEVO)</h4>
+        <h4 className="mt-0">Grievance Officer - Shatkona Ventures Private Limited (PANEVO)</h4>
         <p className="mb-0">
           <strong>Name:</strong> Harvinder Singh<br/>
           <strong>Designation:</strong> Co-Founder & Designated Grievance Officer<br/>
@@ -203,7 +203,7 @@ export function TermsOfUse() {
         <li><strong>Price changes:</strong> We will notify you at least 7 days before any price change. Continued subscription after notification constitutes acceptance of the new price.</li>
       </ul>
 
-      <h3>7. Perishable Goods — Important Notice</h3>
+      <h3>7. Perishable Goods - Important Notice</h3>
       <div className="bg-primary/10 border border-primary text-primary p-4 rounded-xl mt-4">
         <strong>IMPORTANT: Perishable Product</strong><br/>
         PANEVO sells fresh, perishable dairy products. These products must be refrigerated at 2–8°C immediately upon receipt. Shelf life is printed on each pack. Do not consume after the 'Best Before' date. PANEVO is not responsible for product spoilage resulting from improper storage by the customer after delivery.
@@ -215,7 +215,7 @@ export function TermsOfUse() {
       </ul>
 
       <h3>8. Intellectual Property</h3>
-      <p>All content on our Platform — including the PANEVO name and logo, product names, brand colours, photography, design, text, recipes, and software — is the exclusive intellectual property of Shatkona Ventures Private Limited or licensed to us.</p>
+      <p>All content on our Platform - including the PANEVO name and logo, product names, brand colours, photography, design, text, recipes, and software - is the exclusive intellectual property of Shatkona Ventures Private Limited or licensed to us.</p>
       <ul>
         <li><strong>Permitted use:</strong> Personal, non-commercial use only.</li>
         <li><strong>Prohibited use:</strong> No reproduction, distribution, or commercialisation without our prior written consent.</li>
@@ -258,7 +258,7 @@ export function TermsOfUse() {
 
       <h3>15. Contact Us</h3>
       <div className="bg-muted p-6 rounded-xl border border-border mt-4">
-        <h4 className="mt-0">Contact — Shatkona Ventures Private Limited (PANEVO)</h4>
+        <h4 className="mt-0">Contact - Shatkona Ventures Private Limited (PANEVO)</h4>
         <p className="mb-0">
           <strong>Email:</strong> info@panevo.in<br/>
           <strong>Phone / WhatsApp:</strong> +91 87795 67496<br/>
@@ -283,11 +283,11 @@ export function RefundPolicy() {
       <p>You are eligible for a full refund or replacement if:</p>
       <ul>
         <li><strong>Damaged packaging:</strong> The product pack arrives visibly damaged, torn, or compromised such that the integrity of the product may be affected.</li>
-        <li><strong>Product spoilage on delivery:</strong> The product appears spoiled, has an unusual odour, or is not in edible condition at the time of delivery — not due to improper storage on your part after delivery.</li>
+        <li><strong>Product spoilage on delivery:</strong> The product appears spoiled, has an unusual odour, or is not in edible condition at the time of delivery - not due to improper storage on your part after delivery.</li>
         <li><strong>Wrong product delivered:</strong> You received a different flavour or SKU than what you ordered.</li>
         <li><strong>Missing items:</strong> One or more items from your confirmed Order were not delivered.</li>
         <li><strong>Significantly short quantity:</strong> The product quantity is materially less than what is stated on the pack.</li>
-        <li><strong>Quality defect:</strong> The product does not meet the quality description on the packaging — for example, the flavouring is absent, the texture is incorrect, or the product fails a basic quality test.</li>
+        <li><strong>Quality defect:</strong> The product does not meet the quality description on the packaging - for example, the flavouring is absent, the texture is incorrect, or the product fails a basic quality test.</li>
       </ul>
 
       <h3>3. What Is NOT Covered</h3>
@@ -301,12 +301,12 @@ export function RefundPolicy() {
       </ul>
 
       <div className="bg-primary/10 border border-primary text-primary p-4 rounded-xl mt-4">
-        <strong>Food Safety Note — Why We Cannot Accept Physical Returns</strong><br/>
+        <strong>Food Safety Note - Why We Cannot Accept Physical Returns</strong><br/>
         As a fresh dairy product sold under FSSAI regulations, physical return of PANEVO products is not possible for hygiene and food safety reasons. All refund and replacement decisions will be made based on your written description, supporting photographs and/or video, and our internal quality records for that batch. We do not require you to return the product.
       </div>
 
       <h3>4. How to Raise a Complaint</h3>
-      <h4>Step 1 — Contact us within the reporting window:</h4>
+      <h4>Step 1 - Contact us within the reporting window:</h4>
       <ul>
         <li><strong>Missing / wrong item:</strong> Within 4 hours of delivery.</li>
         <li><strong>Damaged packaging:</strong> Within 4 hours of delivery, with photographs.</li>
@@ -314,13 +314,13 @@ export function RefundPolicy() {
         <li><strong>Quality defect (on opening):</strong> Within 2 hours of opening, with photographs or video.</li>
       </ul>
 
-      <h4>Step 2 — Contact channels:</h4>
+      <h4>Step 2 - Contact channels:</h4>
       <ul>
-        <li><strong>WhatsApp:</strong> +91 87795 67496 (fastest response — 9 AM to 7 PM, Monday to Saturday)</li>
-        <li><strong>Email:</strong> info@panevo.in — include your Order ID, photographs, and description</li>
+        <li><strong>WhatsApp:</strong> +91 87795 67496 (fastest response - 9 AM to 7 PM, Monday to Saturday)</li>
+        <li><strong>Email:</strong> info@panevo.in - include your Order ID, photographs, and description</li>
       </ul>
 
-      <h4>Step 3 — What to include in your complaint:</h4>
+      <h4>Step 3 - What to include in your complaint:</h4>
       <ul>
         <li><strong>Order ID:</strong> Your Order confirmation number</li>
         <li><strong>Issue description:</strong> Clear description of the problem</li>
@@ -366,7 +366,7 @@ export function RefundPolicy() {
       <h3>8. The PANEVO Quality Promise</h3>
       <div className="bg-secondary text-secondary-foreground p-6 rounded-xl mt-4">
         <strong>Quality Promise</strong><br/>
-        Every PANEVO pack carries a QR code linking to its NABL-accredited batch Certificate of Analysis (COA) showing microbial test results — Total Plate Count, Coliform, E. coli, and Salmonella. Our products are manufactured in compliance with FSSAI standards using natural flavouring ingredients. If any pack fails to meet these standards, we will replace it or refund it — no questions asked.
+        Every PANEVO pack carries a QR code linking to its NABL-accredited batch Certificate of Analysis (COA) showing microbial test results - Total Plate Count, Coliform, E. coli, and Salmonella. Our products are manufactured in compliance with FSSAI standards using natural flavouring ingredients. If any pack fails to meet these standards, we will replace it or refund it - no questions asked.
       </div>
 
       <h3>9. Consumer Rights</h3>
@@ -379,7 +379,7 @@ export function RefundPolicy() {
 
       <h3>10. Contact for Complaints</h3>
       <div className="bg-muted p-6 rounded-xl border border-border mt-4">
-        <h4 className="mt-0">Customer Support — PANEVO / Shatkona Ventures Private Limited</h4>
+        <h4 className="mt-0">Customer Support - PANEVO / Shatkona Ventures Private Limited</h4>
         <p className="mb-0">
           <strong>WhatsApp:</strong> +91 87795 67496 (9 AM – 7 PM, Mon–Sat)<br/>
           <strong>Email:</strong> info@panevo.in<br/>

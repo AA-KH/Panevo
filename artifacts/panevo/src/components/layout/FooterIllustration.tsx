@@ -3,7 +3,7 @@
  *
  * Clean, minimal, Google-style line illustration of farm & dairy life.
  * Rendered as inline SVG so it is colour-aware and fully integrated
- * with the footer's green (secondary) background — no raster image slap-on.
+ * with the footer's green (secondary) background - no raster image slap-on.
  *
  * The scene reads left-to-right:
  *   barn silo → rolling hills with a cow → herb sprigs → paneer block → milk jug
@@ -126,10 +126,10 @@ export function FooterIllustration({ className = "", style }: { className?: stri
         <path d="M558 64 L572 52 L616 52 L602 64Z" strokeWidth="1.4" />
         {/* Right face */}
         <path d="M602 64 L616 52 L616 86 L602 98Z" strokeWidth="1.4" />
-        {/* Surface texture — horizontal lines on main face */}
+        {/* Surface texture - horizontal lines on main face */}
         <line x1="558" y1="74" x2="602" y2="74" strokeWidth="0.8" opacity="0.5" />
         <line x1="558" y1="84" x2="602" y2="84" strokeWidth="0.8" opacity="0.5" />
-        {/* Surface texture — vertical lines */}
+        {/* Surface texture - vertical lines */}
         <line x1="576" y1="64" x2="576" y2="98" strokeWidth="0.8" opacity="0.4" />
         <line x1="590" y1="64" x2="590" y2="98" strokeWidth="0.8" opacity="0.4" />
         {/* Cross-hatch on top */}
@@ -157,7 +157,7 @@ export function FooterIllustration({ className = "", style }: { className?: stri
         <path d="M682 52 Q702 46 722 52 Q720 58 702 58 Q684 58 682 52Z" strokeWidth="1.3" />
         {/* Handle */}
         <path d="M720 68 Q742 68 742 80 Q742 90 720 90" strokeWidth="1.4" />
-        {/* Milk inside — slightly lower fill level line */}
+        {/* Milk inside - slightly lower fill level line */}
         <path d="M670 84 Q702 78 732 84" strokeWidth="1" opacity="0.4" />
         {/* Milk splash from top */}
         <path d="M702 46 Q698 36 694 30 Q698 28 700 34" strokeWidth="1" opacity="0.6" />

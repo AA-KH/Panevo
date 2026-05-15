@@ -168,7 +168,7 @@ export function NewsletterPopup() {
                             disabled={submitting}
                             className="w-full bg-primary text-white font-bold text-sm py-3 rounded-lg hover:opacity-90 transition disabled:opacity-50"
                           >
-                            {submitting ? "Joining…" : "Subscribe — it's free"}
+                            {submitting ? "Joining…" : "Subscribe - it's free"}
                           </button>
                         </form>
 

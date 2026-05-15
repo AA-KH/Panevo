@@ -55,7 +55,7 @@ export function PincodeChecker() {
     }
     track("coming_soon_signup", { pincode, email: trimmed, source: "pincode_checker" });
     setResult({ kind: "notify_sent" });
-    toast.success("You're on the list — we'll email when we deliver to your pincode.");
+    toast.success("You're on the list - we'll email when we deliver to your pincode.");
   };
 
   const reset = () => {
@@ -77,7 +77,7 @@ export function PincodeChecker() {
           <h3 className="text-2xl text-foreground">Do We Deliver to You?</h3>
         </div>
         <p className="text-sm text-muted-foreground mb-5">
-          Enter your pincode — we'll show you the fastest way to get PANEVO.
+          Enter your pincode - we'll show you the fastest way to get PANEVO.
         </p>
 
         <AnimatePresence mode="wait" initial={false}>
@@ -136,7 +136,7 @@ export function PincodeChecker() {
                   <Check className="w-3.5 h-3.5" strokeWidth={3} />
                 </div>
                 <div>
-                  <p className="font-bold text-foreground">Yes — we deliver to {result.city}!</p>
+                  <p className="font-bold text-foreground">Yes - we deliver to {result.city}!</p>
                   <p className="text-sm text-muted-foreground mt-1">
                     Soon get PANEVO in ~10 minutes from one of these apps:
                   </p>
@@ -175,7 +175,7 @@ export function PincodeChecker() {
                 <div>
                   <p className="font-bold text-foreground">Not yet in your area.</p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    We're growing fast. Drop your email — you'll be the first to know when we
+                    We're growing fast. Drop your email - you'll be the first to know when we
                     deliver to {pincode}.
                   </p>
                 </div>

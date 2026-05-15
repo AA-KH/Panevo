@@ -33,7 +33,7 @@ export function SplashScreen({ onDone }: SplashScreenProps) {
           exit={{ opacity: 0, transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] } }}
           transition={{ duration: 0.4 }}
         >
-          {/* Subtle warm radial bloom — like sunlight through cream */}
+          {/* Subtle warm radial bloom - like sunlight through cream */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             initial={{ opacity: 0 }}
@@ -45,7 +45,7 @@ export function SplashScreen({ onDone }: SplashScreenProps) {
             }}
           />
 
-          {/* Upward triangle (Fire △) — drifts gently upward */}
+          {/* Upward triangle (Fire △) - drifts gently upward */}
           <motion.div
             className="absolute"
             initial={{ opacity: 0, y: 4, scale: 0.88 }}
@@ -68,7 +68,7 @@ export function SplashScreen({ onDone }: SplashScreenProps) {
             </svg>
           </motion.div>
 
-          {/* Downward triangle (Water ▽) — drifts gently downward */}
+          {/* Downward triangle (Water ▽) - drifts gently downward */}
           <motion.div
             className="absolute"
             initial={{ opacity: 0, y: -4, scale: 0.88 }}

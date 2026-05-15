@@ -17,10 +17,10 @@ export function NewsletterSignup() {
     }
     setState("loading");
     track("waitlist_signup", { email: trimmed, source: "footer_newsletter" });
-    // Simulate request — Phase 2 will wire to MSG91 / Mailchimp endpoint
+    // Simulate request - Phase 2 will wire to MSG91 / Mailchimp endpoint
     await new Promise((r) => setTimeout(r, 600));
     setState("done");
-    toast.success("Welcome aboard — recipes & news coming your way.");
+    toast.success("Welcome aboard - recipes & news coming your way.");
   };
 
   return (

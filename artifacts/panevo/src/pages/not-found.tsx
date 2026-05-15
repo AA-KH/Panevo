@@ -7,8 +7,8 @@ export default function NotFound() {
   return (
     <>
       <SEO
-        title="Page Not Found — PANEVO"
-        description="The page you’re looking for has moved or doesn’t exist. Head back to PANEVO — India’s first pre-flavoured fresh paneer."
+        title="Page Not Found - PANEVO"
+        description="The page you’re looking for has moved or doesn’t exist. Head back to PANEVO - India’s first pre-flavoured fresh paneer."
         robots="noindex, follow"
       />
       <section className="min-h-[70vh] flex items-center justify-center bg-background py-20 px-4">

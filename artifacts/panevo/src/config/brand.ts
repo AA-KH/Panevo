@@ -9,7 +9,7 @@ export const BRAND = {
   whatsapp: "https://wa.me/918975016500?text=Hi%20PANEVO%20team,%20I%20have%20a%20question%20about...",
   instagram: "https://instagram.com/panevoindia",
   placeholders: {
-    fssai: "FSSAI licensed — licence number displayed on pack",
+    fssai: "FSSAI licensed - licence number displayed on pack",
     cin: "Registered as Shatkona Ventures Private Limited",
     gst: "GST details available on request",
     address: "Chandigarh, India"

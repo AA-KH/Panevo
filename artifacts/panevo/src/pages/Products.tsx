@@ -279,8 +279,8 @@ export default function Products() {
   return (
     <div className="w-full">
       <SEO
-        title="PANEVO Flavoured Paneer — Black Pepper, Red Chilli, Oregano | ₹125 for 200g"
-        description="Three bold pre-flavoured paneer variants — Black Pepper, Red Chilli Flakes and Oregano — at ₹125 for 200g. Zero marination, ready to cook in minutes."
+        title="PANEVO Flavoured Paneer - Black Pepper, Red Chilli, Oregano | ₹125 for 200g"
+        description="Three bold pre-flavoured paneer variants - Black Pepper, Red Chilli Flakes and Oregano - at ₹125 for 200g. Zero marination, ready to cook in minutes."
         structuredData={structuredData}
       />
 
@@ -295,12 +295,12 @@ export default function Products() {
         )}
       </AnimatePresence>
 
-      {/* HERO — vibrant animated ticker */}
+      {/* HERO - vibrant animated ticker */}
       <section
         className="relative bg-background text-foreground overflow-hidden"
         style={{ minHeight: "82vh" }}
       >
-        {/* Animated background glow — shifts colour per slide */}
+        {/* Animated background glow - shifts colour per slide */}
         <AnimatePresence>
           <motion.div
             key={`prod-glow-${tickerIndex}`}
@@ -319,7 +319,7 @@ export default function Products() {
           className="container px-4 relative z-10 flex flex-col justify-center"
           style={{ minHeight: "82vh", paddingTop: "9rem", paddingBottom: "6rem" }}
         >
-          {/* Brand logo mark — top right of hero */}
+          {/* Brand logo mark - top right of hero */}
           <div className="absolute top-8 right-4 md:right-8 pointer-events-none" aria-hidden="true">
             <img
               src={panevoWithStar}
@@ -356,7 +356,7 @@ export default function Products() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Heading — fixed-height wrapper prevents layout shift */}
+          {/* Heading - fixed-height wrapper prevents layout shift */}
           <div className="relative h-[9.5rem] sm:h-[14rem] md:h-[19rem] lg:h-[23.5rem] mb-8">
             <AnimatePresence mode="wait">
               <motion.h1
@@ -385,7 +385,7 @@ export default function Products() {
             </AnimatePresence>
           </div>
 
-          {/* Sub text + ingredient chips — fixed min-height reserves space */}
+          {/* Sub text + ingredient chips - fixed min-height reserves space */}
           <div className="min-h-[7rem]">
             <AnimatePresence mode="wait">
               <motion.div
@@ -423,7 +423,7 @@ export default function Products() {
             </AnimatePresence>
           </div>
 
-          {/* Thin progress bar — no dots */}
+          {/* Thin progress bar - no dots */}
           <div className="mt-14 w-56 h-[2px] bg-border rounded-full overflow-hidden">
             <motion.div
               key={`prod-progress-${tickerIndex}`}
@@ -471,7 +471,7 @@ export default function Products() {
                   </div>
                   <img
                     src={PRODUCT_IMAGES[product.id]}
-                    alt={`PANEVO ${product.name} — pre-flavoured fresh paneer`}
+                    alt={`PANEVO ${product.name} - pre-flavoured fresh paneer`}
                     draggable={false}
                     className="w-full h-full object-cover"
                   />
@@ -491,8 +491,8 @@ export default function Products() {
 
                 <Reveal delay={160}>
                   <div className="flex gap-4 mb-6 font-bold text-foreground">
-                    <span className="bg-card px-3 py-1 border border-border tabnums" style={{ borderRadius: 4 }}>200g — ₹125</span>
-                    <span className="bg-card px-3 py-1 border border-border tabnums" style={{ borderRadius: 4 }}>500g — ₹275</span>
+                    <span className="bg-card px-3 py-1 border border-border tabnums" style={{ borderRadius: 4 }}>200g - ₹125</span>
+                    <span className="bg-card px-3 py-1 border border-border tabnums" style={{ borderRadius: 4 }}>500g - ₹275</span>
                   </div>
                 </Reveal>
 
@@ -587,7 +587,7 @@ export default function Products() {
         <div className="container px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">PANEVO's Next Chapter Is Coming.</h2>
           <p className="text-lg opacity-80 mb-16 max-w-2xl mx-auto">
-            We're not stopping at three. Four new flavours are in development — each one bolder than the last.
+            We're not stopping at three. Four new flavours are in development - each one bolder than the last.
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-16">

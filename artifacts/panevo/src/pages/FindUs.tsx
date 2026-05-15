@@ -110,7 +110,7 @@ export default function FindUs() {
   return (
     <div className="w-full">
       <SEO
-        title="Where to Buy PANEVO — Blinkit, Zepto, Instamart, Chandigarh Stores"
+        title="Where to Buy PANEVO - Blinkit, Zepto, Instamart, Chandigarh Stores"
         description="Find PANEVO on Blinkit, Zepto and Swiggy Instamart in Chandigarh Tri-City, plus our growing list of physical retail stores."
         structuredData={structuredData}
       />
@@ -122,7 +122,7 @@ export default function FindUs() {
             <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">Soon In Your Kitchen in 10 Minutes. Or at Your Corner Store.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Soon to be delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart — or find us at your nearest store across Chandigarh Tri-City.</p>
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Soon to be delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart - or find us at your nearest store across Chandigarh Tri-City.</p>
           </Reveal>
         </div>
       </section>
@@ -175,7 +175,7 @@ export default function FindUs() {
               {!import.meta.env.VITE_GOOGLE_MAPS_API_KEY && (
                 <>
                   <MapPin className="w-16 h-16 text-muted-foreground mb-4 opacity-50" />
-                  <p className="text-muted-foreground font-medium max-w-xs">Map preview — interactive map activates with API key.</p>
+                  <p className="text-muted-foreground font-medium max-w-xs">Map preview - interactive map activates with API key.</p>
                 </>
               )}
             </div>

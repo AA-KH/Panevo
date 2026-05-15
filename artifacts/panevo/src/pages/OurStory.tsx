@@ -15,7 +15,7 @@ const STORY_SLIDES = [
     label: "ORIGIN",
     heading: "Tradition",
     headingAccent: "Transformed.",
-    sub: "India's most-loved protein — reimagined from the ground up for the modern kitchen.",
+    sub: "India's most-loved protein - reimagined from the ground up for the modern kitchen.",
     color: "#9A3412",
     colorDark: "#7C2D12",
     rgba: "154, 52, 18",
@@ -29,7 +29,7 @@ const STORY_SLIDES = [
     label: "INCUBATION",
     heading: "NDRI",
     headingAccent: "Incubated.",
-    sub: "Backed by ICAR-NDRI — India's most trusted dairy research institute. Science-first, always.",
+    sub: "Backed by ICAR-NDRI - India's most trusted dairy research institute. Science-first, always.",
     color: "#1E40AF",
     colorDark: "#1E3A8A",
     rgba: "30, 64, 175",
@@ -43,7 +43,7 @@ const STORY_SLIDES = [
     label: "VALIDATION",
     heading: "Process",
     headingAccent: "Validated.",
-    sub: "Every bite tested. Every batch certified. Held to the highest dairy standards — no exceptions.",
+    sub: "Every bite tested. Every batch certified. Held to the highest dairy standards - no exceptions.",
     color: "#6B21A8",
     colorDark: "#581C87",
     rgba: "107, 33, 168",
@@ -57,7 +57,7 @@ const STORY_SLIDES = [
     label: "QUALITY",
     heading: "Quality",
     headingAccent: "Assured.",
-    sub: "From the first drop of milk to the seal on your pack — consistent, clean, certified.",
+    sub: "From the first drop of milk to the seal on your pack - consistent, clean, certified.",
     color: "#166534",
     colorDark: "#14532D",
     rgba: "22, 101, 52",
@@ -248,12 +248,12 @@ export default function OurStory() {
   return (
     <div className="w-full">
       <SEO
-        title="About PANEVO — India's First Pre-Flavoured Paneer Brand"
-        description="The story behind PANEVO — India's first pre-flavoured paneer brand from Shatkona Ventures. How a kitchen frustration became a category-defining product."
+        title="About PANEVO - India's First Pre-Flavoured Paneer Brand"
+        description="The story behind PANEVO - India's first pre-flavoured paneer brand from Shatkona Ventures. How a kitchen frustration became a category-defining product."
         structuredData={structuredData}
       />
 
-      {/* HERO — animated ticker */}
+      {/* HERO - animated ticker */}
       <section className="relative bg-background text-foreground overflow-hidden" style={{ minHeight: "85vh" }}>
 
         {/* Animated background gradient per slide */}
@@ -431,11 +431,11 @@ export default function OurStory() {
 
       {/* BRAND STORY */}
       <section className="bg-background py-20 md:py-32 relative overflow-hidden">
-        {/* Large faint cow head — far right, halfway down */}
+        {/* Large faint cow head - far right, halfway down */}
         <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block" aria-hidden="true">
           <ChalkCowHead className="w-72 h-72 text-foreground opacity-[0.04]" />
         </div>
-        {/* Herb cluster — left side, lower */}
+        {/* Herb cluster - left side, lower */}
         <div className="absolute left-0 bottom-16 pointer-events-none hidden lg:block" aria-hidden="true">
           <ChalkHerbs className="w-32 h-36 text-foreground opacity-[0.05]" />
         </div>
@@ -503,7 +503,7 @@ export default function OurStory() {
 
           <Reveal>
             <p>
-              We then took it to market test — sliced the paneer right out of the pack. No masala box.
+              We then took it to market test - sliced the paneer right out of the pack. No masala box.
               No waiting. Within hours, we sold out. 76% of people who tasted it asked where they
               could buy it daily or weekly. That's when we knew we hadn't just made a better paneer;
               we had fixed the category.
@@ -513,7 +513,7 @@ export default function OurStory() {
           <Reveal>
             <div className="mt-16 pt-16 border-t border-border">
               <p className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
-                PANEVO is not improving paneer — it is redefining how India consumes it.
+                PANEVO is not improving paneer - it is redefining how India consumes it.
               </p>
               <p className="text-primary font-bold uppercase tracking-widest text-sm mt-4">
                 The answer for CATEGORY EVOLUTION
@@ -525,7 +525,7 @@ export default function OurStory() {
 
       {/* SHATKONA SYMBOL */}
       <section className="bg-secondary text-secondary-foreground py-24 text-center border-t border-border/20 relative overflow-hidden">
-        {/* Milk splash — top-right corner accent */}
+        {/* Milk splash - top-right corner accent */}
         <div className="absolute top-6 right-8 pointer-events-none hidden md:block" aria-hidden="true">
           <ChalkMilkSplash className="w-16 h-20 text-secondary-foreground opacity-[0.12]" />
         </div>
@@ -580,12 +580,12 @@ export default function OurStory() {
               {
                 name: "Harviinder",
                 title: "Business & Partnerships",
-                bio: "Drives PANEVO's business strategy, partnerships, and institutional relationships — turning bold ideas into operational reality.",
+                bio: "Drives PANEVO's business strategy, partnerships, and institutional relationships - turning bold ideas into operational reality.",
               },
               {
                 name: "Shweta",
                 title: "Branding & Marketing",
-                bio: "The creative force behind PANEVO's identity, crafting the brand's voice, visual world, and consumer story — making sure every pack, post, and product leaves a lasting impression.",
+                bio: "The creative force behind PANEVO's identity, crafting the brand's voice, visual world, and consumer story - making sure every pack, post, and product leaves a lasting impression.",
               },
               {
                 name: "Palvit",
@@ -620,7 +620,7 @@ export default function OurStory() {
         </div>
       </section>
 
-      {/* ROADMAP — cinematic animated timeline */}
+      {/* ROADMAP - cinematic animated timeline */}
       <section className="py-28 border-t border-border" style={{ backgroundColor: "hsl(0 0% 11%)" }}>
         <div className="container px-4 max-w-4xl">
           <Reveal>

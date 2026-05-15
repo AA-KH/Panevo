@@ -106,7 +106,7 @@ export default function Subscribe() {
       const data = await res.json();
 
       if (data.mock) {
-        toast.success("Razorpay credentials not configured — this is a Phase 1 demo of the wizard");
+        toast.success("Razorpay credentials not configured - this is a Phase 1 demo of the wizard");
         setLocation("/subscribe/thank-you");
         return;
       }
@@ -138,17 +138,17 @@ export default function Subscribe() {
   return (
     <div className="w-full bg-background min-h-screen">
       <SEO
-        title="PANEVO Paneer Subscription — Fresh, Pre-Flavoured, Delivered"
+        title="PANEVO Paneer Subscription - Fresh, Pre-Flavoured, Delivered"
         description="Your paneer box from PANEVO. Fresh, pre-flavoured paneer delivered on schedule. No lock-in, pause any time, cancel from your dashboard in one click."
       />
 
       {/* HERO */}
       <section className="bg-background pt-24 pb-16 text-center border-b border-border relative overflow-hidden">
-        {/* Milk splash — top right */}
+        {/* Milk splash - top right */}
         <div className="absolute top-8 right-8 pointer-events-none hidden md:block" aria-hidden="true">
           <ChalkMilkSplash className="w-16 h-20 text-foreground opacity-[0.07]" />
         </div>
-        {/* Paneer block — bottom left, partially cut off */}
+        {/* Paneer block - bottom left, partially cut off */}
         <div className="absolute -bottom-4 -left-6 pointer-events-none hidden lg:block" aria-hidden="true">
           <ChalkPaneer className="w-32 h-24 text-foreground opacity-[0.06]" />
         </div>
@@ -183,7 +183,7 @@ export default function Subscribe() {
           </Reveal>
           <Reveal delay={240}>
             <p className="text-base md:text-lg text-foreground/80 max-w-2xl mx-auto mb-10">
-              Cancel or pause — no emails, no calls, no fine print.
+              Cancel or pause - no emails, no calls, no fine print.
             </p>
           </Reveal>
           <Reveal delay={300}>
@@ -203,7 +203,7 @@ export default function Subscribe() {
         <div className="absolute right-0 bottom-0 pointer-events-none hidden lg:block" aria-hidden="true">
           <ChalkHerbs className="w-36 h-40 text-foreground opacity-[0.05]" />
         </div>
-        {/* Chilli — top left corner accent */}
+        {/* Chilli - top left corner accent */}
         <div className="absolute left-8 top-8 pointer-events-none hidden md:block" aria-hidden="true">
           <ChalkChilli className="w-10 h-14 text-foreground opacity-[0.06]" />
         </div>
@@ -270,7 +270,7 @@ export default function Subscribe() {
           <div className="bg-card border border-border p-6 md:p-10" style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}>
             <AnimatePresence mode="wait">
 
-              {/* STEP 1 — PLAN + SIZE */}
+              {/* STEP 1 - PLAN + SIZE */}
               {step === 1 && (
                 <motion.div
                   key="step1"
@@ -314,7 +314,7 @@ export default function Subscribe() {
                 </motion.div>
               )}
 
-              {/* STEP 2 — BOX CALCULATOR */}
+              {/* STEP 2 - BOX CALCULATOR */}
               {step === 2 && (
                 <motion.div
                   key="step2"
@@ -351,7 +351,7 @@ export default function Subscribe() {
                 </motion.div>
               )}
 
-              {/* STEP 3 — DELIVERY DETAILS */}
+              {/* STEP 3 - DELIVERY DETAILS */}
               {step === 3 && (
                 <motion.div
                   key="step3"

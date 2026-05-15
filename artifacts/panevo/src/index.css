@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Centered page container — Tailwind v4 dropped the built-in .container utility,
+/* Centered page container - Tailwind v4 dropped the built-in .container utility,
    so define our own. Pages then add their own horizontal padding (px-4/px-6). */
 @utility container {
   width: 100%;
@@ -164,7 +164,7 @@
   }
 }
 
-/* Brand notch — 6px clip on bottom-right */
+/* Brand notch - 6px clip on bottom-right */
 .notch-br {
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
 }
@@ -177,7 +177,7 @@
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
 
-/* Card lift hover — gated on devices with true hover */
+/* Card lift hover - gated on devices with true hover */
 .card-lift {
   box-shadow: var(--shadow-rest);
   transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
@@ -199,7 +199,7 @@
   }
 }
 
-/* Primary CTA — subtle darken + arrow shift on hover.
+/* Primary CTA - subtle darken + arrow shift on hover.
    Using filter:brightness keeps the original background colour intact
    (so a green or transparent CTA doesn't get repainted peach) and
    guarantees the foreground text always stays readable. */
@@ -220,7 +220,7 @@
   }
 }
 
-/* Q-Com shimmer — gated on hover-capable devices */
+/* Q-Com shimmer - gated on hover-capable devices */
 .qcom-shimmer {
   position: relative;
   overflow: hidden;
@@ -343,7 +343,7 @@
   scroll-margin-top: 80px;
 }
 
-/* Global focus-visible — 2px Terracotta with 2px offset */
+/* Global focus-visible - 2px Terracotta with 2px offset */
 :where(a, button, [role="button"], input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;

@@ -55,7 +55,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 mb-8">
           <div className="md:col-span-3">
-            <Link href="/" className="inline-block mb-5 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg" aria-label={`${BRAND.name} — Home`}>
+            <Link href="/" className="inline-block mb-5 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg" aria-label={`${BRAND.name} - Home`}>
               <img
                 src={panevoStacked}
                 alt="PANEVO"

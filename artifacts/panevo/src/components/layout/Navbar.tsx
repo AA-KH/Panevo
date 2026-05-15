@@ -64,7 +64,7 @@ export function Navbar() {
               if (location === "/") window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
             }}
             className="flex items-center gap-2.5 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-            aria-label={`${BRAND.name} — Home`}
+            aria-label={`${BRAND.name} - Home`}
           >
             <img
               src={panevoCircle}
@@ -130,7 +130,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Full-screen Overlay — portalled to body to escape backdrop-filter containment */}
+      {/* Mobile Full-screen Overlay - portalled to body to escape backdrop-filter containment */}
       {createPortal(
         <AnimatePresence>
           {isMobileOpen && (

@@ -33,13 +33,13 @@ const HOME_PRODUCT_IMAGES: Record<string, string> = {
 
 const HOME_TESTIMONIALS = [
   {
-    text: "Made paneer tikka in 8 minutes flat. The black pepper flavour is spot on — tasted like it had been marinating for hours.",
+    text: "Made paneer tikka in 8 minutes flat. The black pepper flavour is spot on - tasted like it had been marinating for hours.",
     author: "Priya S.",
     loc: "Chandigarh",
     flavour: "Black Pepper",
   },
   {
-    text: "Finally a paneer that saves time without compromising on taste. My kids love the oregano one — it's now in our weekly box.",
+    text: "Finally a paneer that saves time without compromising on taste. My kids love the oregano one - it's now in our weekly box.",
     author: "Rahul M.",
     loc: "Chandigarh",
     flavour: "Oregano",
@@ -81,8 +81,8 @@ export default function Home() {
   return (
     <div className="w-full">
       <SEO
-        title="PANEVO — Bold Pre-Flavoured Fresh Paneer | Soon on Blinkit, Zepto"
-        description="Open the pack. Cook in under 10 minutes. No marination. No prep. PANEVO — bold, pre-flavoured fresh paneer — soon on Blinkit, Zepto and Swiggy Instamart."
+        title="PANEVO - Bold Pre-Flavoured Fresh Paneer | Soon on Blinkit, Zepto"
+        description="Open the pack. Cook in under 10 minutes. No marination. No prep. PANEVO - bold, pre-flavoured fresh paneer - soon on Blinkit, Zepto and Swiggy Instamart."
       />
 
       {/* HERO */}
@@ -209,7 +209,7 @@ export default function Home() {
 
       {/* PROBLEM SECTION */}
       <section className="bg-secondary text-secondary-foreground py-20 relative overflow-hidden">
-        {/* Decorative herb illustration — right side, large, very faint */}
+        {/* Decorative herb illustration - right side, large, very faint */}
         <div className="absolute right-0 bottom-0 pointer-events-none" aria-hidden="true">
           <ChalkHerbs className="w-48 h-48 text-secondary-foreground opacity-10" />
         </div>
@@ -243,7 +243,7 @@ export default function Home() {
               <div className="flex flex-col items-center text-center">
                 <CheckCircle className="w-8 h-8 mb-6 text-primary" strokeWidth={1.5} />
                 <h3 className="text-2xl mb-4">Quality, Every Time</h3>
-                <p className="text-lg opacity-90 leading-relaxed">Same texture. Same flavour. Same result — whether it's a Tuesday dinner or a weekend gathering.</p>
+                <p className="text-lg opacity-90 leading-relaxed">Same texture. Same flavour. Same result - whether it's a Tuesday dinner or a weekend gathering.</p>
               </div>
             </Reveal>
             <Reveal delay={240}>
@@ -266,7 +266,7 @@ export default function Home() {
           <Reveal>
             <div className="text-center mb-16">
               <h2 className="text-5xl md:text-6xl mb-4 text-foreground">Pick Your Flavour. Cook in Minutes.</h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Three bold flavours. Two sizes — 200g for weeknights, 500g for the whole family.</p>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Three bold flavours. Two sizes - 200g for weeknights, 500g for the whole family.</p>
             </div>
           </Reveal>
 
@@ -317,9 +317,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROTEIN + COMPARISON — merged section */}
+      {/* PROTEIN + COMPARISON - merged section */}
       <section className="bg-card text-card-foreground py-24 border-t border-border/50 relative overflow-hidden">
-        {/* Chalk paneer block — faint, bottom-left corner */}
+        {/* Chalk paneer block - faint, bottom-left corner */}
         <div className="absolute -bottom-4 -left-4 pointer-events-none" aria-hidden="true">
           <ChalkPaneer className="w-40 h-32 text-foreground opacity-[0.055]" />
         </div>
@@ -375,18 +375,18 @@ export default function Home() {
                     </tr>
                     <tr>
                       <td className="p-4 md:p-6 font-medium text-foreground">Flavour</td>
-                      <td className="p-4 md:p-6 text-muted-foreground">Depends on your marinade — inconsistent</td>
+                      <td className="p-4 md:p-6 text-muted-foreground">Depends on your marinade - inconsistent</td>
                       <td className="p-4 md:p-6 text-foreground font-medium">Infused into every block. Same result every time.</td>
                     </tr>
                     <tr>
                       <td className="p-4 md:p-6 font-medium text-foreground">Result</td>
-                      <td className="p-4 md:p-6 text-muted-foreground">Variable — some days great, some days flat</td>
+                      <td className="p-4 md:p-6 text-muted-foreground">Variable - some days great, some days flat</td>
                       <td className="p-4 md:p-6 text-foreground font-medium">Consistent, restaurant-quality, every pack.</td>
                     </tr>
                     <tr>
                       <td className="p-4 md:p-6 font-medium text-foreground">Protein</td>
                       <td className="p-4 md:p-6 text-muted-foreground">Same fresh dairy nutrition</td>
-                      <td className="p-4 md:p-6 text-foreground font-medium">Same fresh dairy nutrition — BOLDNESS &amp; UNIQUENESS added.</td>
+                      <td className="p-4 md:p-6 text-foreground font-medium">Same fresh dairy nutrition - BOLDNESS &amp; UNIQUENESS added.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -465,11 +465,11 @@ export default function Home() {
 
       {/* PAGE-CLOSING CTA BANNER */}
       <section className="bg-secondary text-secondary-foreground py-20 text-center relative overflow-hidden">
-        {/* Cow head — far right, large, extremely faint */}
+        {/* Cow head - far right, large, extremely faint */}
         <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden="true">
           <ChalkCowHead className="w-56 h-56 text-secondary-foreground opacity-[0.08]" />
         </div>
-        {/* Farm hills — bottom left */}
+        {/* Farm hills - bottom left */}
         <div className="absolute left-0 bottom-0 pointer-events-none hidden md:block" aria-hidden="true">
           <ChalkFarmHills className="w-64 h-20 text-secondary-foreground opacity-[0.08]" />
         </div>
