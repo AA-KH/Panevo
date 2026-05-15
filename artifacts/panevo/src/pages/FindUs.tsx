@@ -181,7 +181,7 @@ export default function FindUs() {
             </div>
 
             {/* List and Filters */}
-            <div className="w-full lg:w-1/2 p-6 flex flex-col max-h-[600px]">
+            <div className="w-full lg:w-1/2 p-6 flex flex-col h-[600px]">
 
               <div className="flex gap-2 overflow-x-auto pb-4 mb-4 hide-scrollbar">
                 {cities.map(city => (

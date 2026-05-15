@@ -385,11 +385,12 @@ export default function Products() {
             </AnimatePresence>
           </div>
 
-          {/* Sub text + ingredient chips - fixed min-height reserves space */}
-          <div className="min-h-[7rem]">
+          {/* Sub text + ingredient chips — fixed height prevents layout shift */}
+          <div className="relative h-[13rem] overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`prod-sub-${tickerIndex}`}
+                className="absolute inset-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}

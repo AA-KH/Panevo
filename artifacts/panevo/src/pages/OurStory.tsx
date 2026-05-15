@@ -384,19 +384,21 @@ export default function OurStory() {
             />
           </AnimatePresence>
 
-          {/* Sub text */}
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={`story-sub-${storyIndex}`}
-              className="text-lg sm:text-xl text-foreground/65 max-w-md mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.45, delay: 0.28 }}
-            >
-              {STORY_SLIDES[storyIndex].sub}
-            </motion.p>
-          </AnimatePresence>
+          {/* Sub text — fixed height prevents layout shift */}
+          <div className="relative h-28 w-full overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`story-sub-${storyIndex}`}
+                className="absolute inset-x-0 text-lg sm:text-xl text-foreground/65 max-w-md mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.45, delay: 0.28 }}
+              >
+                {STORY_SLIDES[storyIndex].sub}
+              </motion.p>
+            </AnimatePresence>
+          </div>
 
           {/* Slide dot + progress controls */}
           <div className="flex items-center gap-3 mt-12">
