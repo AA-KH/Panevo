@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import panevoStacked from "@assets/chk_04_square_stacked_terracotta_1778837617882.png";
 
 interface SplashScreenProps {
   onDone: () => void;
@@ -92,25 +91,6 @@ export function SplashScreen({ onDone }: SplashScreenProps) {
             </svg>
           </motion.div>
 
-          {/* PANEVO stacked logo */}
-          <motion.div
-            className="absolute"
-            style={{ top: "calc(50% + 80px)" }}
-            initial={{ opacity: 0, y: 6 }}
-            animate={
-              isDrift
-                ? { opacity: 0, y: 18, transition: { duration: 0.4, ease: "easeIn" } }
-                : { opacity: phase === "enter" ? 0 : 1, y: 0,
-                    transition: { duration: 0.55, delay: 0.18, ease: [0.22, 1, 0.36, 1] } }
-            }
-          >
-            <img
-              src={panevoStacked}
-              alt="PANEVO"
-              draggable={false}
-              className="w-28 h-28 sm:w-32 sm:h-32 object-cover rounded-xl select-none shadow-lg"
-            />
-          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

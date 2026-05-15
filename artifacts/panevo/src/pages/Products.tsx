@@ -9,9 +9,18 @@ import { toast } from "sonner";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { faqs } from "@/data/faqs";
 import { Reveal } from "@/components/motion/Reveal";
-import { Shatkona } from "@/components/sections/Shatkona";
 import { motion, AnimatePresence } from "framer-motion";
 import { WaitlistPopup } from "@/components/WaitlistPopup";
+import imgBlackPepper from "@assets/WhatsApp_Image_2026-05-01_at_16.24.34_upscayl_4x_upscayl-stand_1778870855059.png";
+import imgRedChilli from "@assets/WhatsApp_Image_2026-05-01_at_16.24.37_(2)_upscayl_4x_upscayl-s_1778870896417.png";
+import imgOregano from "@assets/WhatsApp_Image_2026-05-01_at_16.24.46_upscayl_4x_upscayl-stand_1778870896417.png";
+import panevoWithStar from "@assets/PANEVO_with_star_-_CLEAR_1778837617882.png";
+
+const PRODUCT_IMAGES: Record<string, string> = {
+  "black-pepper": imgBlackPepper,
+  "red-chilli-flakes": imgRedChilli,
+  "oregano": imgOregano,
+};
 
 const VegSymbol = () => (
   <div className="flex items-center gap-1.5 border border-green-600/30 px-2 py-0.5 rounded bg-green-50/50 w-fit shadow-sm">
@@ -310,6 +319,16 @@ export default function Products() {
           className="container px-4 relative z-10 flex flex-col justify-center"
           style={{ minHeight: "82vh", paddingTop: "9rem", paddingBottom: "6rem" }}
         >
+          {/* Brand logo mark — top right of hero */}
+          <div className="absolute top-8 right-4 md:right-8 pointer-events-none" aria-hidden="true">
+            <img
+              src={panevoWithStar}
+              alt=""
+              draggable={false}
+              className="h-14 md:h-16 w-auto object-contain opacity-80"
+            />
+          </div>
+
           {/* Coloured label pill */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -444,19 +463,19 @@ export default function Products() {
             <div className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 === 0 ? "" : "md:flex-row-reverse"}`}>
               <Reveal className="w-full md:w-1/2">
                 <div
-                  className="aspect-square border border-border flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-secondary/15 via-primary/10 to-accent/25"
+                  className="aspect-square border border-border relative overflow-hidden"
                   style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
                 >
                   <div className="absolute top-4 left-4 z-20">
                     <VegSymbol />
                   </div>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                    <Shatkona className="w-20 h-20 md:w-24 md:h-24 text-primary/50" />
-                    <span className="font-bold text-2xl md:text-3xl uppercase text-foreground/70 tracking-widest" style={{ fontFamily: "var(--app-font-display)" }}>
-                      {product.name}
-                    </span>
-                    <span className="text-xs uppercase tracking-widest text-muted-foreground">Fresh Paneer · 200g / 500g</span>
-                  </div>
+                  <img
+                    src={PRODUCT_IMAGES[product.id]}
+                    alt={`PANEVO ${product.name} — pre-flavoured fresh paneer`}
+                    draggable={false}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
                 </div>
               </Reveal>
 

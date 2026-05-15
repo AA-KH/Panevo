@@ -1,7 +1,10 @@
 import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
-import { Shatkona } from "@/components/sections/Shatkona";
 import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
+import imgBlackPepperHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.35_upscayl_4x_upscayl-stand_1778870855059.png";
+import imgRedChilliHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.37_(2)_upscayl_4x_upscayl-s_1778870896417.png";
+import imgOreganoHome from "@assets/WhatsApp_Image_2026-05-01_at_16.24.46_upscayl_4x_upscayl-stand_1778870896417.png";
+
 import { QCOM_LINKS } from "@/config/brand";
 import { products } from "@/data/products";
 import { faqs } from "@/data/faqs";
@@ -21,6 +24,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
+const HOME_PRODUCT_IMAGES: Record<string, string> = {
+  "black-pepper": imgBlackPepperHome,
+  "red-chilli-flakes": imgRedChilliHome,
+  "oregano": imgOreganoHome,
+};
 
 const HOME_TESTIMONIALS = [
   {
@@ -263,11 +272,6 @@ export default function Home() {
 
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 list-none p-0">
             {products.map((product, i) => {
-              const flavourGrad = [
-                "from-slate-900/30 via-slate-700/15 to-slate-500/10",
-                "from-red-800/30 via-red-600/15 to-orange-500/10",
-                "from-green-900/30 via-green-700/15 to-emerald-500/10",
-              ][i] ?? "from-secondary/15 via-primary/10 to-accent/20";
               const flavourDot = ["bg-slate-700", "bg-red-600", "bg-green-700"][i] ?? "bg-primary";
               return (
               <Reveal key={product.id} delay={i * 80}>
@@ -277,16 +281,19 @@ export default function Home() {
                   className="card-lift group bg-card border border-border overflow-hidden flex flex-col h-full relative"
                   style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
                 >
-                  <div className={`aspect-[4/3] relative overflow-hidden bg-gradient-to-br ${flavourGrad}`}>
+                  <div className="aspect-[4/3] relative overflow-hidden">
                     {product.id === "oregano" && (
                       <div className="absolute top-4 left-4 z-20 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
                         Most Loved
                       </div>
                     )}
-                    <div className="absolute inset-0 group-hover:scale-[1.04] transition-transform duration-500 flex flex-col items-center justify-center gap-3">
-                      <Shatkona className="w-16 h-16 text-primary/40" />
-                      <span className="text-foreground/60 font-bold uppercase tracking-widest text-sm" style={{ fontFamily: "var(--app-font-display)" }}>{product.name}</span>
-                    </div>
+                    <img
+                      src={HOME_PRODUCT_IMAGES[product.id]}
+                      alt={`PANEVO ${product.name} paneer`}
+                      draggable={false}
+                      className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-2 mb-2">

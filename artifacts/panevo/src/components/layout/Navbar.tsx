@@ -4,9 +4,9 @@ import { createPortal } from "react-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BRAND } from "@/config/brand";
-import { track } from "@/lib/analytics";
 import { WaitlistPopup } from "@/components/WaitlistPopup";
 import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
+import panevoWordmark from "@assets/PANEVO_LOGO-CLEAR_1778837617882.png";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -73,12 +73,12 @@ export function Navbar() {
               draggable={false}
               className="h-9 w-9 object-contain rounded-full flex-shrink-0"
             />
-            <span
-              className="text-[1.65rem] md:text-[1.85rem] text-foreground"
-              style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.1em" }}
-            >
-              {BRAND.name}
-            </span>
+            <img
+              src={panevoWordmark}
+              alt="PANEVO"
+              draggable={false}
+              className="h-7 md:h-8 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav */}

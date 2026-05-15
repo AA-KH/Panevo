@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { toast } from "sonner";
 import { track } from "@/lib/analytics";
 import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
+import bpSpread from "@assets/WhatsApp_Image_2026-05-01_at_16.24.35_upscayl_4x_upscayl-stand_1778870855059.png";
 
 const STORAGE_KEY = "panevo_newsletter_dismissed";
 
@@ -80,9 +81,9 @@ export function NewsletterPopup() {
                   style={{ background: "linear-gradient(135deg, #BF3D0B 0%, #7c2d12 60%, #1c0a00 100%)" }}
                 >
                   <img
-                    src="/hero-chalk.png"
-                    alt="PANEVO pre-flavoured paneer"
-                    className="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-60"
+                    src={bpSpread}
+                    alt="PANEVO Black Pepper paneer"
+                    className="absolute inset-0 w-full h-full object-cover opacity-75"
                     draggable={false}
                   />
                   {/* Overlay gradient */}

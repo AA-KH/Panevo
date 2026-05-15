@@ -1,6 +1,7 @@
 import { SEO } from "@/components/SEO";
 import { Shatkona } from "@/components/sections/Shatkona";
 import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
+import panevoStoryLogo from "@assets/chk_10_story_terracotta_1778837617882.png";
 import { roadmap } from "@/data/roadmap";
 import { useState, useEffect, useRef } from "react";
 import { track } from "@/lib/analytics";
@@ -533,7 +534,15 @@ export default function OurStory() {
         </div>
         <div className="container px-4">
           <Reveal>
-            <Shatkona className="w-32 h-32 mx-auto mb-12 text-primary" />
+            <div className="flex flex-col items-center gap-8 mb-12">
+              <Shatkona className="w-32 h-32 text-primary" />
+              <img
+                src={panevoStoryLogo}
+                alt="PANEVO"
+                draggable={false}
+                className="h-20 w-auto object-contain"
+              />
+            </div>
           </Reveal>
           <Reveal delay={120}>
             <h2 className="text-4xl md:text-5xl font-bold mb-8">The Union of Opposites</h2>
