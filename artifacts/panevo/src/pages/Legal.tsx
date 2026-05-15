@@ -53,7 +53,7 @@ export default function Legal({ type }: { type: "privacy" | "terms" | "refund" }
             <p className="pt-4 border-t border-border/50">These documents govern the use of the PANEVO website (panevo.in), mobile application, and all products sold under the PANEVO brand. Please read all three documents carefully before using our platform or purchasing our products.</p>
           </div>
         </Reveal>
-        <Reveal delay={180}>
+        <Reveal delay={180} threshold={0}>
           <div
             className="bg-card border border-border p-8 md:p-12"
             style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
