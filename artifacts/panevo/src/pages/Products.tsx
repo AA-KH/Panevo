@@ -11,9 +11,9 @@ import { faqs } from "@/data/faqs";
 import { Reveal } from "@/components/motion/Reveal";
 import { motion, AnimatePresence } from "framer-motion";
 import { WaitlistPopup } from "@/components/WaitlistPopup";
-import imgBlackPepper from "@assets/WhatsApp_Image_2026-05-01_at_16.24.34_upscayl_4x_upscayl-stand_1778870855059.png";
-import imgRedChilli from "@assets/WhatsApp_Image_2026-05-01_at_16.24.37_(2)_upscayl_4x_upscayl-s_1778870896417.png";
-import imgOregano from "@assets/WhatsApp_Image_2026-05-01_at_16.24.46_upscayl_4x_upscayl-stand_1778870896417.png";
+import imgBlackPepper from "@assets/WhatsApp_Image_2026-05-01_at_16.24.34_upscayl_4x_upscayl-stand_1778870855059_opt.webp";
+import imgRedChilli from "@assets/WhatsApp_Image_2026-05-01_at_16.24.37_(2)_upscayl_4x_upscayl-s_1778870896417_opt.webp";
+import imgOregano from "@assets/WhatsApp_Image_2026-05-01_at_16.24.46_upscayl_4x_upscayl-stand_1778870896417_opt.webp";
 import panevoWithStar from "@assets/PANEVO_with_star_-_CLEAR_1778837617882.png";
 
 const PRODUCT_IMAGES: Record<string, string> = {

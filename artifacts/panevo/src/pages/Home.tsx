@@ -138,7 +138,7 @@ export default function Home() {
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
-            className="text-5xl sm:text-7xl md:text-9xl mb-6 max-w-4xl text-white"
+            className="text-[8vw] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl mb-6 w-full max-w-[1500px] text-white leading-[1.1] whitespace-nowrap"
             style={{ letterSpacing: "0.02em" }}
           >
             No Marination. No Prep.<br />
