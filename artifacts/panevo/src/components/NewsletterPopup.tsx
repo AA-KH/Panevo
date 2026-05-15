@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import { toast } from "sonner";
 import { track } from "@/lib/analytics";
 import panevoCircle from "@assets/AV-UPSIDE_1778837617882.png";
-import bpSpread from "@assets/WhatsApp_Image_2026-05-01_at_16.24.35_upscayl_4x_upscayl-stand_1778870855059.png";
+import bpSpread from "@assets/WhatsApp_Image_2026-05-01_at_16.24.35_upscayl_4x_upscayl-stand_1778870855059_opt.webp";
 
 const STORAGE_KEY = "panevo_newsletter_dismissed";
 
