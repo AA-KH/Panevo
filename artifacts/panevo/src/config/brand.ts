@@ -5,7 +5,7 @@ export const BRAND = {
   corePromise: "Open the pack. Cook in under 10 minutes. No marination. No prep.",
   parentCompany: "Shatkona Ventures Private Limited",
   phones: ["+91 89750 16500"],
-  emails: ["hello@panevo.in", "trade@panevo.in"],
+  emails: ["info@panevo.in"],
   whatsapp: "https://wa.me/918975016500?text=Hi%20PANEVO%20team,%20I%20have%20a%20question%20about...",
   instagram: "https://instagram.com/panevoindia",
   placeholders: {

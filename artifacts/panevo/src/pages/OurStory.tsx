@@ -536,20 +536,31 @@ export default function OurStory() {
             <Shatkona className="w-32 h-32 mx-auto mb-12 text-primary" />
           </Reveal>
           <Reveal delay={120}>
-            <h2 className="text-3xl mb-8">The Union of Opposites</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">The Union of Opposites</h2>
           </Reveal>
           <Reveal delay={200}>
-            <p className="text-xl md:text-2xl font-medium max-w-2xl mx-auto leading-relaxed">
-              <span className="text-primary font-bold">△ is fire.</span> The heat, the spice, the
-              transformation.
-              <br />
-              <br />
-              <span className="text-[#3b82f6] font-bold">▽ is water.</span> The milk, the cool, the
-              nourishment.
-              <br />
-              <br />
-              Together: the Shatkona — the union of opposites.
-            </p>
+            <div className="text-lg md:text-xl font-medium max-w-4xl mx-auto leading-relaxed space-y-8">
+              <p>
+                <span className="text-primary font-bold text-2xl">△</span> <span className="font-bold">(pan) Upward Triangle</span> represents growth, ascent, fire, strength, ambition. In ancient symbolism it's the element of fire - heat, energy, transformation. In modern times it signals rising, scaling, forward momentum. The raw - paneer, protein, India's staple.
+              </p>
+              <p>
+                <span className="text-[#3b82f6] font-bold text-2xl">▽</span> <span className="font-bold">(evo) Downward Triangle</span> Represents water, nourishment, the feminine, stability, depth. In food symbolism specifically it connects to vessels, bowls, pouring - the act of receiving and nourishing. The evolved - flavoured, modern, ready.
+              </p>
+              <p className="italic font-bold text-foreground/90 text-xl md:text-2xl mt-8">
+                "We take raw ingredients (▽ - nourishment, nature, vessel) and transform them into something elevated (△ - fire, energy, evolution)"
+              </p>
+              <p className="font-black text-xl md:text-2xl tracking-widest text-primary uppercase">
+                PANEER + FLAVOR + HEAT = READY TO EAT.
+              </p>
+              <div className="pt-6 border-t border-border/30 text-foreground/90">
+                <p className="mb-4">
+                  The two triangles together (△ ▽) also form the Shatkona in Indian sacred geometry - called the Anahata (heart chakra) symbol.
+                </p>
+                <p>
+                  It represents the union of opposites - earth and sky, tradition and modernity, raw and ready. Tradition transformed. India's Modern Protein.
+                </p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>

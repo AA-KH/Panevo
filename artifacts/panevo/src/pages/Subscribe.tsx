@@ -164,7 +164,7 @@ export default function Subscribe() {
                 className="text-4xl sm:text-5xl md:text-7xl mb-6 text-foreground"
               >
                 Your{" "}
-                <span className="text-primary">{planAdj}</span>
+                <span className="text-[#1B4332]">{planAdj}</span>
                 {" "}Paneer Box.
                 <br />
                 <span className="text-primary font-bold">Stop thinking. Start eating real paneer.</span>

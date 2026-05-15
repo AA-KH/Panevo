@@ -107,8 +107,13 @@ export function Footer() {
               <li><Link href="/privacy" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Terms of Use</Link></li>
               <li><Link href="/refund-policy" className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Refund Policy</Link></li>
-              <li className="pt-2"><a href={`mailto:${BRAND.emails[0]}`} className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">{BRAND.emails[0]}</a></li>
-              <li><a href={`mailto:${BRAND.emails[1]}`} className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">{BRAND.emails[1]}</a></li>
+              {BRAND.emails.map((email, idx) => (
+                <li key={email} className={idx === 0 ? "pt-2" : ""}>
+                  <a href={`mailto:${email}`} className="hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+                    {email}
+                  </a>
+                </li>
+              ))}
               <li className="pt-3 font-semibold opacity-90">{BRAND.parentCompany}</li>
               <li className="text-xs opacity-70">{BRAND.placeholders.address} · {BRAND.placeholders.fssai}</li>
             </ul>

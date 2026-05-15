@@ -122,7 +122,7 @@ export default function Contact() {
                     <Mail className="w-6 h-6 text-primary mt-1" />
                     <div>
                       <p className="font-bold text-foreground">Trade & Distribution</p>
-                      <a href={`mailto:${BRAND.emails[1]}`} className="text-muted-foreground hover:text-primary">{BRAND.emails[1]}</a>
+                      <a href={`mailto:${BRAND.emails[0]}`} className="text-muted-foreground hover:text-primary">{BRAND.emails[0]}</a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">

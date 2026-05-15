@@ -1,6 +1,7 @@
 import { SEO } from "@/components/SEO";
 import { Reveal } from "@/components/motion/Reveal";
 import { BRAND } from "@/config/brand";
+import { PrivacyPolicy, TermsOfUse, RefundPolicy } from "@/components/legal-docs";
 
 export default function Legal({ type }: { type: "privacy" | "terms" | "refund" }) {
   const meta = {
@@ -42,44 +43,24 @@ export default function Legal({ type }: { type: "privacy" | "terms" | "refund" }
             {summary}
           </p>
         </Reveal>
+        <Reveal delay={150}>
+          <div className="bg-muted p-6 md:p-8 rounded-xl border border-border mb-8 text-sm md:text-base text-foreground/80 space-y-2">
+            <h2 className="text-xl font-bold text-foreground mb-4 uppercase tracking-wider">PANEVO Legal Documents</h2>
+            <p><strong>Published by:</strong> {BRAND.parentCompany}</p>
+            <p><strong>Registered Office:</strong> {BRAND.placeholders.address}</p>
+            <p><strong>Email:</strong> {BRAND.emails[0]} | <strong>Phone:</strong> {BRAND.phones[0]}</p>
+            <p><strong>DPIIT Recognised Startup</strong> | <strong>FSSAI Status:</strong> Applied for (application under process with FSSAI)</p>
+            <p className="pt-4 border-t border-border/50">These documents govern the use of the PANEVO website (panevo.in), mobile application, and all products sold under the PANEVO brand. Please read all three documents carefully before using our platform or purchasing our products.</p>
+          </div>
+        </Reveal>
         <Reveal delay={180}>
           <div
             className="bg-card border border-border p-8 md:p-12"
             style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
           >
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-3">
-              Coming soon
-            </p>
-            <p className="text-base md:text-lg text-foreground/90 mb-6">
-              Our full {title.toLowerCase()} is being finalised by{" "}
-              {BRAND.parentCompany}. In the meantime, if you have any
-              questions about how we handle data, orders or returns, please
-              reach out and we will be happy to help.
-            </p>
-            <ul className="space-y-2 text-sm text-foreground/80">
-              <li>
-                <span className="font-semibold">Email:</span>{" "}
-                <a
-                  href={`mailto:${BRAND.emails[0]}`}
-                  className="underline underline-offset-4 hover:text-primary"
-                >
-                  {BRAND.emails[0]}
-                </a>
-              </li>
-              <li>
-                <span className="font-semibold">Trade enquiries:</span>{" "}
-                <a
-                  href={`mailto:${BRAND.emails[1]}`}
-                  className="underline underline-offset-4 hover:text-primary"
-                >
-                  {BRAND.emails[1]}
-                </a>
-              </li>
-              <li>
-                <span className="font-semibold">Registered office:</span>{" "}
-                {BRAND.placeholders.address}
-              </li>
-            </ul>
+            {type === "privacy" && <PrivacyPolicy />}
+            {type === "terms" && <TermsOfUse />}
+            {type === "refund" && <RefundPolicy />}
           </div>
         </Reveal>
       </div>
