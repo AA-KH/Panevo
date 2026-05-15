@@ -56,7 +56,7 @@ export function Footer() {
              <Link href="/" className="flex items-center gap-2 mb-4 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
               <span className="text-3xl tracking-tight uppercase" style={{ fontFamily: 'var(--app-font-display)', letterSpacing: "0.02em" }}>{BRAND.name}</span>
             </Link>
-            <p className="text-sm opacity-80 mb-4">Made in India ✦ Delivered in 10 minutes</p>
+            <p className="text-sm opacity-80 mb-4">Made in India ✦ Soon to be delivered in 10 minutes</p>
             <div className="flex gap-4">
               <a
                 href={BRAND.instagram}

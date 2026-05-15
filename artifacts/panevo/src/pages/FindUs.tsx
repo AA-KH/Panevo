@@ -9,6 +9,7 @@ import { toast } from "sonner";
 
 import { Reveal } from "@/components/motion/Reveal";
 import { QComIcon, QComLabel } from "@/components/sections/QComIcon";
+import { WaitlistPopup } from "@/components/WaitlistPopup";
 
 export default function FindUs() {
   const [activeCity, setActiveCity] = useState("All");
@@ -118,10 +119,10 @@ export default function FindUs() {
       <section className="bg-primary text-primary-foreground py-16 md:py-24 text-center">
         <div className="container px-4">
           <Reveal>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">In Your Kitchen in 10 Minutes. Or at Your Corner Store.</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl mb-6">Soon In Your Kitchen in 10 Minutes. Or at Your Corner Store.</h1>
           </Reveal>
           <Reveal delay={120}>
-            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart — or find us at your nearest store across Chandigarh Tri-City.</p>
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">Soon to be delivered in 10 minutes on Blinkit, Zepto, and Swiggy Instamart — or find us at your nearest store across Chandigarh Tri-City.</p>
           </Reveal>
         </div>
       </section>
@@ -130,32 +131,30 @@ export default function FindUs() {
       <section className="bg-background py-20 border-b border-border">
         <div className="container px-4">
           <Reveal>
-            <h2 className="text-3xl mb-12 text-center text-foreground">Delivered in 10 Minutes.</h2>
+            <h2 className="text-3xl mb-12 text-center text-foreground">Soon to be delivered in 10 Minutes.</h2>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {Object.entries(QCOM_LINKS).map(([platform, url], idx) => (
               <Reveal key={platform} delay={Math.min(idx, 4) * 80}>
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => handleQComClick(platform)}
-                  className="qcom-shimmer card-lift bg-card border border-border p-8 text-center hover:border-primary transition-colors group block"
-                  style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
-                >
-                  <div className="h-16 mb-6 flex items-center justify-center gap-4">
-                    <QComIcon platform={platform} size="lg" />
-                    <span
-                      className="font-bold text-2xl text-foreground"
-                      style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.05em" }}
-                    >
-                      <QComLabel platform={platform} />
-                    </span>
-                  </div>
-                  <div className="inline-flex items-center gap-2 text-primary font-bold text-lg">
-                    Order Now <ArrowRight className="w-5 h-5 cta-arrow" />
-                  </div>
-                </a>
+                <WaitlistPopup>
+                  <button
+                    className="w-full qcom-shimmer card-lift bg-card border border-border p-8 text-center hover:border-primary transition-colors group block outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    style={{ borderRadius: 12, boxShadow: "var(--shadow-rest)" }}
+                  >
+                    <div className="h-16 mb-6 flex items-center justify-center gap-4">
+                      <QComIcon platform={platform} size="lg" />
+                      <span
+                        className="font-bold text-2xl text-foreground"
+                        style={{ fontFamily: "var(--app-font-display)", letterSpacing: "0.05em" }}
+                      >
+                        <QComLabel platform={platform} />
+                      </span>
+                    </div>
+                    <div className="inline-flex items-center gap-2 text-primary font-bold text-lg">
+                      Join the waitlist <ArrowRight className="w-5 h-5 cta-arrow" />
+                    </div>
+                  </button>
+                </WaitlistPopup>
               </Reveal>
             ))}
           </div>

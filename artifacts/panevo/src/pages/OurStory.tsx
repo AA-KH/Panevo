@@ -252,7 +252,7 @@ export default function OurStory() {
       />
 
       {/* HERO — animated ticker */}
-      <section className="relative bg-secondary text-secondary-foreground overflow-hidden" style={{ minHeight: "85vh" }}>
+      <section className="relative bg-background text-foreground overflow-hidden" style={{ minHeight: "85vh" }}>
 
         {/* Animated background gradient per slide */}
         <AnimatePresence>
@@ -325,7 +325,7 @@ export default function OurStory() {
         >
           {/* Shatkona logo */}
           <Reveal>
-            <Shatkona className="w-14 h-14 mx-auto mb-8 text-secondary-foreground/80" />
+            <Shatkona className="w-14 h-14 mx-auto mb-8 text-foreground/80" />
           </Reveal>
 
 
@@ -333,7 +333,7 @@ export default function OurStory() {
           <AnimatePresence mode="wait">
             <motion.h1
               key={`story-heading-${storyIndex}`}
-              className="leading-[1.0] text-secondary-foreground mb-6 max-w-4xl"
+              className="leading-[1.0] text-foreground mb-6 max-w-4xl"
               style={{ fontSize: "clamp(3.5rem, 12vw, 8rem)" }}
               exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
             >
@@ -381,7 +381,7 @@ export default function OurStory() {
           <AnimatePresence mode="wait">
             <motion.p
               key={`story-sub-${storyIndex}`}
-              className="text-lg sm:text-xl text-secondary-foreground/65 max-w-md mx-auto leading-relaxed"
+              className="text-lg sm:text-xl text-foreground/65 max-w-md mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}

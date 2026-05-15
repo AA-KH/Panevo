@@ -4,6 +4,7 @@ import { MapPin, Check, X, Loader2, ArrowRight } from "lucide-react";
 import { QCOM_LINKS } from "@/config/brand";
 import { track } from "@/lib/analytics";
 import { toast } from "sonner";
+import { WaitlistPopup } from "@/components/WaitlistPopup";
 
 const SERVICEABLE_PREFIXES: Record<string, string> = {
   "160": "Chandigarh",
@@ -137,26 +138,16 @@ export function PincodeChecker() {
                 <div>
                   <p className="font-bold text-foreground">Yes — we deliver to {result.city}!</p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Order now and get PANEVO in ~10 minutes from one of these apps:
+                    Soon get PANEVO in ~10 minutes from one of these apps:
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-2">
-                {Object.entries(QCOM_LINKS).map(([platform, url]) => (
-                  <a
-                    key={platform}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() =>
-                      track("qcom_click", { platform, source_element: "pincode_checker" })
-                    }
-                    className="qcom-shimmer cta-primary bg-primary text-primary-foreground text-center py-3 font-bold text-sm capitalize notch-br"
-                    style={{ borderRadius: 6 }}
-                  >
-                    {platform}
-                  </a>
-                ))}
+              <div className="flex justify-center mt-4">
+                <WaitlistPopup>
+                  <button className="qcom-shimmer cta-primary bg-primary text-primary-foreground px-8 py-3 font-bold text-sm notch-br w-full sm:w-auto" style={{ borderRadius: 6 }}>
+                    Join the waitlist
+                  </button>
+                </WaitlistPopup>
               </div>
               <button
                 type="button"

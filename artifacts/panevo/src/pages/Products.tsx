@@ -11,6 +11,7 @@ import { faqs } from "@/data/faqs";
 import { Reveal } from "@/components/motion/Reveal";
 import { Shatkona } from "@/components/sections/Shatkona";
 import { motion, AnimatePresence } from "framer-motion";
+import { WaitlistPopup } from "@/components/WaitlistPopup";
 
 const VegSymbol = () => (
   <div className="flex items-center gap-1.5 border border-green-600/30 px-2 py-0.5 rounded bg-green-50/50 w-fit shadow-sm">
@@ -179,13 +180,13 @@ function NutritionModal({ productId, productName, onClose }: { productId: string
 
           {/* CTA */}
           <div className="pt-2 border-t border-border">
-            <Link
-              href="/products"
-              onClick={onClose}
-              className="cta-primary w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-bold text-center flex items-center justify-center gap-2 notch-br"
-            >
-              Order {productName} <ArrowRight className="w-4 h-4 cta-arrow" />
-            </Link>
+            <WaitlistPopup>
+              <button
+                className="cta-primary w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-bold text-center flex items-center justify-center gap-2 notch-br"
+              >
+                Join the waitlist for {productName} <ArrowRight className="w-4 h-4 cta-arrow" />
+              </button>
+            </WaitlistPopup>
           </div>
         </div>
       </motion.div>
@@ -516,28 +517,11 @@ export default function Products() {
 
                 <Reveal delay={400}>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <div className="relative group">
+                    <WaitlistPopup>
                       <button className="cta-primary w-full sm:w-auto bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br flex items-center justify-center gap-2">
-                        Order Now <ArrowRight className="w-5 h-5 cta-arrow" />
+                        Join the waitlist <ArrowRight className="w-5 h-5 cta-arrow" />
                       </button>
-                      <div
-                        className="absolute hidden group-hover:flex flex-col top-full left-0 mt-2 w-48 bg-card border border-border py-1 z-50"
-                        style={{ borderRadius: 8, boxShadow: "var(--shadow-hover)" }}
-                      >
-                        {Object.entries(QCOM_LINKS).map(([platform, url]) => (
-                          <a
-                            key={platform}
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => handleQComClick(platform)}
-                            className="qcom-shimmer px-4 py-2 text-sm text-foreground hover:bg-muted capitalize font-medium"
-                          >
-                            Order on {platform}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
+                    </WaitlistPopup>
                     <button
                       onClick={() => setNutritionModal({ id: product.id, name: product.name })}
                       className="w-full sm:w-auto bg-transparent border-2 border-primary text-primary px-6 py-4 rounded-full font-bold text-base hover:bg-primary/5 transition-colors flex items-center justify-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-primary"

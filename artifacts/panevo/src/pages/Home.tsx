@@ -13,6 +13,7 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PincodeChecker } from "@/components/sections/PincodeChecker";
 import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
 import { ChalkHerbs, ChalkPaneer, ChalkPeppercorns, ChalkCowHead, ChalkFarmHills, ChalkStarburst } from "@/components/sections/ChalkIllustrations";
+import { WaitlistPopup } from "@/components/WaitlistPopup";
 import {
   Accordion,
   AccordionContent,
@@ -70,8 +71,8 @@ export default function Home() {
   return (
     <div className="w-full">
       <SEO
-        title="PANEVO — Bold Pre-Flavoured Fresh Paneer | Order on Blinkit, Zepto"
-        description="Open the pack. Cook in under 10 minutes. No marination. No prep. PANEVO — bold, pre-flavoured fresh paneer — order on Blinkit, Zepto and Swiggy Instamart."
+        title="PANEVO — Bold Pre-Flavoured Fresh Paneer | Soon on Blinkit, Zepto"
+        description="Open the pack. Cook in under 10 minutes. No marination. No prep. PANEVO — bold, pre-flavoured fresh paneer — soon on Blinkit, Zepto and Swiggy Instamart."
       />
 
       {/* HERO */}
@@ -125,7 +126,8 @@ export default function Home() {
             className="text-5xl sm:text-7xl md:text-9xl mb-6 max-w-4xl text-white"
             style={{ letterSpacing: "0.02em" }}
           >
-            No Marination. No Prep. Just Paneer.
+            No Marination. No Prep.<br />
+            Simply Awesome Paneer.
           </motion.h1>
 
           <motion.p
@@ -143,12 +145,13 @@ export default function Home() {
             transition={{ duration: 0.3, delay: 0.55, ease: "easeOut" }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Link
-              href="/products"
-              className="cta-primary bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br flex items-center justify-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              Order Now <ArrowRight className="w-5 h-5 cta-arrow" />
-            </Link>
+            <WaitlistPopup>
+              <button
+                className="cta-primary bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg notch-br flex items-center justify-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Join the waitlist <ArrowRight className="w-5 h-5 cta-arrow" />
+              </button>
+            </WaitlistPopup>
             <Link
               href="/products"
               className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-white"
@@ -167,8 +170,8 @@ export default function Home() {
         <div className="container px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl">In Your Kitchen in 10 Minutes.</h2>
-              <p className="text-base md:text-lg opacity-90 mt-1">Available now in Chandigarh Tri-City</p>
+              <h2 className="text-3xl md:text-4xl">Soon In Your Kitchen in 10 Minutes.</h2>
+              <p className="text-base md:text-lg opacity-90 mt-1">Soon to be available in Chandigarh Tri-City</p>
             </div>
             <div className="flex gap-8">
               {Object.entries(QCOM_LINKS).map(([platform, url]) => (
@@ -181,7 +184,7 @@ export default function Home() {
                   style={{ borderRadius: 4 }}
                 >
                   <span className="text-xs font-bold capitalize text-white">{platform}</span>
-                  <span className="text-sm font-medium flex items-center gap-1">Order Now <ArrowRight className="w-3 h-3" /></span>
+                  <span className="text-sm font-medium flex items-center gap-1">Soon on {platform} <ArrowRight className="w-3 h-3" /></span>
                 </a>
               ))}
             </div>
