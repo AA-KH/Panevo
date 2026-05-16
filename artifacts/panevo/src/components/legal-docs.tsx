@@ -15,7 +15,7 @@ export function PrivacyPolicy() {
         <li><strong>FSSAI Status:</strong> Applied for (application under process with FSSAI)</li>
         <li><strong>DPIIT Status:</strong> DPIIT Recognised Startup</li>
         <li><strong>Contact email:</strong> info@panevo.in</li>
-        <li><strong>Phone:</strong> +91 87795 67496</li>
+        <li><strong>Phone:</strong> +91 877 956 7496</li>
       </ul>
 
       <h3>2. Information We Collect</h3>
@@ -125,7 +125,7 @@ export function PrivacyPolicy() {
           <strong>Name:</strong> Harvinder Singh<br/>
           <strong>Designation:</strong> Co-Founder & Designated Grievance Officer<br/>
           <strong>Email:</strong> info@panevo.in<br/>
-          <strong>Phone:</strong> +91 87795 67496<br/>
+          <strong>Phone:</strong> +91 877 956 7496<br/>
           <strong>Address:</strong> PSB Towers, Sector 79, Mohali, Punjab – 140 308, India<br/>
           <strong>Response time:</strong> Within 30 days of receipt of complaint
         </p>
@@ -261,7 +261,7 @@ export function TermsOfUse() {
         <h4 className="mt-0">Contact - Shatkona Ventures Private Limited (PANEVO)</h4>
         <p className="mb-0">
           <strong>Email:</strong> info@panevo.in<br/>
-          <strong>Phone / WhatsApp:</strong> +91 87795 67496<br/>
+          <strong>Phone / WhatsApp:</strong> +91 877 956 7496<br/>
           <strong>Address:</strong> PSB Towers, Sector 79, Mohali, Punjab – 140 308, India<br/>
           <strong>Grievance Officer:</strong> Harvinder Singh | info@panevo.in
         </p>
@@ -316,7 +316,7 @@ export function RefundPolicy() {
 
       <h4>Step 2 - Contact channels:</h4>
       <ul>
-        <li><strong>WhatsApp:</strong> +91 87795 67496 (fastest response - 9 AM to 7 PM, Monday to Saturday)</li>
+        <li><strong>WhatsApp:</strong> +91 877 956 7496 (fastest response - 9 AM to 7 PM, Monday to Saturday)</li>
         <li><strong>Email:</strong> info@panevo.in - include your Order ID, photographs, and description</li>
       </ul>
 
@@ -355,7 +355,7 @@ export function RefundPolicy() {
         <li><strong>Next-day deliveries:</strong> Before 10 PM on the day of ordering.</li>
         <li><strong>Subscription orders:</strong> At least 24 hours before the scheduled delivery date.</li>
       </ul>
-      <p>Contact us via WhatsApp at +91 87795 67496 or email info@panevo.in to cancel.</p>
+      <p>Contact us via WhatsApp at +91 877 956 7496 or email info@panevo.in to cancel.</p>
 
       <h4>7.2 Cancellation After Dispatch</h4>
       <p>Once an Order has been dispatched, it cannot be cancelled. Fresh paneer is prepared specifically for your Order and has a limited shelf life. If you are unable to receive the delivery, please contact us immediately and we will try to accommodate your situation on a case-by-case basis.</p>
@@ -381,7 +381,7 @@ export function RefundPolicy() {
       <div className="bg-muted p-6 rounded-xl border border-border mt-4">
         <h4 className="mt-0">Customer Support - PANEVO / Shatkona Ventures Private Limited</h4>
         <p className="mb-0">
-          <strong>WhatsApp:</strong> +91 87795 67496 (9 AM – 7 PM, Mon–Sat)<br/>
+          <strong>WhatsApp:</strong> +91 877 956 7496 (9 AM – 7 PM, Mon–Sat)<br/>
           <strong>Email:</strong> info@panevo.in<br/>
           <strong>Food safety concerns:</strong> info@panevo.in<br/>
           <strong>Grievance Officer:</strong> Harvinder Singh | info@panevo.in<br/>

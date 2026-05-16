@@ -4,9 +4,9 @@ export const BRAND = {
   categoryClaim: "India's first pre-flavoured fresh paneer",
   corePromise: "Open the pack. Cook in under 10 minutes. No marination. No prep.",
   parentCompany: "Shatkona Ventures Private Limited",
-  phones: ["+91 89750 16500"],
+  phones: ["+91 877 956 7496"],
   emails: ["info@panevo.in"],
-  whatsapp: "https://wa.me/918975016500?text=Hi%20PANEVO%20team,%20I%20have%20a%20question%20about...",
+  whatsapp: "https://wa.me/918779567496?text=Hi%20PANEVO%20team,%20I%20have%20a%20question%20about...",
   instagram: "https://instagram.com/panevoindia",
   placeholders: {
     fssai: "FSSAI licensed - licence number displayed on pack",
